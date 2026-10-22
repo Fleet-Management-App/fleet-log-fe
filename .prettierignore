@@ -1,0 +1,6 @@
+dist
+node_modules
+yarn.lock
+src/routeTree.gen.ts
+src/api/generated
+src/modules/common/components/ui
