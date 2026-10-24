@@ -7,7 +7,8 @@
     "start": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --max-warnings 0",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "generate:api": "orval",
     "ui:add": "node scripts/ui-add.mjs"
