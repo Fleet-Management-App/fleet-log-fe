@@ -1,79 +1,39 @@
 import js from "@eslint/js";
-import { createTypeScriptImportResolver } from "eslint-import-resolver-typescript";
-import { importX } from "eslint-plugin-import-x";
-import prettierRecommended from "eslint-plugin-prettier/recommended";
-import react from "eslint-plugin-react";
-import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
-import globals from "globals";
 import tseslint from "typescript-eslint";
+import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
+import prettierConfig from "eslint-config-prettier";
+import globals from "globals";
 
 export default tseslint.config(
+  // 1. Vyloučení složky node_modules z kontroly
   {
-    ignores: [
-      "dist",
-      "src/routeTree.gen.ts",
-      "src/api/generated",
-      "src/modules/common/components/ui",
-    ],
+    ignores: ["node_modules/**"],
   },
+  // 2. Základní doporučená pravidla ze zadání
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommended,
-      react.configs.flat.recommended,
-      react.configs.flat["jsx-runtime"],
-      reactHooks.configs.flat.recommended,
-      importX.flatConfigs.recommended,
-      importX.flatConfigs.typescript,
-      prettierRecommended,
-    ],
-    languageOptions: {
-      ecmaVersion: 2022,
-      globals: globals.browser,
-    },
-    plugins: { "react-refresh": reactRefresh },
-    settings: {
-      react: { version: "detect" },
-      "import-x/resolver-next": [createTypeScriptImportResolver()],
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    plugins: {
+      react: reactPlugin,
+      "react-hooks": reactHooksPlugin,
     },
     rules: {
-      // Same import grouping as the house apps: builtin -> external (react first) -> internal.
-      "import-x/order": [
-        "error",
-        {
-          groups: ["builtin", "external", "internal", ["parent", "sibling", "index"]],
-          pathGroups: [
-            { pattern: "react", group: "external", position: "before" },
-            { pattern: "@/**", group: "internal" },
-          ],
-          pathGroupsExcludedImportTypes: ["react"],
-          "newlines-between": "always",
-          alphabetize: { order: "asc", caseInsensitive: true },
-        },
-      ],
-      "import-x/no-duplicates": "error",
-      "import-x/newline-after-import": "error",
-      "react/function-component-definition": [
-        "error",
-        { namedComponents: "arrow-function", unnamedComponents: "arrow-function" },
-      ],
-      "react/prop-types": "off",
-      "react/jsx-no-useless-fragment": ["warn", { allowExpressions: true }],
-      "react/jsx-curly-brace-presence": ["warn", { props: "never", children: "never" }],
-      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-      "no-console": ["error", { allow: ["warn", "error"] }],
-      "prettier/prettier": ["warn", { endOfLine: "auto" }],
+      // vlastní pravidla
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
     },
   },
+  // 3. Speciální nastavení pro Node.js skripty (řeší 'process')
   {
-    // Route files export `Route`, shadcn primitives export variants next to components.
-    files: ["src/routes/**", "src/modules/common/components/form/**"],
-    rules: { "react-refresh/only-export-components": "off" },
+    files: ["scripts/**"],
+    languageOptions: {
+      globals: globals.node,
+    },
   },
-  {
-    files: ["*.config.{js,ts}"],
-    languageOptions: { globals: globals.node },
-  },
+  prettierConfig,
 );
