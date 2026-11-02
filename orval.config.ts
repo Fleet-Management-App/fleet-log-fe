@@ -10,6 +10,8 @@ export default defineConfig({
       target: "src/api/generated/hooks",
       schemas: "src/api/generated/models",
       client: "react-query",
+      // orval 8 defaults to fetch; the mutator below is an axios one
+      httpClient: "axios",
       clean: true,
       override: {
         mutator: { path: "src/security/axios/axiosInstance.ts", name: "customInstance" },
