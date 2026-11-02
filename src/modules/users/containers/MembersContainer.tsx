@@ -4,7 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 
-import { getMeQueryKey } from "@/api/generated/hooks/account/account";
+import { getGetMeQueryKey } from "@/api/generated/hooks/account/account";
 import {
   getListMembersQueryKey,
   useChangeMemberRole,
@@ -30,7 +30,7 @@ export const MembersContainer: FC = () => {
 
   // Changing your own role takes the Fleet Manager rights away, so leave this page
   const afterOwnChange = async () => {
-    await queryClient.invalidateQueries({ queryKey: getMeQueryKey() });
+    await queryClient.invalidateQueries({ queryKey: getGetMeQueryKey() });
     await navigate({ to: "/" });
   };
 

@@ -46,7 +46,7 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
 /**
  * @summary Return a hello message
  */
-export const hello = (
+export const getHello = (
 
  signal?: AbortSignal
 ) => {
@@ -61,69 +61,69 @@ export const hello = (
 
 
 
-export const getHelloQueryKey = () => {
+export const getGetHelloQueryKey = () => {
     return [
     `/api/hello`
     ] as const;
     }
 
 
-export const getHelloQueryOptions = <TData = Awaited<ReturnType<typeof hello>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof hello>>, TError, TData>>, }
+export const getGetHelloQueryOptions = <TData = Awaited<ReturnType<typeof getHello>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getHello>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getHelloQueryKey();
+  const queryKey =  queryOptions?.queryKey ?? getGetHelloQueryKey();
 
 
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof hello>>> = ({ signal }) => hello(signal);
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getHello>>> = ({ signal }) => getHello(signal);
 
 
 
 
 
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof hello>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getHello>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
-export type HelloQueryResult = NonNullable<Awaited<ReturnType<typeof hello>>>
-export type HelloQueryError = unknown
+export type GetHelloQueryResult = NonNullable<Awaited<ReturnType<typeof getHello>>>
+export type GetHelloQueryError = unknown
 
 
-export function useHello<TData = Awaited<ReturnType<typeof hello>>, TError = unknown>(
-  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof hello>>, TError, TData>> & Pick<
+export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getHello>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof hello>>,
+          Awaited<ReturnType<typeof getHello>>,
           TError,
-          Awaited<ReturnType<typeof hello>>
+          Awaited<ReturnType<typeof getHello>>
         > , 'initialData'
       >, }
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useHello<TData = Awaited<ReturnType<typeof hello>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof hello>>, TError, TData>> & Pick<
+export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getHello>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof hello>>,
+          Awaited<ReturnType<typeof getHello>>,
           TError,
-          Awaited<ReturnType<typeof hello>>
+          Awaited<ReturnType<typeof getHello>>
         > , 'initialData'
       >, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useHello<TData = Awaited<ReturnType<typeof hello>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof hello>>, TError, TData>>, }
+export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getHello>>, TError, TData>>, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
  * @summary Return a hello message
  */
 
-export function useHello<TData = Awaited<ReturnType<typeof hello>>, TError = unknown>(
-  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof hello>>, TError, TData>>, }
+export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getHello>>, TError, TData>>, }
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const queryOptions = getHelloQueryOptions(options)
+  const queryOptions = getGetHelloQueryOptions(options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 

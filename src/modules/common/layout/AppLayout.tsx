@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { Link, Outlet } from "@tanstack/react-router";
 import { CarFront } from "lucide-react";
 
-import { useMe } from "@/api/generated/hooks/account/account";
+import { useGetMe } from "@/api/generated/hooks/account/account";
 import { Role } from "@/api/generated/models";
 import { OrganizationSwitcherContainer } from "@/modules/organizations/containers/OrganizationSwitcherContainer";
 import { UserMenuContainer } from "@/modules/organizations/containers/UserMenuContainer";
@@ -14,7 +14,7 @@ const activeNavLinkClass = "bg-muted text-foreground";
 
 // Layout of every signed-in page: header with navigation, organization switcher and user menu.
 export const AppLayout: FC = () => {
-  const { data: me } = useMe();
+  const { data: me } = useGetMe();
   // Logging out clears the cache before the redirect to /login lands; render nothing meanwhile,
   // so nothing below calls useCurrentUser without data
   if (!me) return null;

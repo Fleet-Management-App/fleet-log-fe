@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
-import { getMeQueryOptions } from "@/api/generated/hooks/account/account";
+import { getGetMeQueryOptions } from "@/api/generated/hooks/account/account";
 import { queryClient } from "@/config/queryClient/queryClient";
 import { AppLayout } from "@/modules/common/layout/AppLayout";
 import { endSession, hasSession } from "@/security/session";
@@ -10,7 +10,7 @@ import { endSession, hasSession } from "@/security/session";
 export const Route = createFileRoute("/_app")({
   beforeLoad: async ({ location }) => {
     if (!hasSession()) throw redirect({ to: "/login" });
-    const me = await queryClient.ensureQueryData(getMeQueryOptions()).catch(() => {
+    const me = await queryClient.ensureQueryData(getGetMeQueryOptions()).catch(() => {
       endSession();
       throw redirect({ to: "/login" });
     });

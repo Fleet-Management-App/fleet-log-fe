@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-import { getMeQueryKey } from "@/api/generated/hooks/account/account";
+import { getGetMeQueryKey } from "@/api/generated/hooks/account/account";
 import {
   useAcceptInvitation,
   useDeclineInvitation,
@@ -35,7 +35,7 @@ export const PendingInvitationsContainer: FC = () => {
   const handleDecline = async (invitation: IncomingInvitationResponse) => {
     try {
       await decline({ invitationId: invitation.id });
-      await queryClient.invalidateQueries({ queryKey: getMeQueryKey() });
+      await queryClient.invalidateQueries({ queryKey: getGetMeQueryKey() });
     } catch (error) {
       toast.error(getErrorMessage(error));
     }
