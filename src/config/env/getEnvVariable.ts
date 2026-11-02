@@ -1,6 +1,8 @@
 export enum EnvVariableName {
   PUBLIC_URL = "PUBLIC_URL",
   HOST_CORE = "HOST_CORE",
+  // "true" shows one-click demo logins on the login page (BE started with DEMO_DATA_ENABLED=true)
+  DEMO_MODE = "DEMO_MODE",
 }
 
 export const getEnvVariable = (
