@@ -24,7 +24,7 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  ChangeRoleRequest,
+  ChangeRolesRequest,
   CreateInvitationRequest,
   InvitationResponse,
   MemberResponse,
@@ -52,6 +52,75 @@ const withQueryKey = <T extends object, K>(query: T, queryKey: K): T & { queryKe
 };
 
 /**
+ * A member can hold several roles, e.g. a Fleet Manager who also drives.
+ * @summary Replace a member's roles
+ */
+export const changeMemberRoles = (
+    userId: string,
+    changeRolesRequest: ChangeRolesRequest,
+ signal?: AbortSignal
+) => {
+
+
+      return customInstance<unknown>(
+      {url: `/api/organization/members/${userId}/roles`, method: 'PUT',
+      headers: {'Content-Type': 'application/json', },
+      data: changeRolesRequest, signal
+    },
+      );
+    }
+
+
+
+
+export const getChangeMemberRolesMutationKey = () => ['changeMemberRoles'] as const;
+
+export const getChangeMemberRolesMutationOptions = <TError = ProblemDetail,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof changeMemberRoles>>, TError,ChangeMemberRolesMutationVariables, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof changeMemberRoles>>, TError,ChangeMemberRolesMutationVariables, TContext> => {
+
+const mutationKey = getChangeMemberRolesMutationKey();
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof changeMemberRoles>>, ChangeMemberRolesMutationVariables> = (props) => {
+          const {userId,data} = props ?? {};
+
+          return  changeMemberRoles(userId,data,)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ChangeMemberRolesMutationResult = NonNullable<Awaited<ReturnType<typeof changeMemberRoles>>>
+    export type ChangeMemberRolesMutationBody = ChangeRolesRequest
+    export type ChangeMemberRolesMutationError = ProblemDetail
+    export type ChangeMemberRolesMutationVariables = {userId: string;data: ChangeRolesRequest}
+
+    /**
+ * @summary Replace a member's roles
+ */
+export const useChangeMemberRoles = <TError = ProblemDetail,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof changeMemberRoles>>, TError,ChangeMemberRolesMutationVariables, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof changeMemberRoles>>,
+        TError,
+        ChangeMemberRolesMutationVariables,
+        TContext
+      > => {
+      return useMutation(getChangeMemberRolesMutationOptions(options), queryClient);
+    }
+    /**
  * @summary List the pending invitations of the active organization
  */
 export const listInvitations = (
@@ -211,139 +280,6 @@ export const useCreateInvitation = <TError = ProblemDetail,
       return useMutation(getCreateInvitationMutationOptions(options), queryClient);
     }
     /**
- * @summary Remove a member from the organization (their account stays)
- */
-export const removeMember = (
-    userId: string,
- signal?: AbortSignal
-) => {
-
-
-      return customInstance<void>(
-      {url: `/api/organization/members/${userId}`, method: 'DELETE', signal
-    },
-      );
-    }
-
-
-
-
-export const getRemoveMemberMutationKey = () => ['removeMember'] as const;
-
-export const getRemoveMemberMutationOptions = <TError = ProblemDetail,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof removeMember>>, TError,RemoveMemberMutationVariables, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof removeMember>>, TError,RemoveMemberMutationVariables, TContext> => {
-
-const mutationKey = getRemoveMemberMutationKey();
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof removeMember>>, RemoveMemberMutationVariables> = (props) => {
-          const {userId} = props ?? {};
-
-          return  removeMember(userId,)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type RemoveMemberMutationResult = NonNullable<Awaited<ReturnType<typeof removeMember>>>
-
-    export type RemoveMemberMutationError = ProblemDetail
-    export type RemoveMemberMutationVariables = {userId: string}
-
-    /**
- * @summary Remove a member from the organization (their account stays)
- */
-export const useRemoveMember = <TError = ProblemDetail,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof removeMember>>, TError,RemoveMemberMutationVariables, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof removeMember>>,
-        TError,
-        RemoveMemberMutationVariables,
-        TContext
-      > => {
-      return useMutation(getRemoveMemberMutationOptions(options), queryClient);
-    }
-    /**
- * @summary Change a member's role
- */
-export const changeMemberRole = (
-    userId: string,
-    changeRoleRequest: ChangeRoleRequest,
- signal?: AbortSignal
-) => {
-
-
-      return customInstance<unknown>(
-      {url: `/api/organization/members/${userId}`, method: 'PATCH',
-      headers: {'Content-Type': 'application/json', },
-      data: changeRoleRequest, signal
-    },
-      );
-    }
-
-
-
-
-export const getChangeMemberRoleMutationKey = () => ['changeMemberRole'] as const;
-
-export const getChangeMemberRoleMutationOptions = <TError = ProblemDetail,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof changeMemberRole>>, TError,ChangeMemberRoleMutationVariables, TContext>, }
-): UseMutationOptions<Awaited<ReturnType<typeof changeMemberRole>>, TError,ChangeMemberRoleMutationVariables, TContext> => {
-
-const mutationKey = getChangeMemberRoleMutationKey();
-const {mutation: mutationOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }};
-
-
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof changeMemberRole>>, ChangeMemberRoleMutationVariables> = (props) => {
-          const {userId,data} = props ?? {};
-
-          return  changeMemberRole(userId,data,)
-        }
-
-
-
-
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type ChangeMemberRoleMutationResult = NonNullable<Awaited<ReturnType<typeof changeMemberRole>>>
-    export type ChangeMemberRoleMutationBody = ChangeRoleRequest
-    export type ChangeMemberRoleMutationError = ProblemDetail
-    export type ChangeMemberRoleMutationVariables = {userId: string;data: ChangeRoleRequest}
-
-    /**
- * @summary Change a member's role
- */
-export const useChangeMemberRole = <TError = ProblemDetail,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof changeMemberRole>>, TError,ChangeMemberRoleMutationVariables, TContext>, }
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof changeMemberRole>>,
-        TError,
-        ChangeMemberRoleMutationVariables,
-        TContext
-      > => {
-      return useMutation(getChangeMemberRoleMutationOptions(options), queryClient);
-    }
-    /**
  * @summary List the members of the active organization
  */
 export const listMembers = (
@@ -436,6 +372,71 @@ export function useListMembers<TData = Awaited<ReturnType<typeof listMembers>>, 
 
 
 /**
+ * @summary Remove a member from the organization (their account stays)
+ */
+export const removeMember = (
+    userId: string,
+ signal?: AbortSignal
+) => {
+
+
+      return customInstance<void>(
+      {url: `/api/organization/members/${userId}`, method: 'DELETE', signal
+    },
+      );
+    }
+
+
+
+
+export const getRemoveMemberMutationKey = () => ['removeMember'] as const;
+
+export const getRemoveMemberMutationOptions = <TError = ProblemDetail,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof removeMember>>, TError,RemoveMemberMutationVariables, TContext>, }
+): UseMutationOptions<Awaited<ReturnType<typeof removeMember>>, TError,RemoveMemberMutationVariables, TContext> => {
+
+const mutationKey = getRemoveMemberMutationKey();
+const {mutation: mutationOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof removeMember>>, RemoveMemberMutationVariables> = (props) => {
+          const {userId} = props ?? {};
+
+          return  removeMember(userId,)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type RemoveMemberMutationResult = NonNullable<Awaited<ReturnType<typeof removeMember>>>
+
+    export type RemoveMemberMutationError = ProblemDetail
+    export type RemoveMemberMutationVariables = {userId: string}
+
+    /**
+ * @summary Remove a member from the organization (their account stays)
+ */
+export const useRemoveMember = <TError = ProblemDetail,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof removeMember>>, TError,RemoveMemberMutationVariables, TContext>, }
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof removeMember>>,
+        TError,
+        RemoveMemberMutationVariables,
+        TContext
+      > => {
+      return useMutation(getRemoveMemberMutationOptions(options), queryClient);
+    }
+    /**
  * @summary Revoke a pending invitation
  */
 export const revokeInvitation = (

@@ -10,6 +10,6 @@ export interface MemberResponse {
   userId: string;
   fullName: string;
   email: string;
-  role: Role;
+  roles: Role[];
   joinedAt: string;
 }

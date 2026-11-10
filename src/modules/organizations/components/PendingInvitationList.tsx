@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/modules/common/components/ui/card";
-import { ROLE_LABELS } from "@/modules/common/utils/roles";
+import { formatRoles } from "@/modules/common/utils/roles";
 
 type PendingInvitationListProps = {
   email: string;
@@ -46,7 +46,7 @@ export const PendingInvitationList: FC<PendingInvitationListProps> = ({
               <div className="flex flex-col">
                 <span className="font-medium">{invitation.organizationName}</span>
                 <span className="text-sm text-muted-foreground">
-                  {invitation.invitedByName} invited you as {ROLE_LABELS[invitation.role]}
+                  {invitation.invitedByName} invited you as {formatRoles(invitation.roles)}
                 </span>
               </div>
               <div className="flex gap-2">

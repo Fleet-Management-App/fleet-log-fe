@@ -9,5 +9,5 @@ import type { Role } from './role';
 export interface MembershipResponse {
   organizationId: string;
   organizationName: string;
-  role: Role;
+  roles: Role[];
 }

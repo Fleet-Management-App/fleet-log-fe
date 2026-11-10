@@ -6,7 +6,7 @@
  */
 
 export * from './authTokenResponse';
-export * from './changeRoleRequest';
+export * from './changeRolesRequest';
 export * from './createInvitationRequest';
 export * from './createOrganizationRequest';
 export * from './helloResponse';

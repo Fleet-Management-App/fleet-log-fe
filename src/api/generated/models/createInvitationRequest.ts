@@ -12,5 +12,6 @@ export interface CreateInvitationRequest {
      * @maxLength 320
      */
   email: string;
-  role: Role;
+  /** @minItems 1 */
+  roles: Role[];
 }

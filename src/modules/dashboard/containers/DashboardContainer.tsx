@@ -1,5 +1,6 @@
 import type { FC } from "react";
 
+import { sortRoles } from "@/modules/common/utils/roles";
 import { useCurrentUser } from "@/security/useCurrentUser";
 
 import { DashboardHeader } from "../components/DashboardHeader";
@@ -16,9 +17,12 @@ export const DashboardContainer: FC = () => {
       <DashboardHeader
         fullName={fullName}
         organizationName={activeOrganization.organizationName}
-        role={activeOrganization.role}
+        roles={activeOrganization.roles}
       />
-      <RoleActions actions={ROLE_ACTIONS[activeOrganization.role]} />
+      {/* Someone with several roles sees the tiles of all of them (how to present this is still open) */}
+      <RoleActions
+        actions={sortRoles(activeOrganization.roles).flatMap((role) => ROLE_ACTIONS[role])}
+      />
     </div>
   );
 };

@@ -38,7 +38,7 @@ export const AppLayout: FC = () => {
               >
                 Dashboard
               </Link>
-              {activeOrganization.role === Role.FLEET_MANAGER && (
+              {activeOrganization.roles.includes(Role.FLEET_MANAGER) && (
                 <Link
                   to="/organization/members"
                   className={navLinkClass}

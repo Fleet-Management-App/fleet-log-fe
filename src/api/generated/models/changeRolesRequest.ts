@@ -6,6 +6,7 @@
  */
 import type { Role } from './role';
 
-export interface ChangeRoleRequest {
-  role: Role;
+export interface ChangeRolesRequest {
+  /** @minItems 1 */
+  roles: Role[];
 }

@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@/modules/common/components/ui/table";
 import { formatDate } from "@/modules/common/utils/formatDate";
-import { ROLE_LABELS } from "@/modules/common/utils/roles";
+import { formatRoles } from "@/modules/common/utils/roles";
 
 type SentInvitationsTableProps = {
   invitations: InvitationResponse[];
@@ -34,7 +34,7 @@ export const SentInvitationsTable: FC<SentInvitationsTableProps> = ({
         <TableHeader>
           <TableRow>
             <TableHead>E-mail</TableHead>
-            <TableHead className="w-44">Role</TableHead>
+            <TableHead className="w-44">Roles</TableHead>
             <TableHead className="w-28">Sent</TableHead>
             <TableHead className="w-28" />
           </TableRow>
@@ -50,7 +50,7 @@ export const SentInvitationsTable: FC<SentInvitationsTableProps> = ({
                   </span>
                 </div>
               </TableCell>
-              <TableCell>{ROLE_LABELS[invitation.role]}</TableCell>
+              <TableCell>{formatRoles(invitation.roles)}</TableCell>
               <TableCell className="text-muted-foreground">
                 {formatDate(invitation.createdAt)}
               </TableCell>

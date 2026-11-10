@@ -14,7 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/modules/common/components/ui/dropdown-menu";
-import { ROLE_LABELS } from "@/modules/common/utils/roles";
+import { formatRoles } from "@/modules/common/utils/roles";
 
 type OrganizationSwitcherProps = {
   active?: MembershipResponse;
@@ -53,7 +53,7 @@ export const OrganizationSwitcher: FC<OrganizationSwitcherProps> = ({
           >
             <div className="flex min-w-0 flex-1 flex-col">
               <span className="truncate">{membership.organizationName}</span>
-              <span className="text-xs text-muted-foreground">{ROLE_LABELS[membership.role]}</span>
+              <span className="text-xs text-muted-foreground">{formatRoles(membership.roles)}</span>
             </div>
             {isActive && <Check />}
           </DropdownMenuItem>

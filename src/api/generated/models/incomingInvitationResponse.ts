@@ -10,7 +10,7 @@ export interface IncomingInvitationResponse {
   id: string;
   organizationId: string;
   organizationName: string;
-  role: Role;
+  roles: Role[];
   invitedByName: string;
   createdAt: string;
 }
