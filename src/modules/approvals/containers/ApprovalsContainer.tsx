@@ -23,7 +23,9 @@ export const ApprovalsContainer: FC = () => {
   const { t } = useTranslation("approvals");
   const [tab, setTab] = useState<ApprovalsTab>("plans");
   // A Fleet Manager gets every trip of the organization; one list feeds both tabs
-  const tripsQuery = useListTrips();
+  // The queue changes under the Fleet Manager (drivers plan, cancel and log fuel), so it refreshes
+  // itself while the page is open
+  const tripsQuery = useListTrips(undefined, { query: { refetchInterval: 30 * 1000 } });
   const vehiclesQuery = useListVehicles();
 
   const { planTrips, fuelTrips } = useMemo(() => {
