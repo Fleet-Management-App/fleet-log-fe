@@ -17,7 +17,7 @@ type ApprovalsTab = "plans" | "fuel";
 
 // Figma tabs are pill buttons: filled when active, outlined otherwise
 const tabTriggerClass =
-  "h-8 flex-none rounded-md border-border bg-background px-3 font-normal text-muted-foreground data-active:border-primary data-active:bg-primary data-active:text-primary-foreground group-data-[variant=default]/tabs-list:data-active:shadow-none dark:data-active:border-primary dark:data-active:bg-primary dark:data-active:text-primary-foreground";
+  "h-8 flex-none rounded-md border-border bg-background px-3 font-normal text-muted-foreground data-active:border-primary data-active:bg-primary data-active:text-primary-foreground data-active:hover:text-primary-foreground group-data-[variant=default]/tabs-list:data-active:shadow-none dark:data-active:border-primary dark:data-active:bg-primary dark:data-active:text-primary-foreground";
 
 export const ApprovalsContainer: FC = () => {
   const { t } = useTranslation("approvals");
