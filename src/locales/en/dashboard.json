@@ -5,9 +5,13 @@
       "title": "Members & invitations",
       "description": "Invite drivers and accountants, change roles."
     },
+    "vehicles": {
+      "title": "Vehicles",
+      "description": "The vehicle pool with STK, insurance and vignette dates; add vehicles."
+    },
     "approveTripPlans": {
-      "title": "Approve trip plans",
-      "description": "Approve or reject planned trips and their vehicle."
+      "title": "Approvals",
+      "description": "Approve or reject trip plans and fuel entries."
     },
     "anomalies": {
       "title": "Anomalies",
@@ -23,7 +27,7 @@
     },
     "logFuel": {
       "title": "Log fuel",
-      "description": "Add a fill-up with its receipt."
+      "description": "Add a fill-up with its receipt to one of your trips."
     },
     "reportProblem": {
       "title": "Report a problem",

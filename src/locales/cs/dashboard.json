@@ -5,9 +5,13 @@
       "title": "Členové a pozvánky",
       "description": "Zvěte řidiče a účetní, měňte jim role."
     },
+    "vehicles": {
+      "title": "Vozidla",
+      "description": "Vozový park s termíny STK, pojištění a dálniční známky; přidávání vozidel."
+    },
     "approveTripPlans": {
-      "title": "Schvalování plánů jízd",
-      "description": "Schvalujte nebo zamítejte plánované jízdy a zvolená vozidla."
+      "title": "Schvalování",
+      "description": "Schvalujte nebo zamítejte plány jízd a tankování."
     },
     "anomalies": {
       "title": "Anomálie",
@@ -23,7 +27,7 @@
     },
     "logFuel": {
       "title": "Zapsat tankování",
-      "description": "Přidejte tankování i s účtenkou."
+      "description": "Přidejte tankování i s účtenkou k některé ze svých jízd."
     },
     "reportProblem": {
       "title": "Nahlásit problém",
