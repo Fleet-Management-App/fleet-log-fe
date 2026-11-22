@@ -67,6 +67,8 @@
     "INVITATION_NOT_PENDING": "This invitation is no longer pending.",
     "INVITATION_ALREADY_PENDING": "This e-mail already has a pending invitation.",
     "MEMBER_NOT_FOUND": "This member doesn't exist.",
-    "LAST_FLEET_MANAGER": "The organization needs at least one Fleet Manager."
+    "LAST_FLEET_MANAGER": "The organization needs at least one Fleet Manager.",
+    "RECEIPT_PHOTO_INVALID": "The receipt must be a JPG, PNG, WebP or HEIC photo.",
+    "RECEIPT_PHOTO_TOO_LARGE": "The receipt photo can be at most 5 MB."
   }
 }

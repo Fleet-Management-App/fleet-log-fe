@@ -67,6 +67,8 @@
     "INVITATION_NOT_PENDING": "Pozvánka už není platná.",
     "INVITATION_ALREADY_PENDING": "Na tento e-mail už čeká pozvánka.",
     "MEMBER_NOT_FOUND": "Člen neexistuje.",
-    "LAST_FLEET_MANAGER": "Organizace musí mít alespoň jednoho správce vozového parku."
+    "LAST_FLEET_MANAGER": "Organizace musí mít alespoň jednoho správce vozového parku.",
+    "RECEIPT_PHOTO_INVALID": "Účtenka musí být fotka ve formátu JPG, PNG, WebP nebo HEIC.",
+    "RECEIPT_PHOTO_TOO_LARGE": "Fotka účtenky může mít nejvýše 5 MB."
   }
 }
