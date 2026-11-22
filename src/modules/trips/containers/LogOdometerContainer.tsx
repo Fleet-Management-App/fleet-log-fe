@@ -10,37 +10,35 @@ import {
   getListTripsQueryKey,
   useLogOdometer,
 } from "@/api/generated/hooks/trips/trips";
+import { getListVehiclesQueryKey } from "@/api/generated/hooks/vehicles/vehicles";
 import { type TripOdometerRequest, TripStatus } from "@/api/generated/models";
 import { formatNumber } from "@/modules/common/utils/formatDate";
-import { getErrorMessage } from "@/modules/common/utils/getErrorMessage";
 
 import { LogTripNotice } from "../components/LogTripNotice";
 import { OdometerForm } from "../forms/OdometerForm/OdometerForm";
 import { LogTripDataContainer } from "./LogTripDataContainer";
 
 export const LogOdometerContainer: FC<{ tripId: string }> = ({ tripId }) => {
-  const { t } = useTranslation(["tripLog", "common"]);
+  const { t } = useTranslation("tripLog");
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { mutateAsync: logOdometer } = useLogOdometer();
-  const [serverError, setServerError] = useState<string>();
   // Once saved, the cached trip turns COMPLETED; keep showing the form until we have navigated away
   const [isSaved, setIsSaved] = useState(false);
 
-  // Logging the odometer completes the trip (BR-05); fuel is a separate, optional step (BR-06)
+  // Logging the odometer completes the trip (BR-05); fuel is a separate, optional step (BR-06).
+  // A failed save rejects, and the form shows the BE's error.
   const handleSubmit = async (data: TripOdometerRequest) => {
-    setServerError(undefined);
-    try {
-      const trip = await logOdometer({ tripId, data });
-      setIsSaved(true);
-      queryClient.setQueryData(getGetTripQueryKey(tripId), trip);
-      await queryClient.invalidateQueries({ queryKey: getListTripsQueryKey() });
-      toast.success(t("odometer.success"));
-      await navigate({ to: "/trips/$tripId", params: { tripId } });
-    } catch (error) {
-      // Includes the BE's 400 for BR-04 and 409 when the plan is no longer approved (BR-03)
-      setServerError(getErrorMessage(error, t("common:states.actionError")));
-    }
+    const trip = await logOdometer({ tripId, data });
+    setIsSaved(true);
+    queryClient.setQueryData(getGetTripQueryKey(tripId), trip);
+    // Logging also raises the vehicle's odometer, which the next trip's start hint comes from
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: getListTripsQueryKey() }),
+      queryClient.invalidateQueries({ queryKey: getListVehiclesQueryKey() }),
+    ]);
+    toast.success(t("odometer.success"));
+    await navigate({ to: "/trips/$tripId", params: { tripId } });
   };
 
   return (
@@ -64,13 +62,7 @@ export const LogOdometerContainer: FC<{ tripId: string }> = ({ tripId }) => {
             </LogTripNotice>
           );
         }
-        return (
-          <OdometerForm
-            lastKnownOdometerKm={vehicle?.odometerKm}
-            serverError={serverError}
-            onSubmit={handleSubmit}
-          />
-        );
+        return <OdometerForm lastKnownOdometerKm={vehicle?.odometerKm} onSubmit={handleSubmit} />;
       }}
     </LogTripDataContainer>
   );

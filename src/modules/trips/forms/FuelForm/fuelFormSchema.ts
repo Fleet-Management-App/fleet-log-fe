@@ -26,8 +26,7 @@ export const createFuelFormSchema = (t: TFunction<"tripLog">) =>
       t("fuel.validation.litersPositive"),
     ),
     price: positiveDecimal(t("fuel.validation.priceRequired"), t("fuel.validation.pricePositive")),
-    // The receipt is what the Fleet Manager approves the fill-up against, so the FE asks for it
-    // even though the API accepts an entry without one
+    // BR-06: the receipt is what the Fleet Manager approves the fill-up against, so it is required
     receiptPhoto: z.custom<ReceiptPhoto | null>(
       (value) => value !== null,
       t("fuel.validation.receiptRequired"),

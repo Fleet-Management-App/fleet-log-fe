@@ -6,65 +6,41 @@ import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 import {
+  getGetFuelReceiptQueryKey,
   getGetTripQueryKey,
   getListTripsQueryKey,
   useLogFuel,
 } from "@/api/generated/hooks/trips/trips";
-import {
-  FuelStatus,
-  type TripFuelRequest,
-  type TripResponse,
-  TripStatus,
-} from "@/api/generated/models";
+import { FuelStatus, type TripFuelRequest, TripStatus } from "@/api/generated/models";
 import { formatNumber, formatPrice } from "@/modules/common/utils/formatDate";
-import { getErrorMessage } from "@/modules/common/utils/getErrorMessage";
 
 import { LogTripNotice } from "../components/LogTripNotice";
-import { FuelForm } from "../forms/FuelForm/FuelForm";
-import type { FuelFormValues } from "../forms/FuelForm/fuelFormSchema";
+import { FuelFormContainer } from "./FuelFormContainer";
 import { LogTripDataContainer } from "./LogTripDataContainer";
 
-// The API takes fuel on a trip in any status; the FE offers it only once the plan is approved,
-// i.e. on the trip being driven or already completed (a fill-up belongs to a trip that happens).
+// Fuel belongs to a trip that happens: the one being driven or already completed (the BE answers
+// 409 TRIP_NOT_PLAN_APPROVED otherwise)
 const FUEL_TRIP_STATUSES: TripStatus[] = [TripStatus.PLAN_APPROVED, TripStatus.COMPLETED];
 
-const EMPTY_FUEL_FORM: FuelFormValues = { liters: "", price: "", receiptPhoto: null };
-
 export const LogFuelContainer: FC<{ tripId: string }> = ({ tripId }) => {
-  const { t } = useTranslation(["tripLog", "common"]);
+  const { t } = useTranslation("tripLog");
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { mutateAsync: logFuel } = useLogFuel();
-  const [serverError, setServerError] = useState<string>();
   // Once sent, the cached entry turns PENDING; keep showing the form until we have navigated away
   const [isSaved, setIsSaved] = useState(false);
 
+  // A failed send rejects, and the form shows the BE's error
   const handleSubmit = async (data: TripFuelRequest) => {
-    setServerError(undefined);
-    try {
-      const trip = await logFuel({ tripId, data });
-      setIsSaved(true);
-      queryClient.setQueryData(getGetTripQueryKey(tripId), trip);
-      await queryClient.invalidateQueries({ queryKey: getListTripsQueryKey() });
-      toast.success(t("fuel.success"));
-      await navigate({ to: "/trips/$tripId", params: { tripId } });
-    } catch (error) {
-      // Includes the BE's 409 when an entry is already pending or approved
-      setServerError(getErrorMessage(error, t("common:states.actionError")));
-    }
+    const trip = await logFuel({ tripId, data });
+    setIsSaved(true);
+    queryClient.setQueryData(getGetTripQueryKey(tripId), trip);
+    // A cached photo of the earlier, rejected entry must not be offered again
+    queryClient.removeQueries({ queryKey: getGetFuelReceiptQueryKey(tripId) });
+    await queryClient.invalidateQueries({ queryKey: getListTripsQueryKey() });
+    toast.success(t("fuel.success"));
+    await navigate({ to: "/trips/$tripId", params: { tripId } });
   };
-
-  // A rejected entry is resubmitted through the same form, prefilled with what was sent (BR-07)
-  const getDefaultValues = (trip: TripResponse): FuelFormValues =>
-    trip.fuel?.status === FuelStatus.REJECTED
-      ? {
-          liters: formatNumber(trip.fuel.liters, 3),
-          price: formatNumber(trip.fuel.price),
-          receiptPhoto: trip.fuel.receiptPhotoUrl
-            ? { dataUrl: trip.fuel.receiptPhotoUrl, name: t("receipt.label") }
-            : null,
-        }
-      : EMPTY_FUEL_FORM;
 
   return (
     <LogTripDataContainer tripId={tripId}>
@@ -106,12 +82,7 @@ export const LogFuelContainer: FC<{ tripId: string }> = ({ tripId }) => {
                 <span>{t("fuel.rejected.hint")}</span>
               </LogTripNotice>
             )}
-            <FuelForm
-              defaultValues={getDefaultValues(trip)}
-              isResubmit={isResubmit}
-              serverError={serverError}
-              onSubmit={handleSubmit}
-            />
+            <FuelFormContainer trip={trip} onSubmit={handleSubmit} />
           </>
         );
       }}

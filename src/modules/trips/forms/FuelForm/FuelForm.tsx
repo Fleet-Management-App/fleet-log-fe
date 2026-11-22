@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { type FC, useState } from "react";
 
 import { Info } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -6,6 +6,10 @@ import { useTranslation } from "react-i18next";
 import type { TripFuelRequest } from "@/api/generated/models";
 import { useAppForm } from "@/modules/common/components/form/useAppForm";
 import { FieldGroup } from "@/modules/common/components/ui/field";
+import {
+  clearServerFieldErrors,
+  setServerFieldError,
+} from "@/modules/common/utils/serverFieldError";
 
 import { parseNumberInput } from "../OdometerForm/parseNumberInput";
 import { PendingSubmitButton } from "../OdometerForm/PendingSubmitButton";
@@ -18,27 +22,32 @@ type FuelFormProps = {
   // Prefilled with the rejected entry when it is being resubmitted (BR-07)
   defaultValues: FuelFormValues;
   isResubmit?: boolean;
-  serverError?: string;
+  // Rejects with the BE's error when sending failed
   onSubmit: (values: TripFuelRequest) => Promise<void>;
 };
 
-export const FuelForm: FC<FuelFormProps> = ({
-  defaultValues,
-  isResubmit,
-  serverError,
-  onSubmit,
-}) => {
+export const FuelForm: FC<FuelFormProps> = ({ defaultValues, isResubmit, onSubmit }) => {
   const { t } = useTranslation("tripLog");
+  // A BE error that names no field of the form, e.g. 409 FUEL_ENTRY_ALREADY_EXISTS (BR-07)
+  const [serverError, setServerError] = useState<string>();
 
   const form = useAppForm({
     defaultValues,
     validators: { onChange: createFuelFormSchema(t) },
-    onSubmit: ({ value }) =>
-      onSubmit({
-        liters: parseNumberInput(value.liters),
-        price: parseNumberInput(value.price),
-        receiptPhoto: value.receiptPhoto?.dataUrl ?? null,
-      }),
+    listeners: { onChange: ({ formApi }) => clearServerFieldErrors(formApi) },
+    onSubmit: async ({ value, formApi }) => {
+      setServerError(undefined);
+      try {
+        await onSubmit({
+          liters: parseNumberInput(value.liters),
+          price: parseNumberInput(value.price),
+          // The schema has already required a photo (BR-06)
+          receiptPhoto: value.receiptPhoto?.dataUrl ?? "",
+        });
+      } catch (error) {
+        setServerError(setServerFieldError(formApi, error));
+      }
+    },
   });
 
   return (
