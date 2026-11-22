@@ -1,0 +1,18 @@
+{
+  "tripStatus": {
+    "PLANNED": "Planned",
+    "PLAN_APPROVED": "Plan approved",
+    "PLAN_REJECTED": "Plan rejected",
+    "COMPLETED": "Completed",
+    "CANCELLED": "Cancelled"
+  },
+  "fuelStatus": {
+    "PENDING": "Pending",
+    "APPROVED": "Approved",
+    "REJECTED": "Rejected"
+  },
+  "placeholder": {
+    "myTrips": "My trips",
+    "tripDetail": "Trip detail"
+  }
+}

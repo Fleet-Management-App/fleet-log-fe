@@ -1,0 +1,18 @@
+{
+  "tripStatus": {
+    "PLANNED": "Naplánováno",
+    "PLAN_APPROVED": "Plán schválen",
+    "PLAN_REJECTED": "Plán zamítnut",
+    "COMPLETED": "Dokončeno",
+    "CANCELLED": "Zrušeno"
+  },
+  "fuelStatus": {
+    "PENDING": "Čeká",
+    "APPROVED": "Schváleno",
+    "REJECTED": "Zamítnuto"
+  },
+  "placeholder": {
+    "myTrips": "Moje jízdy",
+    "tripDetail": "Detail jízdy"
+  }
+}

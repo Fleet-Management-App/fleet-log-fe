@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "dashboard": "Přehled",
+    "vehicles": "Vozidla",
+    "trips": "Jízdy",
+    "myTrips": "Moje jízdy",
+    "approvals": "Schvalování",
+    "members": "Členové"
+  },
+  "actions": {
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "back": "Zpět",
+    "retry": "Zkusit znovu",
+    "approve": "Schválit",
+    "reject": "Zamítnout",
+    "close": "Zavřít"
+  },
+  "states": {
+    "loading": "Načítání…",
+    "loadError": "Při načítání se něco pokazilo. Zkuste to znovu.",
+    "actionError": "Něco se pokazilo. Zkuste to znovu.",
+    "comingSoon": "Připravujeme"
+  },
+  "language": {
+    "label": "Jazyk",
+    "en": "English",
+    "cs": "Čeština"
+  }
+}

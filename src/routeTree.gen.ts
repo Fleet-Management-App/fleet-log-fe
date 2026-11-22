@@ -13,8 +13,16 @@ import { Route as AppRouteImport } from './routes/_app'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as SignUpRouteImport } from './routes/sign-up'
 import { Route as AppIndexRouteImport } from './routes/_app/index'
+import { Route as AppApprovalsRouteImport } from './routes/_app/approvals'
+import { Route as AppVehiclesRouteImport } from './routes/_app/vehicles'
 import { Route as AppWelcomeRouteImport } from './routes/_app/welcome'
 import { Route as AppOrganizationMembersRouteImport } from './routes/_app/organization/members'
+import { Route as AppTripsIndexRouteImport } from './routes/_app/trips/index'
+import { Route as AppTripsNewRouteImport } from './routes/_app/trips/new'
+import { Route as AppTripsTripIdIndexRouteImport } from './routes/_app/trips/$tripId/index'
+import { Route as AppTripsTripIdEditRouteImport } from './routes/_app/trips/$tripId/edit'
+import { Route as AppTripsTripIdFuelRouteImport } from './routes/_app/trips/$tripId/fuel'
+import { Route as AppTripsTripIdOdometerRouteImport } from './routes/_app/trips/$tripId/odometer'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -35,6 +43,16 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppApprovalsRoute = AppApprovalsRouteImport.update({
+  id: '/approvals',
+  path: '/approvals',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVehiclesRoute = AppVehiclesRouteImport.update({
+  id: '/vehicles',
+  path: '/vehicles',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppWelcomeRoute = AppWelcomeRouteImport.update({
   id: '/welcome',
   path: '/welcome',
@@ -45,43 +63,131 @@ const AppOrganizationMembersRoute = AppOrganizationMembersRouteImport.update({
   path: '/organization/members',
   getParentRoute: () => AppRoute,
 } as any)
+const AppTripsIndexRoute = AppTripsIndexRouteImport.update({
+  id: '/trips/',
+  path: '/trips/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTripsNewRoute = AppTripsNewRouteImport.update({
+  id: '/trips/new',
+  path: '/trips/new',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTripsTripIdIndexRoute = AppTripsTripIdIndexRouteImport.update({
+  id: '/trips/$tripId/',
+  path: '/trips/$tripId/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTripsTripIdEditRoute = AppTripsTripIdEditRouteImport.update({
+  id: '/trips/$tripId/edit',
+  path: '/trips/$tripId/edit',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTripsTripIdFuelRoute = AppTripsTripIdFuelRouteImport.update({
+  id: '/trips/$tripId/fuel',
+  path: '/trips/$tripId/fuel',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTripsTripIdOdometerRoute = AppTripsTripIdOdometerRouteImport.update({
+  id: '/trips/$tripId/odometer',
+  path: '/trips/$tripId/odometer',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
   '/login': typeof LoginRoute
   '/sign-up': typeof SignUpRoute
+  '/approvals': typeof AppApprovalsRoute
+  '/vehicles': typeof AppVehiclesRoute
   '/welcome': typeof AppWelcomeRoute
   '/organization/members': typeof AppOrganizationMembersRoute
+  '/trips/new': typeof AppTripsNewRoute
+  '/trips/': typeof AppTripsIndexRoute
+  '/trips/$tripId/edit': typeof AppTripsTripIdEditRoute
+  '/trips/$tripId/fuel': typeof AppTripsTripIdFuelRoute
+  '/trips/$tripId/odometer': typeof AppTripsTripIdOdometerRoute
+  '/trips/$tripId/': typeof AppTripsTripIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/sign-up': typeof SignUpRoute
+  '/approvals': typeof AppApprovalsRoute
+  '/vehicles': typeof AppVehiclesRoute
   '/welcome': typeof AppWelcomeRoute
   '/': typeof AppIndexRoute
   '/organization/members': typeof AppOrganizationMembersRoute
+  '/trips/new': typeof AppTripsNewRoute
+  '/trips': typeof AppTripsIndexRoute
+  '/trips/$tripId/edit': typeof AppTripsTripIdEditRoute
+  '/trips/$tripId/fuel': typeof AppTripsTripIdFuelRoute
+  '/trips/$tripId/odometer': typeof AppTripsTripIdOdometerRoute
+  '/trips/$tripId': typeof AppTripsTripIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
   '/sign-up': typeof SignUpRoute
+  '/_app/approvals': typeof AppApprovalsRoute
+  '/_app/vehicles': typeof AppVehiclesRoute
   '/_app/welcome': typeof AppWelcomeRoute
   '/_app/': typeof AppIndexRoute
   '/_app/organization/members': typeof AppOrganizationMembersRoute
+  '/_app/trips/new': typeof AppTripsNewRoute
+  '/_app/trips/': typeof AppTripsIndexRoute
+  '/_app/trips/$tripId/edit': typeof AppTripsTripIdEditRoute
+  '/_app/trips/$tripId/fuel': typeof AppTripsTripIdFuelRoute
+  '/_app/trips/$tripId/odometer': typeof AppTripsTripIdOdometerRoute
+  '/_app/trips/$tripId/': typeof AppTripsTripIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/sign-up' | '/welcome' | '/organization/members'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/sign-up'
+    | '/approvals'
+    | '/vehicles'
+    | '/welcome'
+    | '/organization/members'
+    | '/trips/new'
+    | '/trips/'
+    | '/trips/$tripId/edit'
+    | '/trips/$tripId/fuel'
+    | '/trips/$tripId/odometer'
+    | '/trips/$tripId/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/sign-up' | '/welcome' | '/' | '/organization/members'
+  to:
+    | '/login'
+    | '/sign-up'
+    | '/approvals'
+    | '/vehicles'
+    | '/welcome'
+    | '/'
+    | '/organization/members'
+    | '/trips/new'
+    | '/trips'
+    | '/trips/$tripId/edit'
+    | '/trips/$tripId/fuel'
+    | '/trips/$tripId/odometer'
+    | '/trips/$tripId'
   id:
     | '__root__'
     | '/_app'
     | '/login'
     | '/sign-up'
+    | '/_app/approvals'
+    | '/_app/vehicles'
     | '/_app/welcome'
     | '/_app/'
     | '/_app/organization/members'
+    | '/_app/trips/new'
+    | '/_app/trips/'
+    | '/_app/trips/$tripId/edit'
+    | '/_app/trips/$tripId/fuel'
+    | '/_app/trips/$tripId/odometer'
+    | '/_app/trips/$tripId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -120,6 +226,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/approvals': {
+      id: '/_app/approvals'
+      path: '/approvals'
+      fullPath: '/approvals'
+      preLoaderRoute: typeof AppApprovalsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/vehicles': {
+      id: '/_app/vehicles'
+      path: '/vehicles'
+      fullPath: '/vehicles'
+      preLoaderRoute: typeof AppVehiclesRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/welcome': {
       id: '/_app/welcome'
       path: '/welcome'
@@ -134,19 +254,77 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppOrganizationMembersRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/trips/': {
+      id: '/_app/trips/'
+      path: '/trips'
+      fullPath: '/trips/'
+      preLoaderRoute: typeof AppTripsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/trips/new': {
+      id: '/_app/trips/new'
+      path: '/trips/new'
+      fullPath: '/trips/new'
+      preLoaderRoute: typeof AppTripsNewRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/trips/$tripId/': {
+      id: '/_app/trips/$tripId/'
+      path: '/trips/$tripId'
+      fullPath: '/trips/$tripId/'
+      preLoaderRoute: typeof AppTripsTripIdIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/trips/$tripId/edit': {
+      id: '/_app/trips/$tripId/edit'
+      path: '/trips/$tripId/edit'
+      fullPath: '/trips/$tripId/edit'
+      preLoaderRoute: typeof AppTripsTripIdEditRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/trips/$tripId/fuel': {
+      id: '/_app/trips/$tripId/fuel'
+      path: '/trips/$tripId/fuel'
+      fullPath: '/trips/$tripId/fuel'
+      preLoaderRoute: typeof AppTripsTripIdFuelRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/trips/$tripId/odometer': {
+      id: '/_app/trips/$tripId/odometer'
+      path: '/trips/$tripId/odometer'
+      fullPath: '/trips/$tripId/odometer'
+      preLoaderRoute: typeof AppTripsTripIdOdometerRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppApprovalsRoute: typeof AppApprovalsRoute
+  AppVehiclesRoute: typeof AppVehiclesRoute
   AppWelcomeRoute: typeof AppWelcomeRoute
   AppIndexRoute: typeof AppIndexRoute
   AppOrganizationMembersRoute: typeof AppOrganizationMembersRoute
+  AppTripsNewRoute: typeof AppTripsNewRoute
+  AppTripsIndexRoute: typeof AppTripsIndexRoute
+  AppTripsTripIdEditRoute: typeof AppTripsTripIdEditRoute
+  AppTripsTripIdFuelRoute: typeof AppTripsTripIdFuelRoute
+  AppTripsTripIdOdometerRoute: typeof AppTripsTripIdOdometerRoute
+  AppTripsTripIdIndexRoute: typeof AppTripsTripIdIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppApprovalsRoute: AppApprovalsRoute,
+  AppVehiclesRoute: AppVehiclesRoute,
   AppWelcomeRoute: AppWelcomeRoute,
   AppIndexRoute: AppIndexRoute,
   AppOrganizationMembersRoute: AppOrganizationMembersRoute,
+  AppTripsNewRoute: AppTripsNewRoute,
+  AppTripsIndexRoute: AppTripsIndexRoute,
+  AppTripsTripIdEditRoute: AppTripsTripIdEditRoute,
+  AppTripsTripIdFuelRoute: AppTripsTripIdFuelRoute,
+  AppTripsTripIdOdometerRoute: AppTripsTripIdOdometerRoute,
+  AppTripsTripIdIndexRoute: AppTripsTripIdIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
