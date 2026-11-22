@@ -1,1 +1,67 @@
-{}
+{
+  "page": {
+    "title": "Vozidla",
+    "subtitle": "Sdílený vozový park organizace {{organization}}",
+    "add": "Přidat vozidlo"
+  },
+  "table": {
+    "plate": "SPZ",
+    "vehicle": "Značka / model",
+    "fuelType": "Palivo",
+    "odometer": "Stav tachometru",
+    "status": "Stav",
+    "stk": "STK",
+    "insurance": "Pojištění",
+    "vignette": "Dálniční známka",
+    "km": "{{value}} km"
+  },
+  "empty": {
+    "title": "Zatím žádná vozidla",
+    "fleetManager": "První vozidlo přidáte tlačítkem „Přidat vozidlo“.",
+    "readOnly": "Vozidla se zde zobrazí, jakmile je přidá správce vozového parku."
+  },
+  "fuelType": {
+    "PETROL": "Benzín",
+    "DIESEL": "Nafta",
+    "ELECTRIC": "Elektřina",
+    "HYBRID": "Hybrid",
+    "LPG": "LPG"
+  },
+  "status": {
+    "ACTIVE": "Aktivní",
+    "IN_SERVICE": "V servisu",
+    "SUSPENDED": "Mimo provoz"
+  },
+  "dueDate": {
+    "dueToday": "Platnost končí dnes",
+    "dueIn_one": "Platnost končí za {{count}} den",
+    "dueIn_few": "Platnost končí za {{count}} dny",
+    "dueIn_many": "Platnost končí za {{count}} dne",
+    "dueIn_other": "Platnost končí za {{count}} dní",
+    "overdue_one": "Po termínu {{count}} den",
+    "overdue_few": "Po termínu {{count}} dny",
+    "overdue_many": "Po termínu {{count}} dne",
+    "overdue_other": "Po termínu {{count}} dní"
+  },
+  "form": {
+    "title": "Přidat vozidlo",
+    "description": "Vozidlo se zařadí do sdíleného vozového parku jako aktivní a řidiči si jej mohou vybrat při plánování jízdy.",
+    "plate": "SPZ",
+    "vin": "VIN",
+    "make": "Značka",
+    "model": "Model",
+    "fuelType": "Druh paliva",
+    "odometer": "Stav tachometru (km)",
+    "stkDueDate": "Platnost STK do",
+    "insuranceDueDate": "Pojištění platné do",
+    "vignetteDueDate": "Dálniční známka platná do",
+    "submit": "Přidat vozidlo",
+    "added": "Vozidlo {{plate}} bylo přidáno.",
+    "errors": {
+      "required": "Vyplňte prosím toto pole",
+      "tooLong": "Nejvýše {{max}} znaků",
+      "odometer": "Zadejte celý počet kilometrů",
+      "date": "Zadejte platné datum"
+    }
+  }
+}
