@@ -14,7 +14,7 @@ export const MembersPage: FC = () => {
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-semibold">Members</h1>
         <p className="text-sm text-muted-foreground">
-          Who has access to {activeOrganization?.organizationName}, and with which role.
+          Who has access to {activeOrganization?.organizationName}, and with which roles.
         </p>
       </div>
       <div className="grid items-start gap-6 lg:grid-cols-[1fr_20rem]">

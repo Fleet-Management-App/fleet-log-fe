@@ -9,7 +9,7 @@ import type { Role } from './role';
 export interface InvitationResponse {
   id: string;
   email: string;
-  role: Role;
+  roles: Role[];
   invitedByName: string;
   createdAt: string;
 }

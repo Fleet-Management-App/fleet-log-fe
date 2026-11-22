@@ -9,7 +9,7 @@ import { MembersPage } from "@/modules/users/pages/MembersPage";
 export const Route = createFileRoute("/_app/organization/members")({
   beforeLoad: () => {
     const me = queryClient.getQueryData<MeResponse>(getGetMeQueryKey());
-    if (me?.activeOrganization?.role !== Role.FLEET_MANAGER) throw redirect({ to: "/" });
+    if (!me?.activeOrganization?.roles.includes(Role.FLEET_MANAGER)) throw redirect({ to: "/" });
   },
   component: MembersPage,
 });

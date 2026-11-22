@@ -9,10 +9,10 @@ import { ROLE_OPTIONS } from "@/modules/common/utils/roles";
 
 const inviteMemberFormSchema = z.object({
   email: z.email("Enter a valid e-mail").max(320),
-  role: z.enum(Role),
+  roles: z.array(z.enum(Role)).min(1, "Pick at least one role"),
 });
 
-const inviteMemberFormDefaults: CreateInvitationRequest = { email: "", role: Role.DRIVER };
+const inviteMemberFormDefaults: CreateInvitationRequest = { email: "", roles: [Role.DRIVER] };
 
 type InviteMemberFormProps = {
   // Resolves to true when the invitation was sent, which clears the form
@@ -40,8 +40,8 @@ export const InviteMemberForm: FC<InviteMemberFormProps> = ({ onSubmit }) => {
         <form.AppField name="email">
           {(field) => <field.TextField label="E-mail" type="email" placeholder="name@company.cz" />}
         </form.AppField>
-        <form.AppField name="role">
-          {(field) => <field.SelectField label="Role" options={ROLE_OPTIONS} />}
+        <form.AppField name="roles">
+          {(field) => <field.MultiToggleField label="Roles" options={ROLE_OPTIONS} />}
         </form.AppField>
         <form.AppForm>
           <form.SubmitButton>Send invitation</form.SubmitButton>

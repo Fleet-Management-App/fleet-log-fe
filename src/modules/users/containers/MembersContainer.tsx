@@ -7,13 +7,13 @@ import { toast } from "sonner";
 import { getGetMeQueryKey } from "@/api/generated/hooks/account/account";
 import {
   getListMembersQueryKey,
-  useChangeMemberRole,
+  useChangeMemberRoles,
   useListMembers,
   useRemoveMember,
 } from "@/api/generated/hooks/organization-members/organization-members";
-import type { MemberResponse, Role } from "@/api/generated/models";
+import { type MemberResponse, Role } from "@/api/generated/models";
 import { getErrorMessage } from "@/modules/common/utils/getErrorMessage";
-import { ROLE_LABELS } from "@/modules/common/utils/roles";
+import { formatRoles } from "@/modules/common/utils/roles";
 import { useCurrentUser } from "@/security/useCurrentUser";
 
 import { MembersTable } from "../components/MembersTable";
@@ -23,22 +23,23 @@ export const MembersContainer: FC = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { data: members = [], isLoading } = useListMembers();
-  const { mutateAsync: changeRole, isPending: isChangingRole } = useChangeMemberRole();
+  const { mutateAsync: changeRoles, isPending: isChangingRoles } = useChangeMemberRoles();
   const { mutateAsync: removeMember, isPending: isRemoving } = useRemoveMember();
 
   const refresh = () => queryClient.invalidateQueries({ queryKey: getListMembersQueryKey() });
 
-  // Changing your own role takes the Fleet Manager rights away, so leave this page
-  const afterOwnChange = async () => {
+  // Your own change may take the Fleet Manager rights away; then this page is no longer yours
+  const afterOwnChange = async (keepsFleetManager: boolean) => {
     await queryClient.invalidateQueries({ queryKey: getGetMeQueryKey() });
-    await navigate({ to: "/" });
+    if (keepsFleetManager) await refresh();
+    else await navigate({ to: "/" });
   };
 
-  const handleRoleChange = async (member: MemberResponse, role: Role) => {
+  const handleRolesChange = async (member: MemberResponse, roles: Role[]) => {
     try {
-      await changeRole({ userId: member.userId, data: { role } });
-      toast.success(`${member.fullName} is now ${ROLE_LABELS[role]}.`);
-      if (member.userId === currentUserId) await afterOwnChange();
+      await changeRoles({ userId: member.userId, data: { roles } });
+      toast.success(`${member.fullName}: ${formatRoles(roles)}.`);
+      if (member.userId === currentUserId) await afterOwnChange(roles.includes(Role.FLEET_MANAGER));
       else await refresh();
     } catch (error) {
       toast.error(getErrorMessage(error));
@@ -49,7 +50,7 @@ export const MembersContainer: FC = () => {
     try {
       await removeMember({ userId: member.userId });
       toast.success(`${member.fullName} no longer has access.`);
-      if (member.userId === currentUserId) await afterOwnChange();
+      if (member.userId === currentUserId) await afterOwnChange(false);
       else await refresh();
     } catch (error) {
       toast.error(getErrorMessage(error));
@@ -61,8 +62,8 @@ export const MembersContainer: FC = () => {
       members={members}
       currentUserId={currentUserId}
       isLoading={isLoading}
-      disabled={isChangingRole || isRemoving}
-      onRoleChange={handleRoleChange}
+      disabled={isChangingRoles || isRemoving}
+      onRolesChange={handleRolesChange}
       onRemove={handleRemove}
     />
   );
