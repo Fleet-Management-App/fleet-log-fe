@@ -65,6 +65,10 @@
     "planApproveFailed": "Plán jízdy {{trip}} se nepodařilo schválit. Zkuste to znovu.",
     "planRejectFailed": "Plán jízdy {{trip}} se nepodařilo zamítnout. Zkuste to znovu.",
     "fuelApproveFailed": "Tankování {{trip}} se nepodařilo schválit. Zkuste to znovu.",
-    "fuelRejectFailed": "Tankování {{trip}} se nepodařilo zamítnout. Zkuste to znovu."
+    "fuelRejectFailed": "Tankování {{trip}} se nepodařilo zamítnout. Zkuste to znovu.",
+    "planApproveRefused": "Plán jízdy {{trip}} nejde schválit. {{reason}}",
+    "planRejectRefused": "Plán jízdy {{trip}} nejde zamítnout. {{reason}}",
+    "fuelApproveRefused": "Tankování {{trip}} nejde schválit. {{reason}}",
+    "fuelRejectRefused": "Tankování {{trip}} nejde zamítnout. {{reason}}"
   }
 }

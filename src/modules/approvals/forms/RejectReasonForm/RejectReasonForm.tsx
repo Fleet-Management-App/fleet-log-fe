@@ -21,7 +21,7 @@ type RejectReasonFormProps = {
   onSubmit: (reason: string) => Promise<void>;
 };
 
-// The BE accepts a rejection without a reason; the FE asks for one so the driver knows what to fix
+// A rejection needs a reason the driver can act on; the BE enforces it too (REJECTION_REASON_REQUIRED)
 export const RejectReasonForm: FC<RejectReasonFormProps> = ({ onSubmit }) => {
   const { t } = useTranslation();
   const { t: tApprovals } = useTranslation("approvals");

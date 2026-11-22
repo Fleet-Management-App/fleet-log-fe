@@ -65,6 +65,10 @@
     "planApproveFailed": "The trip plan {{trip}} could not be approved. Try again.",
     "planRejectFailed": "The trip plan {{trip}} could not be rejected. Try again.",
     "fuelApproveFailed": "The fuel entry {{trip}} could not be approved. Try again.",
-    "fuelRejectFailed": "The fuel entry {{trip}} could not be rejected. Try again."
+    "fuelRejectFailed": "The fuel entry {{trip}} could not be rejected. Try again.",
+    "planApproveRefused": "The trip plan {{trip}} could not be approved. {{reason}}",
+    "planRejectRefused": "The trip plan {{trip}} could not be rejected. {{reason}}",
+    "fuelApproveRefused": "The fuel entry {{trip}} could not be approved. {{reason}}",
+    "fuelRejectRefused": "The fuel entry {{trip}} could not be rejected. {{reason}}"
   }
 }

@@ -78,7 +78,7 @@ export const FuelApprovalsTable: FC<FuelApprovalsTableProps> = ({
               </TableCell>
               <TableCell className={approvalsCellClass}>
                 <ReceiptThumbnail
-                  url={trip.fuel?.receiptPhotoUrl}
+                  trip={trip}
                   alt={t("receipt.alt", { trip: describeTrip(trip) })}
                   onOpen={() => onShowReceipt(trip)}
                 />

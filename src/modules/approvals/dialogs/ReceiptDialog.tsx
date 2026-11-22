@@ -10,9 +10,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/modules/common/components/ui/dialog";
+import { Skeleton } from "@/modules/common/components/ui/skeleton";
 import { formatDate, formatNumber, formatPrice } from "@/modules/common/utils/formatDate";
 
 import { DecisionActions } from "../components/DecisionActions";
+import { useReceiptPhoto } from "../hooks/custom/useReceiptPhoto";
 import type { PendingDecision } from "../models/decision";
 import { describeTrip } from "../utils/describeTrip";
 
@@ -34,11 +36,14 @@ export const ReceiptDialog: FC<ReceiptDialogProps> = ({
 }) => {
   const { t } = useTranslation("approvals");
   const [brokenUrl, setBrokenUrl] = useState<string | null>(null);
-  const url = trip?.fuel?.receiptPhotoUrl;
+  // Usually already cached by the row's thumbnail
+  const { hasReceipt, url, isLoading, isError } = useReceiptPhoto(trip);
 
   const renderReceipt = () => {
-    if (!trip || !url) return <p className="text-sm text-muted-foreground">{t("receipt.none")}</p>;
-    if (brokenUrl === url)
+    if (!trip || !hasReceipt)
+      return <p className="text-sm text-muted-foreground">{t("receipt.none")}</p>;
+    if (isLoading) return <Skeleton className="h-64 w-48" />;
+    if (isError || !url || brokenUrl === url)
       return <p className="text-sm text-muted-foreground">{t("receipt.unavailable")}</p>;
     return (
       <img

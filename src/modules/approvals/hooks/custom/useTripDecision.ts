@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 import { useQueryClient } from "@tanstack/react-query";
-import { isAxiosError } from "axios";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 import { getGetTripQueryKey, getListTripsQueryKey } from "@/api/generated/hooks/trips/trips";
-import type { TripResponse } from "@/api/generated/models";
+import { ApiProblemCode, type TripResponse } from "@/api/generated/models";
+import { getErrorCode, getErrorMessage } from "@/modules/common/utils/getErrorMessage";
 
 import type { DecisionKind, PendingDecision } from "../../models/decision";
 import { describeTrip } from "../../utils/describeTrip";
@@ -22,6 +22,8 @@ const MESSAGES = {
     rejectConflict: "errors.planConflictReject",
     approveFailed: "errors.planApproveFailed",
     rejectFailed: "errors.planRejectFailed",
+    approveRefused: "errors.planApproveRefused",
+    rejectRefused: "errors.planRejectRefused",
   },
   fuel: {
     approved: "toast.fuelApproved",
@@ -30,12 +32,21 @@ const MESSAGES = {
     rejectConflict: "errors.fuelConflict",
     approveFailed: "errors.fuelApproveFailed",
     rejectFailed: "errors.fuelRejectFailed",
+    approveRefused: "errors.fuelApproveRefused",
+    rejectRefused: "errors.fuelRejectRefused",
   },
 } as const;
 
-// 409: no longer awaiting a decision (decided elsewhere, cancelled); 404: the trip is gone
-const isStaleDecision = (error: unknown) =>
-  isAxiosError(error) && (error.response?.status === 409 || error.response?.status === 404);
+// Codes meaning the row no longer awaits this decision: decided by another manager, cancelled by
+// the driver, or the trip is gone. The refetch then drops the row, so the banner says so.
+const STALE_CODES: Record<DecisionKind, ReadonlySet<ApiProblemCode>> = {
+  plan: new Set([ApiProblemCode.TRIP_NOT_PLANNED, ApiProblemCode.TRIP_NOT_FOUND]),
+  fuel: new Set([
+    ApiProblemCode.FUEL_ENTRY_NOT_PENDING,
+    ApiProblemCode.NO_FUEL_ENTRY,
+    ApiProblemCode.TRIP_NOT_FOUND,
+  ]),
+};
 
 /**
  * Runs approve/reject decisions of one kind: tracks which rows are waiting for the BE, refreshes
@@ -49,6 +60,20 @@ export const useTripDecision = (kind: DecisionKind, decide: DecideMutation) => {
   const [actionError, setActionError] = useState<string | null>(null);
   const messages = MESSAGES[kind];
 
+  const describeFailure = (error: unknown, approved: boolean, label: string) => {
+    const code = getErrorCode(error);
+    if (code && STALE_CODES[kind].has(code))
+      return t(approved ? messages.approveConflict : messages.rejectConflict, { trip: label });
+    // A refusal the BE explains, e.g. VEHICLE_UNAVAILABLE when the vehicle got suspended (BR-01)
+    const reason = getErrorMessage(error, "");
+    if (reason)
+      return t(approved ? messages.approveRefused : messages.rejectRefused, {
+        trip: label,
+        reason,
+      });
+    return t(approved ? messages.approveFailed : messages.rejectFailed, { trip: label });
+  };
+
   const decideTrip = async (trip: TripResponse, approved: boolean, rejectionReason?: string) => {
     const label = describeTrip(trip);
     setActionError(null);
@@ -60,14 +85,7 @@ export const useTripDecision = (kind: DecisionKind, decide: DecideMutation) => {
       });
       toast.success(t(approved ? messages.approved : messages.rejected, { trip: label }));
     } catch (error) {
-      const message = isStaleDecision(error)
-        ? approved
-          ? messages.approveConflict
-          : messages.rejectConflict
-        : approved
-          ? messages.approveFailed
-          : messages.rejectFailed;
-      setActionError(t(message, { trip: label }));
+      setActionError(describeFailure(error, approved, label));
     } finally {
       // Refetch before releasing the row, so a decided row leaves instead of flashing its buttons
       await Promise.all([
