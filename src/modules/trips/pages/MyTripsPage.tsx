@@ -1,4 +1,5 @@
 import type { FC } from "react";
 
-// Placeholder created with the route scaffold; FLOG-58 replaces it.
-export const MyTripsPage: FC = () => <h1 className="text-2xl font-semibold">MyTripsPage</h1>;
+import { MyTripsContainer } from "../containers/MyTripsContainer";
+
+export const MyTripsPage: FC = () => <MyTripsContainer />;

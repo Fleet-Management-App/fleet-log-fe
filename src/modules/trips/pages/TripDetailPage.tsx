@@ -1,4 +1,11 @@
 import type { FC } from "react";
 
-// Placeholder created with the route scaffold; FLOG-58 replaces it.
-export const TripDetailPage: FC = () => <h1 className="text-2xl font-semibold">TripDetailPage</h1>;
+import { useParams } from "@tanstack/react-router";
+
+import { TripDetailContainer } from "../containers/TripDetailContainer";
+
+export const TripDetailPage: FC = () => {
+  const { tripId } = useParams({ from: "/_app/trips/$tripId/" });
+  // Keyed by id so the cancel confirmation doesn't carry over to another trip
+  return <TripDetailContainer key={tripId} tripId={tripId} />;
+};
