@@ -713,7 +713,7 @@ export function useGetTrip<TData = Awaited<ReturnType<typeof getTrip>>, TError =
 
 
 /**
- * @summary The fuel entry's receipt photo (a data URL); same visibility as the trip detail
+ * @summary The fuel entry's receipt photo (a base64 data URL); same visibility as the trip detail
  */
 export const getFuelReceipt = (
     tripId: string,
@@ -784,7 +784,7 @@ export function useGetFuelReceipt<TData = Awaited<ReturnType<typeof getFuelRecei
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
- * @summary The fuel entry's receipt photo (a data URL); same visibility as the trip detail
+ * @summary The fuel entry's receipt photo (a base64 data URL); same visibility as the trip detail
  */
 
 export function useGetFuelReceipt<TData = Awaited<ReturnType<typeof getFuelReceipt>>, TError = ApiProblem>(
