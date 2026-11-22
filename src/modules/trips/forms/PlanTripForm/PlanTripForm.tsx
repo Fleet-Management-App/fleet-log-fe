@@ -1,4 +1,4 @@
-import { type FC, type ReactNode, useMemo } from "react";
+import { type FC, type ReactNode, useMemo, useState } from "react";
 
 import { useStore } from "@tanstack/react-form";
 import { useTranslation } from "react-i18next";
@@ -8,6 +8,7 @@ import { useAppForm } from "@/modules/common/components/form/useAppForm";
 import { Button } from "@/modules/common/components/ui/button";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/modules/common/components/ui/field";
 import { formatDate } from "@/modules/common/utils/formatDate";
+import { getErrorField, getErrorMessage } from "@/modules/common/utils/getErrorMessage";
 
 import { PlanTripNotice } from "../../components/PlanTripNotice";
 import { VehiclePicker } from "../../components/VehiclePicker";
@@ -22,8 +23,9 @@ type PlanTripFormProps = {
   vehicles: VehicleResponse[];
   defaultValues: PlanTripFormValues;
   submitLabel: string;
-  // The BE's message when the last submit failed
-  submitError?: string;
+  // The error of the last failed submit; shown on the vehicle field when the BE says it is about
+  // the vehicle (BR-01), otherwise above the buttons
+  submitError?: unknown;
   // Shown above the fields, e.g. why the plan was rejected
   notice?: ReactNode;
   onSubmit: (request: TripCreateRequest) => Promise<void>;
@@ -44,6 +46,8 @@ export const PlanTripForm: FC<PlanTripFormProps> = ({
   onCancel,
 }) => {
   const { t } = useTranslation(["tripPlan", "common"]);
+  // The vehicle the last submit was sent with, so a BE error about it is not left on another one
+  const [submittedVehicleId, setSubmittedVehicleId] = useState<string>();
 
   // Only the BR-01 block matters for validation, and it does not depend on the trip's date
   const schema = useMemo(
@@ -58,7 +62,10 @@ export const PlanTripForm: FC<PlanTripFormProps> = ({
   const form = useAppForm({
     defaultValues,
     validators: { onChange: schema },
-    onSubmit: ({ value }) => onSubmit(toTripCreateRequest(value)),
+    onSubmit: ({ value }) => {
+      setSubmittedVehicleId(value.vehicleId);
+      return onSubmit(toTripCreateRequest(value));
+    },
   });
 
   const date = useStore(form.store, (state) => state.values.date);
@@ -73,6 +80,12 @@ export const PlanTripForm: FC<PlanTripFormProps> = ({
   const vignetteDate = selected?.vehicle.vignetteDueDate
     ? formatDate(`${selected.vehicle.vignetteDueDate}T00:00`)
     : "";
+
+  const isVehicleSubmitError = !!submitError && getErrorField(submitError) === "vehicleId";
+  const vehicleSubmitError =
+    isVehicleSubmitError && vehicleId === submittedVehicleId
+      ? { message: getErrorMessage(submitError) }
+      : undefined;
 
   return (
     <form
@@ -102,8 +115,9 @@ export const PlanTripForm: FC<PlanTripFormProps> = ({
                 reason: t(`vehiclePicker.blockReason.${selected.blockReason}`),
               }),
             };
+            const vehicleError = blockedError || vehicleSubmitError;
             const isInvalid =
-              !!blockedError || (field.state.meta.isTouched && !field.state.meta.isValid);
+              !!vehicleError || (field.state.meta.isTouched && !field.state.meta.isValid);
             return (
               <Field data-invalid={isInvalid}>
                 <FieldLabel htmlFor={field.name}>{t("fields.vehicle")}</FieldLabel>
@@ -117,7 +131,7 @@ export const PlanTripForm: FC<PlanTripFormProps> = ({
                   invalid={isInvalid}
                 />
                 {isInvalid && (
-                  <FieldError errors={blockedError ? [blockedError] : field.state.meta.errors} />
+                  <FieldError errors={vehicleError ? [vehicleError] : field.state.meta.errors} />
                 )}
               </Field>
             );
@@ -166,9 +180,9 @@ export const PlanTripForm: FC<PlanTripFormProps> = ({
           )}
         </form.AppField>
 
-        {submitError && (
+        {!!submitError && !isVehicleSubmitError && (
           <PlanTripNotice variant="error" title={t("states.submitErrorTitle")}>
-            {submitError}
+            {getErrorMessage(submitError)}
           </PlanTripNotice>
         )}
 

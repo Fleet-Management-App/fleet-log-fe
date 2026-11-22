@@ -11,10 +11,10 @@ import {
   getListTripsQueryKey,
   useCreateTrip,
 } from "@/api/generated/hooks/trips/trips";
-import { useListVehicles } from "@/api/generated/hooks/vehicles/vehicles";
+import { getListVehiclesQueryKey, useListVehicles } from "@/api/generated/hooks/vehicles/vehicles";
 import type { TripCreateRequest } from "@/api/generated/models";
 import { Button } from "@/modules/common/components/ui/button";
-import { getErrorMessage } from "@/modules/common/utils/getErrorMessage";
+import { getErrorField, getErrorMessage } from "@/modules/common/utils/getErrorMessage";
 
 import { PlanTripCard } from "../components/PlanTripCard";
 import { PlanTripMessage } from "../components/PlanTripMessage";
@@ -37,8 +37,11 @@ export const PlanTripContainer: FC = () => {
       await queryClient.invalidateQueries({ queryKey: getListTripsQueryKey() });
       toast.success(t("plan.success"));
       await navigate({ to: "/trips/$tripId", params: { tripId: trip.id } });
-    } catch {
-      // The form shows the failure from the mutation's error
+    } catch (error) {
+      // The form shows the failure from the mutation's error. A vehicle blocked or deleted since
+      // the list loaded (BR-01) refreshes the picker, so it shows why.
+      if (getErrorField(error) === "vehicleId")
+        void queryClient.invalidateQueries({ queryKey: getListVehiclesQueryKey() });
     }
   };
 
@@ -72,9 +75,7 @@ export const PlanTripContainer: FC = () => {
         vehicles={vehiclesQuery.data}
         defaultValues={planTripFormDefaults}
         submitLabel={t("plan.submit")}
-        submitError={
-          submitError ? getErrorMessage(submitError, t("common:states.actionError")) : undefined
-        }
+        submitError={submitError}
         onSubmit={handleSubmit}
         onCancel={() => void navigate({ to: "/trips" })}
       />

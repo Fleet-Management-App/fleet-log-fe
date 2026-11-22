@@ -12,10 +12,14 @@ import {
   useGetTrip,
   useUpdateTripPlan,
 } from "@/api/generated/hooks/trips/trips";
-import { useListVehicles } from "@/api/generated/hooks/vehicles/vehicles";
-import { type TripCreateRequest, TripStatus } from "@/api/generated/models";
+import { getListVehiclesQueryKey, useListVehicles } from "@/api/generated/hooks/vehicles/vehicles";
+import { ApiProblemCode, type TripCreateRequest, TripStatus } from "@/api/generated/models";
 import { Button } from "@/modules/common/components/ui/button";
-import { getErrorMessage } from "@/modules/common/utils/getErrorMessage";
+import {
+  getErrorCode,
+  getErrorField,
+  getErrorMessage,
+} from "@/modules/common/utils/getErrorMessage";
 
 import { PlanTripCard } from "../components/PlanTripCard";
 import { PlanTripMessage } from "../components/PlanTripMessage";
@@ -43,8 +47,14 @@ export const EditTripPlanContainer: FC<{ tripId: string }> = ({ tripId }) => {
       await queryClient.invalidateQueries({ queryKey: getListTripsQueryKey() });
       toast.success(t("edit.success"));
       await goToDetail();
-    } catch {
-      // The form shows the failure from the mutation's error
+    } catch (error) {
+      // The form shows the failure from the mutation's error. A vehicle blocked or deleted since
+      // the list loaded (BR-01) refreshes the picker; a plan no longer rejected reloads the trip,
+      // which turns the form into the "can't be edited" state with the trip's current status.
+      if (getErrorField(error) === "vehicleId")
+        void queryClient.invalidateQueries({ queryKey: getListVehiclesQueryKey() });
+      if (getErrorCode(error) === ApiProblemCode.TRIP_NOT_PLAN_REJECTED)
+        void queryClient.invalidateQueries({ queryKey: getGetTripQueryKey(tripId) });
     }
   };
 
@@ -104,9 +114,7 @@ export const EditTripPlanContainer: FC<{ tripId: string }> = ({ tripId }) => {
         vehicles={vehiclesQuery.data}
         defaultValues={toPlanTripFormValues(trip)}
         submitLabel={t("edit.submit")}
-        submitError={
-          submitError ? getErrorMessage(submitError, t("common:states.actionError")) : undefined
-        }
+        submitError={submitError}
         notice={
           <PlanTripNotice variant="error" title={t("edit.rejectedTitle")}>
             {trip.rejectionReason || t("edit.noReason")}
