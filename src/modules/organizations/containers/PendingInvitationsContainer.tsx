@@ -1,6 +1,7 @@
 import type { FC } from "react";
 
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 import { getGetMeQueryKey } from "@/api/generated/hooks/account/account";
@@ -21,12 +22,13 @@ export const PendingInvitationsContainer: FC = () => {
   const { mutateAsync: accept, isPending: isAccepting } = useAcceptInvitation();
   const { mutateAsync: decline, isPending: isDeclining } = useDeclineInvitation();
   const startSession = useStartSession();
+  const { t } = useTranslation("organizations");
 
   const handleAccept = async (invitation: IncomingInvitationResponse) => {
     try {
       // Joining switches the user to the organization they just joined
       await startSession(await accept({ invitationId: invitation.id }));
-      toast.success(`You joined ${invitation.organizationName}.`);
+      toast.success(t("invitations.joined", { organization: invitation.organizationName }));
     } catch (error) {
       toast.error(getErrorMessage(error));
     }

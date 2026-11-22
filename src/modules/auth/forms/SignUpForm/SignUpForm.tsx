@@ -1,5 +1,7 @@
 import type { FC } from "react";
 
+import { useTranslation } from "react-i18next";
+
 import type { SignUpRequest } from "@/api/generated/models";
 import { useAppForm } from "@/modules/common/components/form/useAppForm";
 import { FieldGroup } from "@/modules/common/components/ui/field";
@@ -9,6 +11,7 @@ import { signUpFormDefaults, signUpFormSchema } from "./signUpFormSchema";
 export const SignUpForm: FC<{ onSubmit: (values: SignUpRequest) => Promise<unknown> }> = ({
   onSubmit,
 }) => {
+  const { t } = useTranslation(["auth", "common"]);
   const form = useAppForm({
     defaultValues: signUpFormDefaults,
     validators: { onChange: signUpFormSchema },
@@ -25,30 +28,30 @@ export const SignUpForm: FC<{ onSubmit: (values: SignUpRequest) => Promise<unkno
     >
       <FieldGroup>
         <form.AppField name="fullName">
-          {(field) => <field.TextField label="Full name" autoComplete="name" />}
+          {(field) => <field.TextField label={t("fields.fullName")} autoComplete="name" />}
         </form.AppField>
         <form.AppField name="email">
           {(field) => (
             <field.TextField
-              label="E-mail"
+              label={t("common:fields.email")}
               type="email"
               autoComplete="email"
-              description="Use the address your organization invited, if you have an invitation."
+              description={t("signUp.emailDescription")}
             />
           )}
         </form.AppField>
         <form.AppField name="password">
           {(field) => (
             <field.TextField
-              label="Password"
+              label={t("fields.password")}
               type="password"
               autoComplete="new-password"
-              description="At least 8 characters."
+              description={t("signUp.passwordDescription")}
             />
           )}
         </form.AppField>
         <form.AppForm>
-          <form.SubmitButton>Create account</form.SubmitButton>
+          <form.SubmitButton>{t("signUp.submit")}</form.SubmitButton>
         </form.AppForm>
       </FieldGroup>
     </form>

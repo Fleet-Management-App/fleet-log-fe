@@ -1,1 +1,45 @@
-{}
+{
+  "greeting": "Dobrý den, {{firstName}}",
+  "actions": {
+    "members": {
+      "title": "Členové a pozvánky",
+      "description": "Zvěte řidiče a účetní, měňte jim role."
+    },
+    "approveTripPlans": {
+      "title": "Schvalování plánů jízd",
+      "description": "Schvalujte nebo zamítejte plánované jízdy a zvolená vozidla."
+    },
+    "anomalies": {
+      "title": "Anomálie",
+      "description": "Nesrovnalosti ve stavu tachometru a podezřelá tankování."
+    },
+    "service": {
+      "title": "Servis a STK",
+      "description": "Historie servisu a blížící se termíny."
+    },
+    "planTrip": {
+      "title": "Naplánovat jízdu",
+      "description": "Vyberte vozidlo z vozového parku a odešlete plán ke schválení."
+    },
+    "logFuel": {
+      "title": "Zapsat tankování",
+      "description": "Přidejte tankování i s účtenkou."
+    },
+    "reportProblem": {
+      "title": "Nahlásit problém",
+      "description": "Něco není v pořádku s autem, kterým jste jeli."
+    },
+    "myTrips": {
+      "title": "Moje jízdy",
+      "description": "Vaše záznamy v knize jízd."
+    },
+    "financialHistory": {
+      "title": "Finanční historie",
+      "description": "Náklady na palivo a servis za zvolené období."
+    },
+    "exportToExcel": {
+      "title": "Export do Excelu",
+      "description": "Stáhněte si historii za čtvrtletí."
+    }
+  }
+}

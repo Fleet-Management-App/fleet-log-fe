@@ -1,1 +1,33 @@
-{}
+{
+  "createOrJoin": "Create or join an organization",
+  "switcher": {
+    "noOrganization": "No organization",
+    "yourOrganizations": "Your organizations"
+  },
+  "userMenu": {
+    "account": "Account",
+    "logOut": "Log out"
+  },
+  "welcome": {
+    "title": "Welcome, {{firstName}}",
+    "description": "Your account isn't tied to one company. Create an organization for your fleet, or accept an invitation from one that already uses FleetLog. You can belong to several."
+  },
+  "invitations": {
+    "title": "Invitations",
+    "sentTo": "Sent to {{email}}",
+    "empty": "No invitations yet. Ask your Fleet Manager to invite this e-mail.",
+    "invitedBy": "{{name}} invited you as {{roles}}",
+    "accept": "Accept",
+    "decline": "Decline",
+    "joined": "You joined {{organization}}."
+  },
+  "create": {
+    "title": "Create an organization",
+    "description": "You become its first Fleet Manager.",
+    "nameLabel": "Organization name",
+    "namePlaceholder": "e.g. Demo Fleet s.r.o.",
+    "submit": "Create organization",
+    "created": "{{name}} is ready. Invite your drivers next.",
+    "nameRequired": "Enter the organization's name"
+  }
+}

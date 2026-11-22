@@ -1,1 +1,33 @@
-{}
+{
+  "createOrJoin": "Vytvořit organizaci nebo se připojit",
+  "switcher": {
+    "noOrganization": "Žádná organizace",
+    "yourOrganizations": "Vaše organizace"
+  },
+  "userMenu": {
+    "account": "Účet",
+    "logOut": "Odhlásit se"
+  },
+  "welcome": {
+    "title": "Vítejte, {{firstName}}",
+    "description": "Váš účet není vázaný na jednu firmu. Vytvořte organizaci pro svůj vozový park, nebo přijměte pozvánku od organizace, která už FleetLog používá. Můžete být členem více organizací."
+  },
+  "invitations": {
+    "title": "Pozvánky",
+    "sentTo": "Zaslané na {{email}}",
+    "empty": "Zatím nemáte žádné pozvánky. Požádejte svého fleet manažera, aby na tento e-mail poslal pozvánku.",
+    "invitedBy": "Zve vás {{name}} · role: {{roles}}",
+    "accept": "Přijmout",
+    "decline": "Odmítnout",
+    "joined": "Připojili jste se k organizaci {{organization}}."
+  },
+  "create": {
+    "title": "Vytvoření organizace",
+    "description": "Stanete se jejím prvním fleet manažerem.",
+    "nameLabel": "Název organizace",
+    "namePlaceholder": "např. Demo Fleet s.r.o.",
+    "submit": "Vytvořit organizaci",
+    "created": "Organizace {{name}} je připravená. Teď pozvěte své řidiče.",
+    "nameRequired": "Zadejte název organizace"
+  }
+}

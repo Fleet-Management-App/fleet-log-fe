@@ -26,5 +26,21 @@
     "label": "Language",
     "en": "English",
     "cs": "Čeština"
+  },
+  "roles": {
+    "DRIVER": "Driver",
+    "FLEET_MANAGER": "Fleet Manager",
+    "ACCOUNTANT": "Accountant"
+  },
+  "fields": {
+    "email": "E-mail"
+  },
+  "validation": {
+    "email": "Enter a valid e-mail",
+    "tooLong": "This is too long"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "backToDashboard": "Back to the dashboard"
   }
 }

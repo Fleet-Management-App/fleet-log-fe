@@ -1,1 +1,36 @@
-{}
+{
+  "page": {
+    "title": "Members",
+    "description": "Who has access to {{organization}}, and with which roles."
+  },
+  "members": {
+    "title": "People ({{count}})",
+    "name": "Name",
+    "roles": "Roles",
+    "joined": "Joined",
+    "you": "You",
+    "rolesOf": "Roles of {{name}}",
+    "confirmRemove": "Confirm",
+    "remove": "Remove",
+    "rolesChanged": "{{name}}: {{roles}}.",
+    "removed": "{{name}} no longer has access."
+  },
+  "sentInvitations": {
+    "title": "Waiting for an answer ({{count}})",
+    "email": "E-mail",
+    "roles": "Roles",
+    "sent": "Sent",
+    "invitedBy": "by {{name}}",
+    "revoke": "Revoke",
+    "revoked": "Invitation for {{email}} revoked."
+  },
+  "invite": {
+    "title": "Invite someone",
+    "description": "They see the invitation after logging in with this e-mail, or after signing up with it.",
+    "emailPlaceholder": "name@company.cz",
+    "roles": "Roles",
+    "submit": "Send invitation",
+    "sent": "Invitation sent to {{email}}.",
+    "rolesRequired": "Pick at least one role"
+  }
+}

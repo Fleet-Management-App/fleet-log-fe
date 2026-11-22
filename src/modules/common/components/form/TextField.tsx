@@ -1,14 +1,10 @@
 import type { ComponentProps, FC } from "react";
 
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-} from "@/modules/common/components/ui/field";
+import { Field, FieldDescription, FieldLabel } from "@/modules/common/components/ui/field";
 import { Input } from "@/modules/common/components/ui/input";
 
 import { useFieldContext } from "./formContext";
+import { FormFieldError } from "./FormFieldError";
 
 type TextFieldProps = Omit<ComponentProps<typeof Input>, "value" | "onChange" | "onBlur"> & {
   label: string;
@@ -33,7 +29,7 @@ export const TextField: FC<TextFieldProps> = ({ label, description, ...inputProp
         {...inputProps}
       />
       {description && <FieldDescription>{description}</FieldDescription>}
-      {isInvalid && <FieldError errors={field.state.meta.errors} />}
+      {isInvalid && <FormFieldError errors={field.state.meta.errors} />}
     </Field>
   );
 };

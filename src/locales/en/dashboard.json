@@ -1,1 +1,45 @@
-{}
+{
+  "greeting": "Hello, {{firstName}}",
+  "actions": {
+    "members": {
+      "title": "Members & invitations",
+      "description": "Invite drivers and accountants, change roles."
+    },
+    "approveTripPlans": {
+      "title": "Approve trip plans",
+      "description": "Approve or reject planned trips and their vehicle."
+    },
+    "anomalies": {
+      "title": "Anomalies",
+      "description": "Odometer gaps and suspicious fuel fill-ups."
+    },
+    "service": {
+      "title": "Service & STK",
+      "description": "Service history and upcoming deadlines."
+    },
+    "planTrip": {
+      "title": "Plan a trip",
+      "description": "Pick a vehicle from the pool and send the plan for approval."
+    },
+    "logFuel": {
+      "title": "Log fuel",
+      "description": "Add a fill-up with its receipt."
+    },
+    "reportProblem": {
+      "title": "Report a problem",
+      "description": "Something wrong with a car you drove."
+    },
+    "myTrips": {
+      "title": "My trips",
+      "description": "Your logbook entries."
+    },
+    "financialHistory": {
+      "title": "Financial history",
+      "description": "Fuel and service costs by period."
+    },
+    "exportToExcel": {
+      "title": "Export to Excel",
+      "description": "Download the history for a quarter."
+    }
+  }
+}

@@ -26,5 +26,21 @@
     "label": "Jazyk",
     "en": "English",
     "cs": "Čeština"
+  },
+  "roles": {
+    "DRIVER": "Řidič",
+    "FLEET_MANAGER": "Fleet manažer",
+    "ACCOUNTANT": "Účetní"
+  },
+  "fields": {
+    "email": "E-mail"
+  },
+  "validation": {
+    "email": "Zadejte platný e-mail",
+    "tooLong": "Text je příliš dlouhý"
+  },
+  "notFound": {
+    "title": "Stránka nenalezena",
+    "backToDashboard": "Zpět na přehled"
   }
 }
