@@ -1,4 +1,16 @@
 import type { FC } from "react";
 
-// Placeholder created with the route scaffold; FLOG-57 replaces it.
-export const PlanTripPage: FC = () => <h1 className="text-2xl font-semibold">PlanTripPage</h1>;
+import { useTranslation } from "react-i18next";
+
+import { PlanTripPageHeader } from "../components/PlanTripPageHeader";
+import { PlanTripContainer } from "../containers/PlanTripContainer";
+
+export const PlanTripPage: FC = () => {
+  const { t } = useTranslation("tripPlan");
+  return (
+    <div className="mx-auto flex max-w-lg flex-col gap-4">
+      <PlanTripPageHeader title={t("plan.title")} subtitle={t("plan.subtitle")} />
+      <PlanTripContainer />
+    </div>
+  );
+};
