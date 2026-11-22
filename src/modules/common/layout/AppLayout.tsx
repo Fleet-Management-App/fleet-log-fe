@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { Link, type LinkProps, Outlet } from "@tanstack/react-router";
+import { Link, type LinkProps, Outlet, useMatches } from "@tanstack/react-router";
 import { CarFront } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -17,9 +17,13 @@ const activeNavLinkClass = "bg-muted text-foreground";
 type NavItem = { to: LinkProps["to"]; label: string; exact?: boolean };
 
 // Layout of every signed-in page: header with navigation, organization switcher and user menu.
+// The organization picker pages ask for a bare header instead (route staticData.minimalLayout).
 export const AppLayout: FC = () => {
   const { t } = useTranslation();
   const { data: me } = useGetMe();
+  const isMinimal = useMatches({
+    select: (matches) => matches.some((match) => match.staticData.minimalLayout),
+  });
   // Logging out clears the cache before the redirect to /login lands; render nothing meanwhile,
   // so nothing below calls useCurrentUser without data
   if (!me) return null;
@@ -49,7 +53,7 @@ export const AppLayout: FC = () => {
             <CarFront className="size-5 text-primary" />
             FleetLog
           </Link>
-          {activeOrganization && (
+          {activeOrganization && !isMinimal && (
             <nav className="flex items-center gap-1 overflow-x-auto">
               {navItems.map(({ to, label, exact }) => (
                 <Link
@@ -65,7 +69,11 @@ export const AppLayout: FC = () => {
             </nav>
           )}
           <div className="ml-auto flex items-center gap-2">
-            <OrganizationSwitcherContainer />
+            {isMinimal ? (
+              <span className="hidden text-sm sm:inline">{me.fullName}</span>
+            ) : (
+              <OrganizationSwitcherContainer />
+            )}
             <UserMenuContainer />
           </div>
         </div>

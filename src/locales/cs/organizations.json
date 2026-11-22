@@ -8,26 +8,44 @@
     "account": "Účet",
     "logOut": "Odhlásit se"
   },
-  "welcome": {
-    "title": "Vítejte, {{firstName}}",
-    "description": "Váš účet není vázaný na jednu firmu. Vytvořte organizaci pro svůj vozový park, nebo přijměte pozvánku od organizace, která už FleetLog používá. Můžete být členem více organizací."
+  "picker": {
+    "title": "Vyberte organizaci",
+    "description": "Zvolte, do které organizace chcete vstoupit",
+    "invitationsHeading": "Čekající pozvánky",
+    "organizationsHeading": "Vaše organizace",
+    "createNew": "Založit novou organizaci",
+    "errorTitle": "Chyba",
+    "loadError": {
+      "title": "Organizace se nepodařilo načíst",
+      "description": "Zkontrolujte připojení a zkuste to znovu."
+    },
+    "empty": {
+      "title": "Vítejte ve FleetLogu",
+      "description": "Začněte založením organizace",
+      "heading": "Zatím nemáte žádnou organizaci",
+      "text": "Založte novou, nebo požádejte správce své firmy o pozvánku.",
+      "create": "Založit organizaci"
+    }
   },
   "invitations": {
-    "title": "Pozvánky",
-    "sentTo": "Zaslané na {{email}}",
-    "empty": "Zatím nemáte žádné pozvánky. Požádejte svého fleet manažera, aby na tento e-mail poslal pozvánku.",
-    "invitedBy": "Zve vás {{name}} · role: {{roles}}",
+    "invitedOn": "{{roles}} · pozvánka z {{date}}",
     "accept": "Přijmout",
+    "accepting": "Přijímání…",
     "decline": "Odmítnout",
     "joined": "Připojili jste se k organizaci {{organization}}."
   },
   "create": {
-    "title": "Vytvoření organizace",
-    "description": "Stanete se jejím prvním fleet manažerem.",
-    "nameLabel": "Název organizace",
-    "namePlaceholder": "např. Demo Fleet s.r.o.",
-    "submit": "Vytvořit organizaci",
+    "back": "Výběr organizace",
+    "title": "Založit organizaci",
+    "description": "Stanete se jejím prvním správcem vozového parku.",
+    "nameLabel": "Název firmy",
+    "namePlaceholder": "Např. Novák Logistics s.r.o.",
+    "nameHint": "Tento název uvidí všichni členové organizace.",
+    "submit": "Založit organizaci",
+    "submitting": "Zakládání…",
     "created": "Organizace {{name}} je připravená. Teď pozvěte své řidiče.",
-    "nameRequired": "Zadejte název organizace"
+    "nameRequired": "Zadejte název firmy.",
+    "errorTitle": "Chyba",
+    "failed": "Organizaci se nepodařilo založit. Zkuste to prosím znovu."
   }
 }

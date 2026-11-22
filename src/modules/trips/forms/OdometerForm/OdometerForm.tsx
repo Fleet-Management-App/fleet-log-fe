@@ -13,8 +13,8 @@ import {
 
 import { createOdometerFormSchema, type OdometerFormValues } from "./odometerFormSchema";
 import { parseNumberInput } from "./parseNumberInput";
-import { PendingSubmitButton } from "./PendingSubmitButton";
-import { ServerErrorAlert } from "./ServerErrorAlert";
+import { PendingSubmitButton } from "@/modules/common/components/form/PendingSubmitButton";
+import { ServerErrorAlert } from "@/modules/common/components/form/ServerErrorAlert";
 import { UnitField } from "./UnitField";
 
 type OdometerFormProps = {

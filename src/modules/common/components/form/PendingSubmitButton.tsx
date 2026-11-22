@@ -10,15 +10,15 @@ type PendingSubmitButtonProps = {
   pendingLabel: string;
 };
 
-// Full-width submit of the log screens; while saving it shows a spinner and the pending label.
-// Used inside `form.AppForm`, which provides the form context.
+// Full-width submit button; while saving it shows a spinner and the pending label, and it stays
+// disabled while a field is invalid. Used inside `form.AppForm`, which provides the form context.
 export const PendingSubmitButton: FC<PendingSubmitButtonProps> = ({ label, pendingLabel }) => {
   const form = useFormContext();
 
   return (
-    <form.Subscribe selector={(state) => state.isSubmitting}>
-      {(isSubmitting) => (
-        <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+    <form.Subscribe selector={(state) => [state.canSubmit, state.isSubmitting] as const}>
+      {([canSubmit, isSubmitting]) => (
+        <Button type="submit" size="lg" className="w-full" disabled={!canSubmit || isSubmitting}>
           {isSubmitting && <Loader2 className="animate-spin" aria-hidden />}
           {isSubmitting ? pendingLabel : label}
         </Button>

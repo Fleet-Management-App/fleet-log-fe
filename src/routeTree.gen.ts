@@ -15,8 +15,9 @@ import { Route as SignUpRouteImport } from './routes/sign-up'
 import { Route as AppIndexRouteImport } from './routes/_app/index'
 import { Route as AppApprovalsRouteImport } from './routes/_app/approvals'
 import { Route as AppVehiclesRouteImport } from './routes/_app/vehicles'
-import { Route as AppWelcomeRouteImport } from './routes/_app/welcome'
 import { Route as AppOrganizationMembersRouteImport } from './routes/_app/organization/members'
+import { Route as AppOrganizationsIndexRouteImport } from './routes/_app/organizations/index'
+import { Route as AppOrganizationsNewRouteImport } from './routes/_app/organizations/new'
 import { Route as AppTripsIndexRouteImport } from './routes/_app/trips/index'
 import { Route as AppTripsNewRouteImport } from './routes/_app/trips/new'
 import { Route as AppTripsTripIdIndexRouteImport } from './routes/_app/trips/$tripId/index'
@@ -53,14 +54,19 @@ const AppVehiclesRoute = AppVehiclesRouteImport.update({
   path: '/vehicles',
   getParentRoute: () => AppRoute,
 } as any)
-const AppWelcomeRoute = AppWelcomeRouteImport.update({
-  id: '/welcome',
-  path: '/welcome',
-  getParentRoute: () => AppRoute,
-} as any)
 const AppOrganizationMembersRoute = AppOrganizationMembersRouteImport.update({
   id: '/organization/members',
   path: '/organization/members',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppOrganizationsIndexRoute = AppOrganizationsIndexRouteImport.update({
+  id: '/organizations/',
+  path: '/organizations/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppOrganizationsNewRoute = AppOrganizationsNewRouteImport.update({
+  id: '/organizations/new',
+  path: '/organizations/new',
   getParentRoute: () => AppRoute,
 } as any)
 const AppTripsIndexRoute = AppTripsIndexRouteImport.update({
@@ -100,9 +106,10 @@ export interface FileRoutesByFullPath {
   '/sign-up': typeof SignUpRoute
   '/approvals': typeof AppApprovalsRoute
   '/vehicles': typeof AppVehiclesRoute
-  '/welcome': typeof AppWelcomeRoute
   '/organization/members': typeof AppOrganizationMembersRoute
+  '/organizations/new': typeof AppOrganizationsNewRoute
   '/trips/new': typeof AppTripsNewRoute
+  '/organizations/': typeof AppOrganizationsIndexRoute
   '/trips/': typeof AppTripsIndexRoute
   '/trips/$tripId/edit': typeof AppTripsTripIdEditRoute
   '/trips/$tripId/fuel': typeof AppTripsTripIdFuelRoute
@@ -114,10 +121,11 @@ export interface FileRoutesByTo {
   '/sign-up': typeof SignUpRoute
   '/approvals': typeof AppApprovalsRoute
   '/vehicles': typeof AppVehiclesRoute
-  '/welcome': typeof AppWelcomeRoute
   '/': typeof AppIndexRoute
   '/organization/members': typeof AppOrganizationMembersRoute
+  '/organizations/new': typeof AppOrganizationsNewRoute
   '/trips/new': typeof AppTripsNewRoute
+  '/organizations': typeof AppOrganizationsIndexRoute
   '/trips': typeof AppTripsIndexRoute
   '/trips/$tripId/edit': typeof AppTripsTripIdEditRoute
   '/trips/$tripId/fuel': typeof AppTripsTripIdFuelRoute
@@ -131,10 +139,11 @@ export interface FileRoutesById {
   '/sign-up': typeof SignUpRoute
   '/_app/approvals': typeof AppApprovalsRoute
   '/_app/vehicles': typeof AppVehiclesRoute
-  '/_app/welcome': typeof AppWelcomeRoute
   '/_app/': typeof AppIndexRoute
   '/_app/organization/members': typeof AppOrganizationMembersRoute
+  '/_app/organizations/new': typeof AppOrganizationsNewRoute
   '/_app/trips/new': typeof AppTripsNewRoute
+  '/_app/organizations/': typeof AppOrganizationsIndexRoute
   '/_app/trips/': typeof AppTripsIndexRoute
   '/_app/trips/$tripId/edit': typeof AppTripsTripIdEditRoute
   '/_app/trips/$tripId/fuel': typeof AppTripsTripIdFuelRoute
@@ -149,9 +158,10 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/approvals'
     | '/vehicles'
-    | '/welcome'
     | '/organization/members'
+    | '/organizations/new'
     | '/trips/new'
+    | '/organizations/'
     | '/trips/'
     | '/trips/$tripId/edit'
     | '/trips/$tripId/fuel'
@@ -163,10 +173,11 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/approvals'
     | '/vehicles'
-    | '/welcome'
     | '/'
     | '/organization/members'
+    | '/organizations/new'
     | '/trips/new'
+    | '/organizations'
     | '/trips'
     | '/trips/$tripId/edit'
     | '/trips/$tripId/fuel'
@@ -179,10 +190,11 @@ export interface FileRouteTypes {
     | '/sign-up'
     | '/_app/approvals'
     | '/_app/vehicles'
-    | '/_app/welcome'
     | '/_app/'
     | '/_app/organization/members'
+    | '/_app/organizations/new'
     | '/_app/trips/new'
+    | '/_app/organizations/'
     | '/_app/trips/'
     | '/_app/trips/$tripId/edit'
     | '/_app/trips/$tripId/fuel'
@@ -240,18 +252,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppVehiclesRouteImport
       parentRoute: typeof AppRoute
     }
-    '/_app/welcome': {
-      id: '/_app/welcome'
-      path: '/welcome'
-      fullPath: '/welcome'
-      preLoaderRoute: typeof AppWelcomeRouteImport
-      parentRoute: typeof AppRoute
-    }
     '/_app/organization/members': {
       id: '/_app/organization/members'
       path: '/organization/members'
       fullPath: '/organization/members'
       preLoaderRoute: typeof AppOrganizationMembersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/organizations/': {
+      id: '/_app/organizations/'
+      path: '/organizations'
+      fullPath: '/organizations/'
+      preLoaderRoute: typeof AppOrganizationsIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/organizations/new': {
+      id: '/_app/organizations/new'
+      path: '/organizations/new'
+      fullPath: '/organizations/new'
+      preLoaderRoute: typeof AppOrganizationsNewRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/trips/': {
@@ -302,10 +321,11 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppApprovalsRoute: typeof AppApprovalsRoute
   AppVehiclesRoute: typeof AppVehiclesRoute
-  AppWelcomeRoute: typeof AppWelcomeRoute
   AppIndexRoute: typeof AppIndexRoute
   AppOrganizationMembersRoute: typeof AppOrganizationMembersRoute
+  AppOrganizationsNewRoute: typeof AppOrganizationsNewRoute
   AppTripsNewRoute: typeof AppTripsNewRoute
+  AppOrganizationsIndexRoute: typeof AppOrganizationsIndexRoute
   AppTripsIndexRoute: typeof AppTripsIndexRoute
   AppTripsTripIdEditRoute: typeof AppTripsTripIdEditRoute
   AppTripsTripIdFuelRoute: typeof AppTripsTripIdFuelRoute
@@ -316,10 +336,11 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppApprovalsRoute: AppApprovalsRoute,
   AppVehiclesRoute: AppVehiclesRoute,
-  AppWelcomeRoute: AppWelcomeRoute,
   AppIndexRoute: AppIndexRoute,
   AppOrganizationMembersRoute: AppOrganizationMembersRoute,
+  AppOrganizationsNewRoute: AppOrganizationsNewRoute,
   AppTripsNewRoute: AppTripsNewRoute,
+  AppOrganizationsIndexRoute: AppOrganizationsIndexRoute,
   AppTripsIndexRoute: AppTripsIndexRoute,
   AppTripsTripIdEditRoute: AppTripsTripIdEditRoute,
   AppTripsTripIdFuelRoute: AppTripsTripIdFuelRoute,

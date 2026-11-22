@@ -12,8 +12,8 @@ import {
 } from "@/modules/common/utils/serverFieldError";
 
 import { parseNumberInput } from "../OdometerForm/parseNumberInput";
-import { PendingSubmitButton } from "../OdometerForm/PendingSubmitButton";
-import { ServerErrorAlert } from "../OdometerForm/ServerErrorAlert";
+import { PendingSubmitButton } from "@/modules/common/components/form/PendingSubmitButton";
+import { ServerErrorAlert } from "@/modules/common/components/form/ServerErrorAlert";
 import { UnitField } from "../OdometerForm/UnitField";
 import { createFuelFormSchema, type FuelFormValues } from "./fuelFormSchema";
 import { ReceiptPhotoField } from "./ReceiptPhotoField";
