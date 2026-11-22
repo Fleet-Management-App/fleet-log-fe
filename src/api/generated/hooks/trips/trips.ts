@@ -24,7 +24,9 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ApiProblem,
   ListTripsParams,
+  ReceiptPhotoResponse,
   TripCreateRequest,
   TripFuelDecisionRequest,
   TripFuelRequest,
@@ -79,7 +81,7 @@ export const getListTripsQueryKey = (params?: ListTripsParams,) => {
     }
 
 
-export const getListTripsQueryOptions = <TData = Awaited<ReturnType<typeof listTrips>>, TError = unknown>(params?: ListTripsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listTrips>>, TError, TData>>, }
+export const getListTripsQueryOptions = <TData = Awaited<ReturnType<typeof listTrips>>, TError = ApiProblem>(params?: ListTripsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listTrips>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -98,10 +100,10 @@ const {query: queryOptions} = options ?? {};
 }
 
 export type ListTripsQueryResult = NonNullable<Awaited<ReturnType<typeof listTrips>>>
-export type ListTripsQueryError = unknown
+export type ListTripsQueryError = ApiProblem
 
 
-export function useListTrips<TData = Awaited<ReturnType<typeof listTrips>>, TError = unknown>(
+export function useListTrips<TData = Awaited<ReturnType<typeof listTrips>>, TError = ApiProblem>(
  params: undefined |  ListTripsParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof listTrips>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof listTrips>>,
@@ -111,7 +113,7 @@ export function useListTrips<TData = Awaited<ReturnType<typeof listTrips>>, TErr
       >, }
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useListTrips<TData = Awaited<ReturnType<typeof listTrips>>, TError = unknown>(
+export function useListTrips<TData = Awaited<ReturnType<typeof listTrips>>, TError = ApiProblem>(
  params?: ListTripsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listTrips>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof listTrips>>,
@@ -121,7 +123,7 @@ export function useListTrips<TData = Awaited<ReturnType<typeof listTrips>>, TErr
       >, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useListTrips<TData = Awaited<ReturnType<typeof listTrips>>, TError = unknown>(
+export function useListTrips<TData = Awaited<ReturnType<typeof listTrips>>, TError = ApiProblem>(
  params?: ListTripsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listTrips>>, TError, TData>>, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -129,7 +131,7 @@ export function useListTrips<TData = Awaited<ReturnType<typeof listTrips>>, TErr
  * @summary List trips, optionally filtered by status; same visibility as the detail view
  */
 
-export function useListTrips<TData = Awaited<ReturnType<typeof listTrips>>, TError = unknown>(
+export function useListTrips<TData = Awaited<ReturnType<typeof listTrips>>, TError = ApiProblem>(
  params?: ListTripsParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listTrips>>, TError, TData>>, }
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -168,7 +170,7 @@ export const createTrip = (
 
 export const getCreateTripMutationKey = () => ['createTrip'] as const;
 
-export const getCreateTripMutationOptions = <TError = unknown,
+export const getCreateTripMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createTrip>>, TError,CreateTripMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof createTrip>>, TError,CreateTripMutationVariables, TContext> => {
 
@@ -197,13 +199,13 @@ const {mutation: mutationOptions} = options ?
 
     export type CreateTripMutationResult = NonNullable<Awaited<ReturnType<typeof createTrip>>>
     export type CreateTripMutationBody = TripCreateRequest
-    export type CreateTripMutationError = unknown
+    export type CreateTripMutationError = ApiProblem
     export type CreateTripMutationVariables = {data: TripCreateRequest}
 
     /**
  * @summary Plan a trip, picking a pool vehicle
  */
-export const useCreateTrip = <TError = unknown,
+export const useCreateTrip = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createTrip>>, TError,CreateTripMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createTrip>>,
@@ -214,7 +216,7 @@ export const useCreateTrip = <TError = unknown,
       return useMutation(getCreateTripMutationOptions(options), queryClient);
     }
     /**
- * @summary Log (or, if rejected, resubmit) the trip's optional fuel entry
+ * @summary Log (or, if rejected, resubmit) the trip's optional fuel entry, with its receipt; the plan must be approved
  */
 export const logFuel = (
     tripId: string,
@@ -236,7 +238,7 @@ export const logFuel = (
 
 export const getLogFuelMutationKey = () => ['logFuel'] as const;
 
-export const getLogFuelMutationOptions = <TError = unknown,
+export const getLogFuelMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof logFuel>>, TError,LogFuelMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof logFuel>>, TError,LogFuelMutationVariables, TContext> => {
 
@@ -265,13 +267,13 @@ const {mutation: mutationOptions} = options ?
 
     export type LogFuelMutationResult = NonNullable<Awaited<ReturnType<typeof logFuel>>>
     export type LogFuelMutationBody = TripFuelRequest
-    export type LogFuelMutationError = unknown
+    export type LogFuelMutationError = ApiProblem
     export type LogFuelMutationVariables = {tripId: string;data: TripFuelRequest}
 
     /**
- * @summary Log (or, if rejected, resubmit) the trip's optional fuel entry
+ * @summary Log (or, if rejected, resubmit) the trip's optional fuel entry, with its receipt; the plan must be approved
  */
-export const useLogFuel = <TError = unknown,
+export const useLogFuel = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof logFuel>>, TError,LogFuelMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof logFuel>>,
@@ -304,7 +306,7 @@ export const updateTripPlan = (
 
 export const getUpdateTripPlanMutationKey = () => ['updateTripPlan'] as const;
 
-export const getUpdateTripPlanMutationOptions = <TError = unknown,
+export const getUpdateTripPlanMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateTripPlan>>, TError,UpdateTripPlanMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof updateTripPlan>>, TError,UpdateTripPlanMutationVariables, TContext> => {
 
@@ -333,13 +335,13 @@ const {mutation: mutationOptions} = options ?
 
     export type UpdateTripPlanMutationResult = NonNullable<Awaited<ReturnType<typeof updateTripPlan>>>
     export type UpdateTripPlanMutationBody = TripCreateRequest
-    export type UpdateTripPlanMutationError = unknown
+    export type UpdateTripPlanMutationError = ApiProblem
     export type UpdateTripPlanMutationVariables = {tripId: string;data: TripCreateRequest}
 
     /**
  * @summary Edit and resubmit a plan-rejected trip's plan (vehicle, date/time, route, purpose); returns it to PLANNED
  */
-export const useUpdateTripPlan = <TError = unknown,
+export const useUpdateTripPlan = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateTripPlan>>, TError,UpdateTripPlanMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof updateTripPlan>>,
@@ -350,7 +352,7 @@ export const useUpdateTripPlan = <TError = unknown,
       return useMutation(getUpdateTripPlanMutationOptions(options), queryClient);
     }
     /**
- * @summary Fleet Manager approves or rejects the trip plan, incl. the vehicle choice
+ * @summary Fleet Manager approves or rejects the trip plan, incl. the vehicle choice; a rejection needs a reason
  */
 export const decideTripPlan = (
     tripId: string,
@@ -372,7 +374,7 @@ export const decideTripPlan = (
 
 export const getDecideTripPlanMutationKey = () => ['decideTripPlan'] as const;
 
-export const getDecideTripPlanMutationOptions = <TError = unknown,
+export const getDecideTripPlanMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof decideTripPlan>>, TError,DecideTripPlanMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof decideTripPlan>>, TError,DecideTripPlanMutationVariables, TContext> => {
 
@@ -401,13 +403,13 @@ const {mutation: mutationOptions} = options ?
 
     export type DecideTripPlanMutationResult = NonNullable<Awaited<ReturnType<typeof decideTripPlan>>>
     export type DecideTripPlanMutationBody = TripPlanDecisionRequest
-    export type DecideTripPlanMutationError = unknown
+    export type DecideTripPlanMutationError = ApiProblem
     export type DecideTripPlanMutationVariables = {tripId: string;data: TripPlanDecisionRequest}
 
     /**
- * @summary Fleet Manager approves or rejects the trip plan, incl. the vehicle choice
+ * @summary Fleet Manager approves or rejects the trip plan, incl. the vehicle choice; a rejection needs a reason
  */
-export const useDecideTripPlan = <TError = unknown,
+export const useDecideTripPlan = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof decideTripPlan>>, TError,DecideTripPlanMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof decideTripPlan>>,
@@ -418,7 +420,7 @@ export const useDecideTripPlan = <TError = unknown,
       return useMutation(getDecideTripPlanMutationOptions(options), queryClient);
     }
     /**
- * @summary Log odometer start/end on a plan-approved trip; completes it
+ * @summary Log odometer start/end on a plan-approved trip; completes it and moves the vehicle's odometer forward
  */
 export const logOdometer = (
     tripId: string,
@@ -440,7 +442,7 @@ export const logOdometer = (
 
 export const getLogOdometerMutationKey = () => ['logOdometer'] as const;
 
-export const getLogOdometerMutationOptions = <TError = unknown,
+export const getLogOdometerMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof logOdometer>>, TError,LogOdometerMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof logOdometer>>, TError,LogOdometerMutationVariables, TContext> => {
 
@@ -469,13 +471,13 @@ const {mutation: mutationOptions} = options ?
 
     export type LogOdometerMutationResult = NonNullable<Awaited<ReturnType<typeof logOdometer>>>
     export type LogOdometerMutationBody = TripOdometerRequest
-    export type LogOdometerMutationError = unknown
+    export type LogOdometerMutationError = ApiProblem
     export type LogOdometerMutationVariables = {tripId: string;data: TripOdometerRequest}
 
     /**
- * @summary Log odometer start/end on a plan-approved trip; completes it
+ * @summary Log odometer start/end on a plan-approved trip; completes it and moves the vehicle's odometer forward
  */
-export const useLogOdometer = <TError = unknown,
+export const useLogOdometer = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof logOdometer>>, TError,LogOdometerMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof logOdometer>>,
@@ -486,7 +488,7 @@ export const useLogOdometer = <TError = unknown,
       return useMutation(getLogOdometerMutationOptions(options), queryClient);
     }
     /**
- * @summary Fleet Manager approves or rejects the fuel entry, independent of trip completion
+ * @summary Fleet Manager approves or rejects the pending fuel entry, independent of trip completion; a rejection needs a reason
  */
 export const decideFuel = (
     tripId: string,
@@ -508,7 +510,7 @@ export const decideFuel = (
 
 export const getDecideFuelMutationKey = () => ['decideFuel'] as const;
 
-export const getDecideFuelMutationOptions = <TError = unknown,
+export const getDecideFuelMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof decideFuel>>, TError,DecideFuelMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof decideFuel>>, TError,DecideFuelMutationVariables, TContext> => {
 
@@ -537,13 +539,13 @@ const {mutation: mutationOptions} = options ?
 
     export type DecideFuelMutationResult = NonNullable<Awaited<ReturnType<typeof decideFuel>>>
     export type DecideFuelMutationBody = TripFuelDecisionRequest
-    export type DecideFuelMutationError = unknown
+    export type DecideFuelMutationError = ApiProblem
     export type DecideFuelMutationVariables = {tripId: string;data: TripFuelDecisionRequest}
 
     /**
- * @summary Fleet Manager approves or rejects the fuel entry, independent of trip completion
+ * @summary Fleet Manager approves or rejects the pending fuel entry, independent of trip completion; a rejection needs a reason
  */
-export const useDecideFuel = <TError = unknown,
+export const useDecideFuel = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof decideFuel>>, TError,DecideFuelMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof decideFuel>>,
@@ -573,7 +575,7 @@ export const cancelTrip = (
 
 export const getCancelTripMutationKey = () => ['cancelTrip'] as const;
 
-export const getCancelTripMutationOptions = <TError = unknown,
+export const getCancelTripMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof cancelTrip>>, TError,CancelTripMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof cancelTrip>>, TError,CancelTripMutationVariables, TContext> => {
 
@@ -602,13 +604,13 @@ const {mutation: mutationOptions} = options ?
 
     export type CancelTripMutationResult = NonNullable<Awaited<ReturnType<typeof cancelTrip>>>
 
-    export type CancelTripMutationError = unknown
+    export type CancelTripMutationError = ApiProblem
     export type CancelTripMutationVariables = {tripId: string}
 
     /**
  * @summary Cancel a trip; only while it is still PLANNED
  */
-export const useCancelTrip = <TError = unknown,
+export const useCancelTrip = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof cancelTrip>>, TError,CancelTripMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof cancelTrip>>,
@@ -643,7 +645,7 @@ export const getGetTripQueryKey = (tripId: string,) => {
     }
 
 
-export const getGetTripQueryOptions = <TData = Awaited<ReturnType<typeof getTrip>>, TError = unknown>(tripId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getTrip>>, TError, TData>>, }
+export const getGetTripQueryOptions = <TData = Awaited<ReturnType<typeof getTrip>>, TError = ApiProblem>(tripId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getTrip>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -662,10 +664,10 @@ const {query: queryOptions} = options ?? {};
 }
 
 export type GetTripQueryResult = NonNullable<Awaited<ReturnType<typeof getTrip>>>
-export type GetTripQueryError = unknown
+export type GetTripQueryError = ApiProblem
 
 
-export function useGetTrip<TData = Awaited<ReturnType<typeof getTrip>>, TError = unknown>(
+export function useGetTrip<TData = Awaited<ReturnType<typeof getTrip>>, TError = ApiProblem>(
  tripId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getTrip>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getTrip>>,
@@ -675,7 +677,7 @@ export function useGetTrip<TData = Awaited<ReturnType<typeof getTrip>>, TError =
       >, }
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetTrip<TData = Awaited<ReturnType<typeof getTrip>>, TError = unknown>(
+export function useGetTrip<TData = Awaited<ReturnType<typeof getTrip>>, TError = ApiProblem>(
  tripId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getTrip>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getTrip>>,
@@ -685,7 +687,7 @@ export function useGetTrip<TData = Awaited<ReturnType<typeof getTrip>>, TError =
       >, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetTrip<TData = Awaited<ReturnType<typeof getTrip>>, TError = unknown>(
+export function useGetTrip<TData = Awaited<ReturnType<typeof getTrip>>, TError = ApiProblem>(
  tripId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getTrip>>, TError, TData>>, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -693,12 +695,104 @@ export function useGetTrip<TData = Awaited<ReturnType<typeof getTrip>>, TError =
  * @summary Trip detail; a Driver only sees their own, a Fleet Manager sees all in the tenant
  */
 
-export function useGetTrip<TData = Awaited<ReturnType<typeof getTrip>>, TError = unknown>(
+export function useGetTrip<TData = Awaited<ReturnType<typeof getTrip>>, TError = ApiProblem>(
  tripId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getTrip>>, TError, TData>>, }
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getGetTripQueryOptions(tripId,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  return withQueryKey(query, queryOptions.queryKey);
+}
+
+
+
+
+
+
+/**
+ * @summary The fuel entry's receipt photo (a data URL); same visibility as the trip detail
+ */
+export const getFuelReceipt = (
+    tripId: string,
+ signal?: AbortSignal
+) => {
+
+
+      return customInstance<ReceiptPhotoResponse>(
+      {url: `/api/trips/${tripId}/fuel/receipt`, method: 'GET', signal
+    },
+      );
+    }
+
+
+
+
+export const getGetFuelReceiptQueryKey = (tripId: string,) => {
+    return [
+    `/api/trips/${tripId}/fuel/receipt`
+    ] as const;
+    }
+
+
+export const getGetFuelReceiptQueryOptions = <TData = Awaited<ReturnType<typeof getFuelReceipt>>, TError = ApiProblem>(tripId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getFuelReceipt>>, TError, TData>>, }
+) => {
+
+const {query: queryOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetFuelReceiptQueryKey(tripId);
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getFuelReceipt>>> = ({ signal }) => getFuelReceipt(tripId, signal);
+
+
+
+
+
+   return  { queryKey, queryFn, enabled: tripId !== null && tripId !== undefined, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getFuelReceipt>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type GetFuelReceiptQueryResult = NonNullable<Awaited<ReturnType<typeof getFuelReceipt>>>
+export type GetFuelReceiptQueryError = ApiProblem
+
+
+export function useGetFuelReceipt<TData = Awaited<ReturnType<typeof getFuelReceipt>>, TError = ApiProblem>(
+ tripId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getFuelReceipt>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getFuelReceipt>>,
+          TError,
+          Awaited<ReturnType<typeof getFuelReceipt>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetFuelReceipt<TData = Awaited<ReturnType<typeof getFuelReceipt>>, TError = ApiProblem>(
+ tripId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getFuelReceipt>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof getFuelReceipt>>,
+          TError,
+          Awaited<ReturnType<typeof getFuelReceipt>>
+        > , 'initialData'
+      >, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useGetFuelReceipt<TData = Awaited<ReturnType<typeof getFuelReceipt>>, TError = ApiProblem>(
+ tripId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getFuelReceipt>>, TError, TData>>, }
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary The fuel entry's receipt photo (a data URL); same visibility as the trip detail
+ */
+
+export function useGetFuelReceipt<TData = Awaited<ReturnType<typeof getFuelReceipt>>, TError = ApiProblem>(
+ tripId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getFuelReceipt>>, TError, TData>>, }
+ , queryClient?: QueryClient
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getGetFuelReceiptQueryOptions(tripId,options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 

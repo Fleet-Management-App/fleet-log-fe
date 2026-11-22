@@ -20,6 +20,7 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ApiProblem,
   HelloResponse
 } from '../../models';
 
@@ -68,7 +69,7 @@ export const getGetHelloQueryKey = () => {
     }
 
 
-export const getGetHelloQueryOptions = <TData = Awaited<ReturnType<typeof getHello>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getHello>>, TError, TData>>, }
+export const getGetHelloQueryOptions = <TData = Awaited<ReturnType<typeof getHello>>, TError = ApiProblem>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getHello>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -87,10 +88,10 @@ const {query: queryOptions} = options ?? {};
 }
 
 export type GetHelloQueryResult = NonNullable<Awaited<ReturnType<typeof getHello>>>
-export type GetHelloQueryError = unknown
+export type GetHelloQueryError = ApiProblem
 
 
-export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError = unknown>(
+export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError = ApiProblem>(
   options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getHello>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getHello>>,
@@ -100,7 +101,7 @@ export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError
       >, }
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError = unknown>(
+export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getHello>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getHello>>,
@@ -110,7 +111,7 @@ export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError
       >, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError = unknown>(
+export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getHello>>, TError, TData>>, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -118,7 +119,7 @@ export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError
  * @summary Return a hello message
  */
 
-export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError = unknown>(
+export function useGetHello<TData = Awaited<ReturnType<typeof getHello>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getHello>>, TError, TData>>, }
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {

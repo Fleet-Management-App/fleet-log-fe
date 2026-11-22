@@ -24,11 +24,11 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ApiProblem,
   ChangeRolesRequest,
   CreateInvitationRequest,
   InvitationResponse,
-  MemberResponse,
-  ProblemDetail
+  MemberResponse
 } from '../../models';
 
 import { customInstance } from '../../../../security/axios/axiosInstance';
@@ -62,7 +62,7 @@ export const changeMemberRoles = (
 ) => {
 
 
-      return customInstance<unknown>(
+      return customInstance<MemberResponse>(
       {url: `/api/organization/members/${userId}/roles`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
       data: changeRolesRequest, signal
@@ -75,7 +75,7 @@ export const changeMemberRoles = (
 
 export const getChangeMemberRolesMutationKey = () => ['changeMemberRoles'] as const;
 
-export const getChangeMemberRolesMutationOptions = <TError = ProblemDetail,
+export const getChangeMemberRolesMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof changeMemberRoles>>, TError,ChangeMemberRolesMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof changeMemberRoles>>, TError,ChangeMemberRolesMutationVariables, TContext> => {
 
@@ -104,13 +104,13 @@ const {mutation: mutationOptions} = options ?
 
     export type ChangeMemberRolesMutationResult = NonNullable<Awaited<ReturnType<typeof changeMemberRoles>>>
     export type ChangeMemberRolesMutationBody = ChangeRolesRequest
-    export type ChangeMemberRolesMutationError = ProblemDetail
+    export type ChangeMemberRolesMutationError = ApiProblem
     export type ChangeMemberRolesMutationVariables = {userId: string;data: ChangeRolesRequest}
 
     /**
  * @summary Replace a member's roles
  */
-export const useChangeMemberRoles = <TError = ProblemDetail,
+export const useChangeMemberRoles = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof changeMemberRoles>>, TError,ChangeMemberRolesMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof changeMemberRoles>>,
@@ -145,7 +145,7 @@ export const getListInvitationsQueryKey = () => {
     }
 
 
-export const getListInvitationsQueryOptions = <TData = Awaited<ReturnType<typeof listInvitations>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listInvitations>>, TError, TData>>, }
+export const getListInvitationsQueryOptions = <TData = Awaited<ReturnType<typeof listInvitations>>, TError = ApiProblem>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listInvitations>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -164,10 +164,10 @@ const {query: queryOptions} = options ?? {};
 }
 
 export type ListInvitationsQueryResult = NonNullable<Awaited<ReturnType<typeof listInvitations>>>
-export type ListInvitationsQueryError = unknown
+export type ListInvitationsQueryError = ApiProblem
 
 
-export function useListInvitations<TData = Awaited<ReturnType<typeof listInvitations>>, TError = unknown>(
+export function useListInvitations<TData = Awaited<ReturnType<typeof listInvitations>>, TError = ApiProblem>(
   options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof listInvitations>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof listInvitations>>,
@@ -177,7 +177,7 @@ export function useListInvitations<TData = Awaited<ReturnType<typeof listInvitat
       >, }
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useListInvitations<TData = Awaited<ReturnType<typeof listInvitations>>, TError = unknown>(
+export function useListInvitations<TData = Awaited<ReturnType<typeof listInvitations>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listInvitations>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof listInvitations>>,
@@ -187,7 +187,7 @@ export function useListInvitations<TData = Awaited<ReturnType<typeof listInvitat
       >, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useListInvitations<TData = Awaited<ReturnType<typeof listInvitations>>, TError = unknown>(
+export function useListInvitations<TData = Awaited<ReturnType<typeof listInvitations>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listInvitations>>, TError, TData>>, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -195,7 +195,7 @@ export function useListInvitations<TData = Awaited<ReturnType<typeof listInvitat
  * @summary List the pending invitations of the active organization
  */
 
-export function useListInvitations<TData = Awaited<ReturnType<typeof listInvitations>>, TError = unknown>(
+export function useListInvitations<TData = Awaited<ReturnType<typeof listInvitations>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listInvitations>>, TError, TData>>, }
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -234,7 +234,7 @@ export const createInvitation = (
 
 export const getCreateInvitationMutationKey = () => ['createInvitation'] as const;
 
-export const getCreateInvitationMutationOptions = <TError = ProblemDetail,
+export const getCreateInvitationMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createInvitation>>, TError,CreateInvitationMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof createInvitation>>, TError,CreateInvitationMutationVariables, TContext> => {
 
@@ -263,13 +263,13 @@ const {mutation: mutationOptions} = options ?
 
     export type CreateInvitationMutationResult = NonNullable<Awaited<ReturnType<typeof createInvitation>>>
     export type CreateInvitationMutationBody = CreateInvitationRequest
-    export type CreateInvitationMutationError = ProblemDetail
+    export type CreateInvitationMutationError = ApiProblem
     export type CreateInvitationMutationVariables = {data: CreateInvitationRequest}
 
     /**
  * @summary Invite a person by e-mail
  */
-export const useCreateInvitation = <TError = ProblemDetail,
+export const useCreateInvitation = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createInvitation>>, TError,CreateInvitationMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createInvitation>>,
@@ -304,7 +304,7 @@ export const getListMembersQueryKey = () => {
     }
 
 
-export const getListMembersQueryOptions = <TData = Awaited<ReturnType<typeof listMembers>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listMembers>>, TError, TData>>, }
+export const getListMembersQueryOptions = <TData = Awaited<ReturnType<typeof listMembers>>, TError = ApiProblem>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listMembers>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -323,10 +323,10 @@ const {query: queryOptions} = options ?? {};
 }
 
 export type ListMembersQueryResult = NonNullable<Awaited<ReturnType<typeof listMembers>>>
-export type ListMembersQueryError = unknown
+export type ListMembersQueryError = ApiProblem
 
 
-export function useListMembers<TData = Awaited<ReturnType<typeof listMembers>>, TError = unknown>(
+export function useListMembers<TData = Awaited<ReturnType<typeof listMembers>>, TError = ApiProblem>(
   options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof listMembers>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof listMembers>>,
@@ -336,7 +336,7 @@ export function useListMembers<TData = Awaited<ReturnType<typeof listMembers>>, 
       >, }
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useListMembers<TData = Awaited<ReturnType<typeof listMembers>>, TError = unknown>(
+export function useListMembers<TData = Awaited<ReturnType<typeof listMembers>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listMembers>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof listMembers>>,
@@ -346,7 +346,7 @@ export function useListMembers<TData = Awaited<ReturnType<typeof listMembers>>, 
       >, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useListMembers<TData = Awaited<ReturnType<typeof listMembers>>, TError = unknown>(
+export function useListMembers<TData = Awaited<ReturnType<typeof listMembers>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listMembers>>, TError, TData>>, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -354,7 +354,7 @@ export function useListMembers<TData = Awaited<ReturnType<typeof listMembers>>, 
  * @summary List the members of the active organization
  */
 
-export function useListMembers<TData = Awaited<ReturnType<typeof listMembers>>, TError = unknown>(
+export function useListMembers<TData = Awaited<ReturnType<typeof listMembers>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listMembers>>, TError, TData>>, }
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -391,7 +391,7 @@ export const removeMember = (
 
 export const getRemoveMemberMutationKey = () => ['removeMember'] as const;
 
-export const getRemoveMemberMutationOptions = <TError = ProblemDetail,
+export const getRemoveMemberMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof removeMember>>, TError,RemoveMemberMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof removeMember>>, TError,RemoveMemberMutationVariables, TContext> => {
 
@@ -420,13 +420,13 @@ const {mutation: mutationOptions} = options ?
 
     export type RemoveMemberMutationResult = NonNullable<Awaited<ReturnType<typeof removeMember>>>
 
-    export type RemoveMemberMutationError = ProblemDetail
+    export type RemoveMemberMutationError = ApiProblem
     export type RemoveMemberMutationVariables = {userId: string}
 
     /**
  * @summary Remove a member from the organization (their account stays)
  */
-export const useRemoveMember = <TError = ProblemDetail,
+export const useRemoveMember = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof removeMember>>, TError,RemoveMemberMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof removeMember>>,
@@ -456,7 +456,7 @@ export const revokeInvitation = (
 
 export const getRevokeInvitationMutationKey = () => ['revokeInvitation'] as const;
 
-export const getRevokeInvitationMutationOptions = <TError = unknown,
+export const getRevokeInvitationMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof revokeInvitation>>, TError,RevokeInvitationMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof revokeInvitation>>, TError,RevokeInvitationMutationVariables, TContext> => {
 
@@ -485,13 +485,13 @@ const {mutation: mutationOptions} = options ?
 
     export type RevokeInvitationMutationResult = NonNullable<Awaited<ReturnType<typeof revokeInvitation>>>
 
-    export type RevokeInvitationMutationError = unknown
+    export type RevokeInvitationMutationError = ApiProblem
     export type RevokeInvitationMutationVariables = {invitationId: string}
 
     /**
  * @summary Revoke a pending invitation
  */
-export const useRevokeInvitation = <TError = unknown,
+export const useRevokeInvitation = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof revokeInvitation>>, TError,RevokeInvitationMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof revokeInvitation>>,

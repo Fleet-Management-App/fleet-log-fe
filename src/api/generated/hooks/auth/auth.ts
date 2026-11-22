@@ -15,6 +15,7 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ApiProblem,
   AuthTokenResponse,
   LoginRequest,
   ProblemDetail,
@@ -49,7 +50,7 @@ export const switchOrganization = (
 
 export const getSwitchOrganizationMutationKey = () => ['switchOrganization'] as const;
 
-export const getSwitchOrganizationMutationOptions = <TError = ProblemDetail,
+export const getSwitchOrganizationMutationOptions = <TError = ApiProblem | ProblemDetail,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof switchOrganization>>, TError,SwitchOrganizationMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof switchOrganization>>, TError,SwitchOrganizationMutationVariables, TContext> => {
 
@@ -78,13 +79,13 @@ const {mutation: mutationOptions} = options ?
 
     export type SwitchOrganizationMutationResult = NonNullable<Awaited<ReturnType<typeof switchOrganization>>>
     export type SwitchOrganizationMutationBody = SwitchOrganizationRequest
-    export type SwitchOrganizationMutationError = ProblemDetail
+    export type SwitchOrganizationMutationError = ApiProblem | ProblemDetail
     export type SwitchOrganizationMutationVariables = {data: SwitchOrganizationRequest}
 
     /**
  * @summary Issue a token for another of the caller's organizations
  */
-export const useSwitchOrganization = <TError = ProblemDetail,
+export const useSwitchOrganization = <TError = ApiProblem | ProblemDetail,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof switchOrganization>>, TError,SwitchOrganizationMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof switchOrganization>>,
@@ -116,7 +117,7 @@ export const signUp = (
 
 export const getSignUpMutationKey = () => ['signUp'] as const;
 
-export const getSignUpMutationOptions = <TError = ProblemDetail,
+export const getSignUpMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof signUp>>, TError,SignUpMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof signUp>>, TError,SignUpMutationVariables, TContext> => {
 
@@ -145,13 +146,13 @@ const {mutation: mutationOptions} = options ?
 
     export type SignUpMutationResult = NonNullable<Awaited<ReturnType<typeof signUp>>>
     export type SignUpMutationBody = SignUpRequest
-    export type SignUpMutationError = ProblemDetail
+    export type SignUpMutationError = ApiProblem
     export type SignUpMutationVariables = {data: SignUpRequest}
 
     /**
  * @summary Create a global account (no organization yet)
  */
-export const useSignUp = <TError = ProblemDetail,
+export const useSignUp = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof signUp>>, TError,SignUpMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof signUp>>,
@@ -183,7 +184,7 @@ export const login = (
 
 export const getLoginMutationKey = () => ['login'] as const;
 
-export const getLoginMutationOptions = <TError = ProblemDetail,
+export const getLoginMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof login>>, TError,LoginMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof login>>, TError,LoginMutationVariables, TContext> => {
 
@@ -212,13 +213,13 @@ const {mutation: mutationOptions} = options ?
 
     export type LoginMutationResult = NonNullable<Awaited<ReturnType<typeof login>>>
     export type LoginMutationBody = LoginRequest
-    export type LoginMutationError = ProblemDetail
+    export type LoginMutationError = ApiProblem
     export type LoginMutationVariables = {data: LoginRequest}
 
     /**
  * @summary Log in; the first organization the user joined becomes active
  */
-export const useLogin = <TError = ProblemDetail,
+export const useLogin = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof login>>, TError,LoginMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof login>>,

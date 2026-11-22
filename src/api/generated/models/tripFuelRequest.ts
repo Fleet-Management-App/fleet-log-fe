@@ -10,6 +10,6 @@ export interface TripFuelRequest {
   liters: number;
   /** @exclusiveMinimum 0 */
   price: number;
-  /** @nullable */
-  receiptPhoto?: string | null;
+  /** @minLength 1 */
+  receiptPhoto: string;
 }

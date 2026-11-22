@@ -5,6 +5,9 @@
  * OpenAPI spec version: v1
  */
 
+export * from './apiFieldError';
+export * from './apiProblem';
+export * from './apiProblemCode';
 export * from './authTokenResponse';
 export * from './changeRolesRequest';
 export * from './createInvitationRequest';
@@ -21,6 +24,7 @@ export * from './membershipResponse';
 export * from './meResponse';
 export * from './problemDetail';
 export * from './problemDetailProperties';
+export * from './receiptPhotoResponse';
 export * from './role';
 export * from './signUpRequest';
 export * from './switchOrganizationRequest';

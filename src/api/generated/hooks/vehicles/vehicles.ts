@@ -24,6 +24,7 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ApiProblem,
   VehicleCreateRequest,
   VehicleResponse
 } from '../../models';
@@ -73,7 +74,7 @@ export const getListVehiclesQueryKey = () => {
     }
 
 
-export const getListVehiclesQueryOptions = <TData = Awaited<ReturnType<typeof listVehicles>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listVehicles>>, TError, TData>>, }
+export const getListVehiclesQueryOptions = <TData = Awaited<ReturnType<typeof listVehicles>>, TError = ApiProblem>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listVehicles>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -92,10 +93,10 @@ const {query: queryOptions} = options ?? {};
 }
 
 export type ListVehiclesQueryResult = NonNullable<Awaited<ReturnType<typeof listVehicles>>>
-export type ListVehiclesQueryError = unknown
+export type ListVehiclesQueryError = ApiProblem
 
 
-export function useListVehicles<TData = Awaited<ReturnType<typeof listVehicles>>, TError = unknown>(
+export function useListVehicles<TData = Awaited<ReturnType<typeof listVehicles>>, TError = ApiProblem>(
   options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof listVehicles>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof listVehicles>>,
@@ -105,7 +106,7 @@ export function useListVehicles<TData = Awaited<ReturnType<typeof listVehicles>>
       >, }
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useListVehicles<TData = Awaited<ReturnType<typeof listVehicles>>, TError = unknown>(
+export function useListVehicles<TData = Awaited<ReturnType<typeof listVehicles>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listVehicles>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof listVehicles>>,
@@ -115,7 +116,7 @@ export function useListVehicles<TData = Awaited<ReturnType<typeof listVehicles>>
       >, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useListVehicles<TData = Awaited<ReturnType<typeof listVehicles>>, TError = unknown>(
+export function useListVehicles<TData = Awaited<ReturnType<typeof listVehicles>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listVehicles>>, TError, TData>>, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -123,7 +124,7 @@ export function useListVehicles<TData = Awaited<ReturnType<typeof listVehicles>>
  * @summary List the active organization's vehicles
  */
 
-export function useListVehicles<TData = Awaited<ReturnType<typeof listVehicles>>, TError = unknown>(
+export function useListVehicles<TData = Awaited<ReturnType<typeof listVehicles>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof listVehicles>>, TError, TData>>, }
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
@@ -162,7 +163,7 @@ export const createVehicle = (
 
 export const getCreateVehicleMutationKey = () => ['createVehicle'] as const;
 
-export const getCreateVehicleMutationOptions = <TError = unknown,
+export const getCreateVehicleMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createVehicle>>, TError,CreateVehicleMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof createVehicle>>, TError,CreateVehicleMutationVariables, TContext> => {
 
@@ -191,13 +192,13 @@ const {mutation: mutationOptions} = options ?
 
     export type CreateVehicleMutationResult = NonNullable<Awaited<ReturnType<typeof createVehicle>>>
     export type CreateVehicleMutationBody = VehicleCreateRequest
-    export type CreateVehicleMutationError = unknown
+    export type CreateVehicleMutationError = ApiProblem
     export type CreateVehicleMutationVariables = {data: VehicleCreateRequest}
 
     /**
  * @summary Register a vehicle; Fleet Manager only
  */
-export const useCreateVehicle = <TError = unknown,
+export const useCreateVehicle = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createVehicle>>, TError,CreateVehicleMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createVehicle>>,

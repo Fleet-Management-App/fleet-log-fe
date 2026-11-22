@@ -9,8 +9,7 @@ import type { FuelStatus } from './fuelStatus';
 export interface FuelEntryResponse {
   liters: number;
   price: number;
-  /** @nullable */
-  receiptPhotoUrl?: string | null;
+  hasReceipt: boolean;
   status: FuelStatus;
   /** @nullable */
   rejectionReason?: string | null;

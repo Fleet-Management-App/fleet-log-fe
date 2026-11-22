@@ -15,6 +15,7 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ApiProblem,
   AuthTokenResponse
 } from '../../models';
 
@@ -43,7 +44,7 @@ export const declineInvitation = (
 
 export const getDeclineInvitationMutationKey = () => ['declineInvitation'] as const;
 
-export const getDeclineInvitationMutationOptions = <TError = unknown,
+export const getDeclineInvitationMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof declineInvitation>>, TError,DeclineInvitationMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof declineInvitation>>, TError,DeclineInvitationMutationVariables, TContext> => {
 
@@ -72,13 +73,13 @@ const {mutation: mutationOptions} = options ?
 
     export type DeclineInvitationMutationResult = NonNullable<Awaited<ReturnType<typeof declineInvitation>>>
 
-    export type DeclineInvitationMutationError = unknown
+    export type DeclineInvitationMutationError = ApiProblem
     export type DeclineInvitationMutationVariables = {invitationId: string}
 
     /**
  * @summary Decline an invitation
  */
-export const useDeclineInvitation = <TError = unknown,
+export const useDeclineInvitation = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof declineInvitation>>, TError,DeclineInvitationMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof declineInvitation>>,
@@ -108,7 +109,7 @@ export const acceptInvitation = (
 
 export const getAcceptInvitationMutationKey = () => ['acceptInvitation'] as const;
 
-export const getAcceptInvitationMutationOptions = <TError = unknown,
+export const getAcceptInvitationMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof acceptInvitation>>, TError,AcceptInvitationMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof acceptInvitation>>, TError,AcceptInvitationMutationVariables, TContext> => {
 
@@ -137,13 +138,13 @@ const {mutation: mutationOptions} = options ?
 
     export type AcceptInvitationMutationResult = NonNullable<Awaited<ReturnType<typeof acceptInvitation>>>
 
-    export type AcceptInvitationMutationError = unknown
+    export type AcceptInvitationMutationError = ApiProblem
     export type AcceptInvitationMutationVariables = {invitationId: string}
 
     /**
  * @summary Accept an invitation; the caller joins the organization and switches to it
  */
-export const useAcceptInvitation = <TError = unknown,
+export const useAcceptInvitation = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof acceptInvitation>>, TError,AcceptInvitationMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof acceptInvitation>>,
