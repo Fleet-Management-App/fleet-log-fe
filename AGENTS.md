@@ -20,7 +20,7 @@
 ## 3. Prompting & AI Behavior Instructions
 * When designing a new feature, always ask: "Does this design violate the 'no persistent vehicle assignment' model and the two-phase approval (plan vs. fuel)?"
 * Generated code must respect that Fuel Approval is independent and optional — never implement it as a gating condition for the "Completed" state.
-* When writing or changing business logic, always check the current BR-IDs on the Confluence "04. Business Rules & Validations" page first — never duplicate or rewrite rules locally without a reference.
+* When writing or changing business logic, always check the current BR-IDs on the Confluence "02. Business Rules & Validations" page first — never duplicate or rewrite rules locally without a reference.
 * Integration logic testing (especially calls to any future external system) is done via mocking, not by calling real services.
 
 **Code quality policy:**

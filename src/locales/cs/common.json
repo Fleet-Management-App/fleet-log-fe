@@ -29,7 +29,7 @@
   },
   "roles": {
     "DRIVER": "Řidič",
-    "FLEET_MANAGER": "Fleet manažer",
+    "FLEET_MANAGER": "Správce vozového parku",
     "ACCOUNTANT": "Účetní"
   },
   "fields": {

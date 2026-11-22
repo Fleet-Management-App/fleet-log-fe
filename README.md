@@ -65,4 +65,4 @@ Layering: `routes/x.ts -> pages/XPage.tsx -> containers/XContainer.tsx -> compon
 - Env values only through `getEnvVariable(EnvVariableName.X)`.
 - All requests go through `security/axios/axiosInstance.ts`.
 - Forms use `useAppForm` from `modules/common/components/form/`, with zod schemas as validators.
-- Business rules are referenced by their BR-ID from Confluence "04. Business Rules & Validations".
+- Business rules are referenced by their BR-ID from Confluence "02. Business Rules & Validations".
