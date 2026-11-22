@@ -113,6 +113,8 @@
       "receipt": "Účtenka",
       "showReceipt": "Zobrazit účtenku",
       "noReceipt": "Bez účtenky",
+      "loadingReceipt": "Načítám účtenku…",
+      "receiptUnavailable": "Účtenku se nepodařilo načíst",
       "pending": "Čeká na správce vozového parku. Dokončení jízdy to neblokuje.",
       "approved": "Schváleno správcem vozového parku.",
       "rejected": "Opravte záznam a odešlete jej znovu."

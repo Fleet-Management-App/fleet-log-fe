@@ -17,26 +17,13 @@ import { formatNumber, formatPrice } from "@/modules/common/utils/formatDate";
 
 import { FuelStatusBadge } from "./FuelStatusBadge";
 import { TripDetailFields } from "./TripDetailFields";
-
-// The receipt is whatever the driver sent: a data URL of the photo or a plain URL. Anything else
-// (e.g. a javascript: URL) is not rendered.
-const isSafeReceiptUrl = (url: string) => /^(https?:|data:image\/)/i.test(url);
+import { TripFuelReceipt } from "./TripFuelReceipt";
 
 const STATUS_NOTE = {
   [FuelStatus.PENDING]: "pending",
   [FuelStatus.APPROVED]: "approved",
   [FuelStatus.REJECTED]: "rejected",
 } as const satisfies Record<FuelStatus, string>;
-
-// Browsers refuse to open a data: URL in a new tab, so it is opened as a blob URL instead
-const openReceipt = async (url: string) => {
-  if (!url.startsWith("data:")) {
-    window.open(url, "_blank", "noopener,noreferrer");
-    return;
-  }
-  const blob = await (await fetch(url)).blob();
-  window.open(URL.createObjectURL(blob), "_blank", "noopener,noreferrer");
-};
 
 /**
  * Fuel is optional and approved on its own (BR-06): nothing here ever holds up the trip's
@@ -71,9 +58,6 @@ export const TripFuelCard: FC<{ trip: TripResponse }> = ({ trip }) => {
       return <CardDescription>{t("detail.fuel.none")}</CardDescription>;
     }
 
-    const receiptUrl =
-      fuel.receiptPhotoUrl && isSafeReceiptUrl(fuel.receiptPhotoUrl) ? fuel.receiptPhotoUrl : null;
-
     return (
       <div className="flex flex-col gap-4">
         {fuel.status === FuelStatus.REJECTED && fuel.rejectionReason && (
@@ -90,23 +74,7 @@ export const TripFuelCard: FC<{ trip: TripResponse }> = ({ trip }) => {
             { label: t("detail.fuel.price"), value: formatPrice(fuel.price) },
             {
               label: t("detail.fuel.receipt"),
-              value: receiptUrl ? (
-                <button
-                  type="button"
-                  className="flex items-center gap-2 text-blue-600 hover:underline dark:text-blue-400"
-                  onClick={() => openReceipt(receiptUrl)}
-                >
-                  <img
-                    src={receiptUrl}
-                    alt=""
-                    className="size-10 rounded border object-cover"
-                    loading="lazy"
-                  />
-                  {t("detail.fuel.showReceipt")}
-                </button>
-              ) : (
-                <span className="text-muted-foreground">{t("detail.fuel.noReceipt")}</span>
-              ),
+              value: <TripFuelReceipt tripId={trip.id} hasReceipt={fuel.hasReceipt} />,
             },
           ]}
         />

@@ -113,6 +113,8 @@
       "receipt": "Receipt",
       "showReceipt": "Show receipt",
       "noReceipt": "No receipt",
+      "loadingReceipt": "Loading receipt…",
+      "receiptUnavailable": "Receipt couldn't be loaded",
       "pending": "Waiting for the fleet manager. This doesn't hold up the trip.",
       "approved": "Approved by the fleet manager.",
       "rejected": "Fix the entry and submit it again."

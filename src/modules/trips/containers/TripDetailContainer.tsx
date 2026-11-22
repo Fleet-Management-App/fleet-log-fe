@@ -13,9 +13,9 @@ import {
   useGetTrip,
 } from "@/api/generated/hooks/trips/trips";
 import { useListVehicles } from "@/api/generated/hooks/vehicles/vehicles";
-import { Role } from "@/api/generated/models";
+import { ApiProblemCode, Role } from "@/api/generated/models";
 import { Button } from "@/modules/common/components/ui/button";
-import { getErrorMessage } from "@/modules/common/utils/getErrorMessage";
+import { getErrorCode, getErrorMessage } from "@/modules/common/utils/getErrorMessage";
 import { hasAnyRole } from "@/security/requireRole";
 import { useCurrentUser } from "@/security/useCurrentUser";
 
@@ -27,8 +27,11 @@ import { TripFuelCard } from "../components/TripFuelCard";
 import { TripMessageCard } from "../components/TripMessageCard";
 import { TripOdometerCard } from "../components/TripOdometerCard";
 
-// 404 = no such trip in this organization, 403 = a driver opening someone else's trip
-const NOT_FOUND_STATUSES = [403, 404];
+// TRIP_NOT_FOUND = no such trip in this organization; a driver opening someone else's trip gets a
+// plain 403 without a code. Both look the same to the user, and neither is worth a retry.
+const isTripNotFound = (error: unknown) =>
+  getErrorCode(error) === ApiProblemCode.TRIP_NOT_FOUND ||
+  (error as AxiosError | null)?.response?.status === 403;
 
 export const TripDetailContainer: FC<{ tripId: string }> = ({ tripId }) => {
   const { t } = useTranslation(["trips", "common"]);
@@ -38,33 +41,34 @@ export const TripDetailContainer: FC<{ tripId: string }> = ({ tripId }) => {
 
   const tripQuery = useGetTrip(tripId, {
     query: {
-      retry: (failureCount, error) =>
-        !NOT_FOUND_STATUSES.includes((error as AxiosError)?.response?.status ?? 0) &&
-        failureCount < 3,
+      retry: (failureCount, error) => !isTripNotFound(error) && failureCount < 3,
     },
   });
   const { data: vehicles } = useListVehicles();
   const { mutateAsync: cancelTrip, isPending: isCancelling } = useCancelTrip();
 
+  const refreshTrip = () =>
+    Promise.all([
+      queryClient.invalidateQueries({ queryKey: getGetTripQueryKey(tripId) }),
+      queryClient.invalidateQueries({ queryKey: getListTripsQueryKey() }),
+    ]);
+
   const handleCancel = async () => {
     try {
       await cancelTrip({ tripId });
       toast.success(t("detail.toast.cancelled"));
-      await Promise.all([
-        queryClient.invalidateQueries({ queryKey: getGetTripQueryKey(tripId) }),
-        queryClient.invalidateQueries({ queryKey: getListTripsQueryKey() }),
-      ]);
+      await refreshTrip();
     } catch (error) {
       toast.error(getErrorMessage(error, t("common:states.actionError")));
+      // The fleet manager decided on the plan meanwhile: show the trip as it is now
+      if (getErrorCode(error) === ApiProblemCode.TRIP_NOT_PLANNED) await refreshTrip();
     }
   };
 
   if (tripQuery.isLoading) return <TripDetailSkeleton />;
 
   if (tripQuery.isError || !tripQuery.data) {
-    const isNotFound = NOT_FOUND_STATUSES.includes(
-      (tripQuery.error as AxiosError | null)?.response?.status ?? 0,
-    );
+    const isNotFound = isTripNotFound(tripQuery.error);
     return (
       <div className="flex flex-col gap-6">
         <TripDetailBackLink showsAllTrips={showsAllTrips} />
