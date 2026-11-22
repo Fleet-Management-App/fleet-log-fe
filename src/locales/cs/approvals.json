@@ -1,1 +1,70 @@
-{}
+{
+  "title": "Schvalování",
+  "subtitle": "Plány jízd a tankování čekající na vaše rozhodnutí",
+  "tabs": {
+    "plans": "Plány jízd",
+    "plansWithCount": "Plány jízd ({{count}})",
+    "fuel": "Tankování",
+    "fuelWithCount": "Tankování ({{count}})"
+  },
+  "columns": {
+    "term": "Termín",
+    "tripDate": "Datum jízdy",
+    "driver": "Řidič",
+    "route": "Trasa",
+    "purpose": "Účel",
+    "vehicle": "Vozidlo",
+    "fuel": "Tankování",
+    "receipt": "Účtenka",
+    "actions": "Akce"
+  },
+  "unknownVehicle": "Neznámé vozidlo",
+  "liters": "{{value}} l",
+  "pending": {
+    "approving": "Schvalování…",
+    "rejecting": "Zamítání…"
+  },
+  "empty": {
+    "plansTitle": "Žádné plány ke schválení",
+    "plansText": "Nové plány jízd od řidičů se zobrazí tady.",
+    "fuelTitle": "Žádná tankování ke schválení",
+    "fuelText": "Tankování zapsaná řidiči se zobrazí tady."
+  },
+  "loadError": {
+    "title": "Schvalování se nepodařilo načíst",
+    "text": "Zkontrolujte připojení a zkuste to znovu."
+  },
+  "receipt": {
+    "show": "Zobrazit",
+    "none": "Bez účtenky",
+    "title": "Účtenka",
+    "alt": "Účtenka za tankování: {{trip}}",
+    "unavailable": "Obrázek účtenky se nepodařilo zobrazit.",
+    "loggedByDriver": "Zapsal řidič"
+  },
+  "rejectDialog": {
+    "planTitle": "Zamítnout plán jízdy",
+    "fuelTitle": "Zamítnout tankování",
+    "reasonLabel": "Důvod zamítnutí",
+    "reasonPlaceholder": "např. Vozidlo je v tomto termínu potřeba pro jiný výjezd.",
+    "reasonHint": "Důvod uvidí řidič u své jízdy.",
+    "reasonRequired": "Vyplňte důvod zamítnutí",
+    "reasonTooLong": "Důvod může mít nejvýš {{max}} znaků"
+  },
+  "toast": {
+    "planApproved": "Plán jízdy schválen: {{trip}}",
+    "planRejected": "Plán jízdy zamítnut: {{trip}}",
+    "fuelApproved": "Tankování schváleno: {{trip}}",
+    "fuelRejected": "Tankování zamítnuto: {{trip}}"
+  },
+  "errors": {
+    "title": "Chyba",
+    "planConflictApprove": "Plán jízdy {{trip}} už nejde schválit. Řidič ho mezitím zrušil, nebo ho vyřídil jiný správce. Seznam jsme obnovili.",
+    "planConflictReject": "Plán jízdy {{trip}} už nejde zamítnout. Řidič ho mezitím zrušil, nebo ho vyřídil jiný správce. Seznam jsme obnovili.",
+    "fuelConflict": "Tankování {{trip}} už nejde vyřídit. Mezitím ho vyřídil jiný správce, nebo jízda už neexistuje. Seznam jsme obnovili.",
+    "planApproveFailed": "Plán jízdy {{trip}} se nepodařilo schválit. Zkuste to znovu.",
+    "planRejectFailed": "Plán jízdy {{trip}} se nepodařilo zamítnout. Zkuste to znovu.",
+    "fuelApproveFailed": "Tankování {{trip}} se nepodařilo schválit. Zkuste to znovu.",
+    "fuelRejectFailed": "Tankování {{trip}} se nepodařilo zamítnout. Zkuste to znovu."
+  }
+}
