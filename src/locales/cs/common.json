@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "dashboard": "Přehled",
+    "vehicles": "Vozidla",
+    "trips": "Jízdy",
+    "myTrips": "Moje jízdy",
+    "approvals": "Schvalování",
+    "members": "Členové"
+  },
+  "actions": {
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "back": "Zpět",
+    "retry": "Zkusit znovu",
+    "approve": "Schválit",
+    "reject": "Zamítnout",
+    "close": "Zavřít"
+  },
+  "states": {
+    "loading": "Načítání…",
+    "loadError": "Při načítání se něco pokazilo. Zkuste to znovu.",
+    "actionError": "Něco se pokazilo. Zkuste to znovu.",
+    "comingSoon": "Připravujeme"
+  },
+  "language": {
+    "label": "Jazyk",
+    "en": "English",
+    "cs": "Čeština"
+  },
+  "roles": {
+    "DRIVER": "Řidič",
+    "FLEET_MANAGER": "Správce vozového parku",
+    "ACCOUNTANT": "Účetní"
+  },
+  "fields": {
+    "email": "E-mail"
+  },
+  "validation": {
+    "email": "Zadejte platný e-mail",
+    "tooLong": "Text je příliš dlouhý"
+  },
+  "notFound": {
+    "title": "Stránka nenalezena",
+    "backToDashboard": "Zpět na přehled"
+  },
+  "errors": {
+    "VALIDATION_FAILED": "Některá pole nejsou vyplněna správně.",
+    "MALFORMED_REQUEST": "Požadavek se nepodařilo zpracovat. Zkontrolujte hodnoty a zkuste to znovu.",
+    "VEHICLE_UNAVAILABLE": "Vozidlo je pozastavené nebo má propadlou STK, nelze ho použít.",
+    "ODOMETER_END_BEFORE_START": "Konečný stav nemůže být nižší než počáteční.",
+    "REJECTION_REASON_REQUIRED": "Uveďte důvod zamítnutí.",
+    "TRIP_NOT_FOUND": "Jízda neexistuje nebo k ní nemáte přístup.",
+    "VEHICLE_NOT_FOUND": "Vozidlo neexistuje.",
+    "FUEL_RECEIPT_NOT_FOUND": "Tankování nemá účtenku.",
+    "TRIP_NOT_PLANNED": "Jízda už nečeká na schválení.",
+    "TRIP_NOT_PLAN_REJECTED": "Upravit lze jen zamítnutý plán.",
+    "TRIP_NOT_PLAN_APPROVED": "To lze až po schválení plánu jízdy.",
+    "FUEL_ENTRY_ALREADY_EXISTS": "Jízda už má tankování, které čeká na schválení nebo je schválené.",
+    "FUEL_ENTRY_NOT_PENDING": "O tomto tankování už bylo rozhodnuto.",
+    "NO_FUEL_ENTRY": "Jízda nemá zapsané tankování.",
+    "VEHICLE_PLATE_TAKEN": "Vozidlo s touto SPZ už existuje.",
+    "VEHICLE_VIN_TAKEN": "Vozidlo s tímto VIN už existuje.",
+    "WRONG_CREDENTIALS": "Nesprávný e-mail nebo heslo.",
+    "EMAIL_TAKEN": "Účet s tímto e-mailem už existuje.",
+    "ALREADY_MEMBER": "Tato osoba už je členem organizace.",
+    "INVITATION_NOT_FOUND": "Pozvánka neexistuje.",
+    "INVITATION_NOT_PENDING": "Pozvánka už není platná.",
+    "INVITATION_ALREADY_PENDING": "Na tento e-mail už čeká pozvánka.",
+    "MEMBER_NOT_FOUND": "Člen neexistuje.",
+    "LAST_FLEET_MANAGER": "Organizace musí mít alespoň jednoho správce vozového parku.",
+    "RECEIPT_PHOTO_INVALID": "Účtenka musí být fotka ve formátu JPG, PNG, WebP nebo HEIC.",
+    "RECEIPT_PHOTO_TOO_LARGE": "Fotka účtenky může mít nejvýše 5 MB."
+  }
+}

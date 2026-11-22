@@ -7,8 +7,10 @@ export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: (failureCount, error) => is401Error(error) && failureCount < 2,
-      staleTime: 5 * 60 * 1000,
-      refetchOnWindowFocus: false,
+      // Trips and approvals are changed by other people (a driver cancels, a Fleet Manager decides),
+      // so data counts as fresh only briefly and is refetched when the user comes back to the tab
+      staleTime: 30 * 1000,
+      refetchOnWindowFocus: true,
       refetchOnReconnect: false,
     },
     mutations: {

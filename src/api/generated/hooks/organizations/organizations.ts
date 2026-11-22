@@ -15,6 +15,7 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ApiProblem,
   AuthTokenResponse,
   CreateOrganizationRequest
 } from '../../models';
@@ -46,7 +47,7 @@ export const createOrganization = (
 
 export const getCreateOrganizationMutationKey = () => ['createOrganization'] as const;
 
-export const getCreateOrganizationMutationOptions = <TError = unknown,
+export const getCreateOrganizationMutationOptions = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createOrganization>>, TError,CreateOrganizationMutationVariables, TContext>, }
 ): UseMutationOptions<Awaited<ReturnType<typeof createOrganization>>, TError,CreateOrganizationMutationVariables, TContext> => {
 
@@ -75,13 +76,13 @@ const {mutation: mutationOptions} = options ?
 
     export type CreateOrganizationMutationResult = NonNullable<Awaited<ReturnType<typeof createOrganization>>>
     export type CreateOrganizationMutationBody = CreateOrganizationRequest
-    export type CreateOrganizationMutationError = unknown
+    export type CreateOrganizationMutationError = ApiProblem
     export type CreateOrganizationMutationVariables = {data: CreateOrganizationRequest}
 
     /**
  * @summary Create an organization; the caller becomes its first Fleet Manager and switches to it
  */
-export const useCreateOrganization = <TError = unknown,
+export const useCreateOrganization = <TError = ApiProblem,
     TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof createOrganization>>, TError,CreateOrganizationMutationVariables, TContext>, }
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof createOrganization>>,

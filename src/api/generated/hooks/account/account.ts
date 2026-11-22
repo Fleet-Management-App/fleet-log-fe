@@ -20,6 +20,7 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  ApiProblem,
   MeResponse
 } from '../../models';
 
@@ -68,7 +69,7 @@ export const getGetMeQueryKey = () => {
     }
 
 
-export const getGetMeQueryOptions = <TData = Awaited<ReturnType<typeof getMe>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, }
+export const getGetMeQueryOptions = <TData = Awaited<ReturnType<typeof getMe>>, TError = ApiProblem>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, }
 ) => {
 
 const {query: queryOptions} = options ?? {};
@@ -87,10 +88,10 @@ const {query: queryOptions} = options ?? {};
 }
 
 export type GetMeQueryResult = NonNullable<Awaited<ReturnType<typeof getMe>>>
-export type GetMeQueryError = unknown
+export type GetMeQueryError = ApiProblem
 
 
-export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = unknown>(
+export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = ApiProblem>(
   options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof getMe>>,
@@ -100,7 +101,7 @@ export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = unk
       >, }
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = unknown>(
+export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof getMe>>,
@@ -110,7 +111,7 @@ export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = unk
       >, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = unknown>(
+export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, }
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
@@ -118,7 +119,7 @@ export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = unk
  * @summary The caller, their organizations and the invitations waiting for them
  */
 
-export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = unknown>(
+export function useGetMe<TData = Awaited<ReturnType<typeof getMe>>, TError = ApiProblem>(
   options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getMe>>, TError, TData>>, }
  , queryClient?: QueryClient
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {

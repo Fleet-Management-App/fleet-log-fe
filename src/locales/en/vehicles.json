@@ -1,0 +1,63 @@
+{
+  "page": {
+    "title": "Vehicles",
+    "subtitle": "The shared vehicle pool of {{organization}}",
+    "add": "Add vehicle"
+  },
+  "table": {
+    "plate": "Plate",
+    "vehicle": "Make / model",
+    "fuelType": "Fuel",
+    "odometer": "Odometer",
+    "status": "Status",
+    "stk": "STK",
+    "insurance": "Insurance",
+    "vignette": "Vignette",
+    "km": "{{value}} km"
+  },
+  "empty": {
+    "title": "No vehicles yet",
+    "fleetManager": "Add the first vehicle of the fleet with \"Add vehicle\".",
+    "readOnly": "Vehicles appear here once the Fleet Manager adds them."
+  },
+  "fuelType": {
+    "PETROL": "Petrol",
+    "DIESEL": "Diesel",
+    "ELECTRIC": "Electric",
+    "HYBRID": "Hybrid",
+    "LPG": "LPG"
+  },
+  "status": {
+    "ACTIVE": "Active",
+    "IN_SERVICE": "In service",
+    "SUSPENDED": "Suspended"
+  },
+  "dueDate": {
+    "dueToday": "Expires today",
+    "dueIn_one": "Expires in {{count}} day",
+    "dueIn_other": "Expires in {{count}} days",
+    "overdue_one": "Expired {{count}} day ago",
+    "overdue_other": "Expired {{count}} days ago"
+  },
+  "form": {
+    "title": "Add vehicle",
+    "description": "The vehicle joins the shared pool as active, and drivers can pick it when planning a trip.",
+    "plate": "Plate",
+    "vin": "VIN",
+    "make": "Make",
+    "model": "Model",
+    "fuelType": "Fuel type",
+    "odometer": "Odometer (km)",
+    "stkDueDate": "STK due",
+    "insuranceDueDate": "Insurance due",
+    "vignetteDueDate": "Vignette valid until",
+    "submit": "Add vehicle",
+    "added": "Vehicle {{plate}} added.",
+    "errors": {
+      "required": "Fill this in",
+      "tooLong": "At most {{max}} characters",
+      "odometer": "Enter a whole number of kilometres",
+      "date": "Enter a valid date"
+    }
+  }
+}

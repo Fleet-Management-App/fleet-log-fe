@@ -1,6 +1,7 @@
 import type { FC } from "react";
 
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 import {
@@ -22,12 +23,13 @@ import { InviteMemberForm } from "../forms/InviteMemberForm/InviteMemberForm";
 export const InviteMemberContainer: FC = () => {
   const queryClient = useQueryClient();
   const { mutateAsync: createInvitation } = useCreateInvitation();
+  const { t } = useTranslation("users");
 
   // Resolves to true when the form should reset
   const handleInvite = async (data: CreateInvitationRequest) => {
     try {
       await createInvitation({ data });
-      toast.success(`Invitation sent to ${data.email}.`);
+      toast.success(t("invite.sent", { email: data.email }));
       await queryClient.invalidateQueries({ queryKey: getListInvitationsQueryKey() });
       return true;
     } catch (error) {
@@ -39,10 +41,8 @@ export const InviteMemberContainer: FC = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Invite someone</CardTitle>
-        <CardDescription>
-          They see the invitation after logging in with this e-mail, or after signing up with it.
-        </CardDescription>
+        <CardTitle>{t("invite.title")}</CardTitle>
+        <CardDescription>{t("invite.description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <InviteMemberForm onSubmit={handleInvite} />

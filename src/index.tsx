@@ -1,6 +1,7 @@
 import { RouterProvider } from "@tanstack/react-router";
 import { createRoot } from "react-dom/client";
 
+import "@/config/i18n/i18n";
 import { Context } from "@/context/Context";
 import { router } from "@/routes/-router";
 

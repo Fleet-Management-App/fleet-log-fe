@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "vehicles": "Vehicles",
+    "trips": "Trips",
+    "myTrips": "My trips",
+    "approvals": "Approvals",
+    "members": "Members"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "retry": "Try again",
+    "approve": "Approve",
+    "reject": "Reject",
+    "close": "Close"
+  },
+  "states": {
+    "loading": "Loading…",
+    "loadError": "Something went wrong while loading. Try again.",
+    "actionError": "Something went wrong. Try again.",
+    "comingSoon": "Coming soon"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "cs": "Čeština"
+  },
+  "roles": {
+    "DRIVER": "Driver",
+    "FLEET_MANAGER": "Fleet Manager",
+    "ACCOUNTANT": "Accountant"
+  },
+  "fields": {
+    "email": "E-mail"
+  },
+  "validation": {
+    "email": "Enter a valid e-mail",
+    "tooLong": "This is too long"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "backToDashboard": "Back to the dashboard"
+  },
+  "errors": {
+    "VALIDATION_FAILED": "Some fields are not filled in correctly.",
+    "MALFORMED_REQUEST": "The request could not be read. Check the values and try again.",
+    "VEHICLE_UNAVAILABLE": "This vehicle is suspended or its STK has expired, so it can't be used.",
+    "ODOMETER_END_BEFORE_START": "The end reading can't be lower than the start reading.",
+    "REJECTION_REASON_REQUIRED": "Give a reason for the rejection.",
+    "TRIP_NOT_FOUND": "This trip doesn't exist or you can't see it.",
+    "VEHICLE_NOT_FOUND": "This vehicle doesn't exist.",
+    "FUEL_RECEIPT_NOT_FOUND": "This fuel entry has no receipt.",
+    "TRIP_NOT_PLANNED": "This trip is no longer waiting for approval.",
+    "TRIP_NOT_PLAN_REJECTED": "Only a rejected plan can be edited.",
+    "TRIP_NOT_PLAN_APPROVED": "This can only be done once the trip plan is approved.",
+    "FUEL_ENTRY_ALREADY_EXISTS": "This trip already has a fuel entry that is waiting for approval or approved.",
+    "FUEL_ENTRY_NOT_PENDING": "This fuel entry has already been decided.",
+    "NO_FUEL_ENTRY": "This trip has no fuel entry.",
+    "VEHICLE_PLATE_TAKEN": "A vehicle with this plate already exists.",
+    "VEHICLE_VIN_TAKEN": "A vehicle with this VIN already exists.",
+    "WRONG_CREDENTIALS": "Wrong e-mail or password.",
+    "EMAIL_TAKEN": "An account with this e-mail already exists.",
+    "ALREADY_MEMBER": "This person is already a member of the organization.",
+    "INVITATION_NOT_FOUND": "This invitation doesn't exist.",
+    "INVITATION_NOT_PENDING": "This invitation is no longer pending.",
+    "INVITATION_ALREADY_PENDING": "This e-mail already has a pending invitation.",
+    "MEMBER_NOT_FOUND": "This member doesn't exist.",
+    "LAST_FLEET_MANAGER": "The organization needs at least one Fleet Manager.",
+    "RECEIPT_PHOTO_INVALID": "The receipt must be a JPG, PNG, WebP or HEIC photo.",
+    "RECEIPT_PHOTO_TOO_LARGE": "The receipt photo can be at most 5 MB."
+  }
+}

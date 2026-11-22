@@ -1,0 +1,36 @@
+{
+  "page": {
+    "title": "Členové",
+    "description": "Kdo má přístup do organizace {{organization}} a s jakými rolemi."
+  },
+  "members": {
+    "title": "Lidé ({{count}})",
+    "name": "Jméno",
+    "roles": "Role",
+    "joined": "Členem od",
+    "you": "Vy",
+    "rolesOf": "Role uživatele {{name}}",
+    "confirmRemove": "Potvrdit",
+    "remove": "Odebrat",
+    "rolesChanged": "{{name}}: {{roles}}.",
+    "removed": "{{name}} už nemá přístup."
+  },
+  "sentInvitations": {
+    "title": "Čekají na odpověď ({{count}})",
+    "email": "E-mail",
+    "roles": "Role",
+    "sent": "Odesláno",
+    "invitedBy": "pozval(a) {{name}}",
+    "revoke": "Odvolat",
+    "revoked": "Pozvánka pro {{email}} byla odvolána."
+  },
+  "invite": {
+    "title": "Pozvat nového člena",
+    "description": "Pozvánku uvidí po přihlášení nebo registraci s tímto e-mailem.",
+    "emailPlaceholder": "jmeno@firma.cz",
+    "roles": "Role",
+    "submit": "Odeslat pozvánku",
+    "sent": "Pozvánka odeslána na {{email}}.",
+    "rolesRequired": "Vyberte alespoň jednu roli"
+  }
+}

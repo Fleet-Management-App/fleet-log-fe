@@ -1,0 +1,64 @@
+{
+  "plan": {
+    "title": "Naplánovat jízdu",
+    "subtitle": "Plán odešlete ke schválení správci vozového parku",
+    "submit": "Odeslat ke schválení",
+    "success": "Plán jízdy byl odeslán ke schválení."
+  },
+  "edit": {
+    "title": "Upravit plán jízdy",
+    "subtitle": "Upravte plán a odešlete ho správci vozového parku znovu",
+    "submit": "Znovu odeslat ke schválení",
+    "success": "Plán jízdy byl znovu odeslán ke schválení.",
+    "rejectedTitle": "Správce vozového parku plán zamítl",
+    "noReason": "Důvod nebyl uveden.",
+    "notEditableTitle": "Tento plán nelze upravit",
+    "notEditableText": "Upravit a znovu odeslat lze jen jízdu se zamítnutým plánem. Stav této jízdy:",
+    "toDetail": "Přejít na jízdu"
+  },
+  "fields": {
+    "date": "Datum",
+    "time": "Čas",
+    "vehicle": "Vozidlo z poolu",
+    "from": "Odkud",
+    "to": "Kam",
+    "purpose": "Účel cesty",
+    "fromPlaceholder": "Např. Praha, Karlín",
+    "toPlaceholder": "Např. Brno, centrum",
+    "purposePlaceholder": "Např. schůzka s klientem"
+  },
+  "vehiclePicker": {
+    "chooseDateFirst": "Nejdříve vyberte termín",
+    "placeholder": "Vyberte vozidlo",
+    "vignetteValid": "Známka platí",
+    "vignetteExpiring": "Známka končí {{date}}",
+    "vignetteExpired": "Známka propadlá",
+    "blockReason": {
+      "SUSPENDED": "Pozastaveno",
+      "STK_EXPIRED": "Propadlá STK"
+    }
+  },
+  "vignette": {
+    "expiringTitle": "Dálniční známka brzy končí",
+    "expiringText": "Platnost končí {{date}}. Před další jízdou po dálnici ověřte její prodloužení.",
+    "expiredTitle": "Dálniční známka je propadlá",
+    "expiredText": "Platnost skončila {{date}}. Jízdu můžete naplánovat, ale na dálnici bez platné známky nejezděte."
+  },
+  "validation": {
+    "dateRequired": "Vyberte datum",
+    "timeRequired": "Vyberte čas",
+    "vehicleRequired": "Vyberte vozidlo",
+    "vehicleBlocked": "Toto vozidlo nelze vybrat ({{reason}}). Vyberte jiné.",
+    "fromRequired": "Vyplňte, odkud jízda začíná",
+    "toRequired": "Vyplňte, kam jízda vede",
+    "purposeRequired": "Vyplňte účel cesty",
+    "tooLong": "Zadejte nejvýše {{max}} znaků"
+  },
+  "states": {
+    "noVehiclesTitle": "V poolu nejsou žádná vozidla",
+    "noVehiclesText": "Zatím tu není žádné vozidlo, se kterým by šlo jízdu naplánovat. Požádejte správce vozového parku o přidání vozidla.",
+    "vehiclesLoadError": "Vozidla se nepodařilo načíst.",
+    "tripLoadError": "Jízdu se nepodařilo načíst.",
+    "submitErrorTitle": "Plán se nepodařilo odeslat"
+  }
+}

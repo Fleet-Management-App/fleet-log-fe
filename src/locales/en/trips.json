@@ -1,0 +1,132 @@
+{
+  "tripStatus": {
+    "PLANNED": "Planned",
+    "PLAN_APPROVED": "Plan approved",
+    "PLAN_REJECTED": "Plan rejected",
+    "COMPLETED": "Completed",
+    "CANCELLED": "Cancelled"
+  },
+  "fuelStatus": {
+    "PENDING": "Pending",
+    "APPROVED": "Approved",
+    "REJECTED": "Rejected"
+  },
+  "list": {
+    "title": "My trips",
+    "subtitle": "Your planned and completed trips",
+    "titleAll": "Trips",
+    "subtitleAll": "Every trip in the organization",
+    "planTrip": "Plan a trip",
+    "filterLabel": "Filter by status",
+    "filters": {
+      "ALL": "All",
+      "PLANNED": "Planned",
+      "PLAN_APPROVED": "Approved",
+      "PLAN_REJECTED": "Rejected",
+      "COMPLETED": "Completed"
+    },
+    "columns": {
+      "date": "Date",
+      "driver": "Driver",
+      "route": "Route",
+      "purpose": "Purpose",
+      "vehicle": "Vehicle",
+      "status": "Status",
+      "fuel": "Fuel"
+    },
+    "empty": {
+      "title": "No trips yet",
+      "description": "Plan your first trip. Once the fleet manager approves it, you can set off.",
+      "descriptionAll": "Nobody in the organization has planned a trip yet."
+    },
+    "emptyFilter": {
+      "title": "No trips with this status",
+      "description": "Pick another status or show all trips.",
+      "showAll": "Show all trips"
+    },
+    "error": {
+      "title": "Trips could not be loaded",
+      "description": "Something went wrong while loading. Try again."
+    }
+  },
+  "detail": {
+    "back": "My trips",
+    "backAll": "Trips",
+    "editPlan": "Edit plan",
+    "cancelTrip": "Cancel trip",
+    "cancelConfirm": "Really cancel the trip?",
+    "cancelConfirmYes": "Yes, cancel",
+    "cancelConfirmNo": "Keep it",
+    "banner": {
+      "PLANNED": {
+        "title": "Waiting for approval",
+        "description": "The fleet manager hasn't approved the plan yet. Until then you can cancel the trip."
+      },
+      "PLAN_APPROVED": {
+        "title": "Plan approved",
+        "description": "You can set off. Log the odometer when you are back."
+      },
+      "PLAN_REJECTED": {
+        "title": "Plan rejected",
+        "description": "Edit the plan and send it for approval again."
+      },
+      "COMPLETED": {
+        "title": "Trip completed",
+        "description": "The odometer is logged and the trip is in the logbook."
+      },
+      "CANCELLED": {
+        "title": "Trip cancelled",
+        "description": "A cancelled trip can no longer be changed."
+      }
+    },
+    "reason": "Reason: {{reason}}",
+    "data": {
+      "title": "Trip details",
+      "dateTime": "Date",
+      "driver": "Driver",
+      "from": "From",
+      "to": "To",
+      "purpose": "Purpose",
+      "vehicle": "Vehicle"
+    },
+    "odometer": {
+      "title": "Odometer",
+      "afterApproval": "You can log it once the plan is approved.",
+      "prompt": "After the trip, log the start and end reading. That completes the trip.",
+      "log": "Log odometer",
+      "notLogged": "Not logged.",
+      "start": "Start",
+      "end": "End",
+      "distance": "Distance",
+      "km": "{{value}} km"
+    },
+    "fuel": {
+      "title": "Fuel",
+      "afterApproval": "You can add fuel once the plan is approved.",
+      "optional": "Fuel is optional. Nothing logged yet.",
+      "none": "No fuel logged.",
+      "add": "Add fuel",
+      "submitAgain": "Submit again",
+      "liters": "Litres",
+      "litersValue": "{{value}} l",
+      "price": "Price",
+      "receipt": "Receipt",
+      "showReceipt": "Show receipt",
+      "noReceipt": "No receipt",
+      "loadingReceipt": "Loading receipt…",
+      "receiptUnavailable": "Receipt couldn't be loaded",
+      "pending": "Waiting for the fleet manager. This doesn't hold up the trip.",
+      "approved": "Approved by the fleet manager.",
+      "rejected": "Fix the entry and submit it again."
+    },
+    "error": {
+      "title": "The trip could not be loaded",
+      "description": "Something went wrong while loading. Try again.",
+      "notFoundTitle": "Trip not found",
+      "notFoundDescription": "It doesn't exist or you don't have access to it."
+    },
+    "toast": {
+      "cancelled": "Trip cancelled."
+    }
+  }
+}

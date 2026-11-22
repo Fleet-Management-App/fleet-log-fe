@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { Field, FieldError, FieldLabel } from "@/modules/common/components/ui/field";
+import { Field, FieldLabel } from "@/modules/common/components/ui/field";
 import {
   Select,
   SelectContent,
@@ -10,6 +10,7 @@ import {
 } from "@/modules/common/components/ui/select";
 
 import { useFieldContext } from "./formContext";
+import { FormFieldError } from "./FormFieldError";
 
 type SelectFieldProps = {
   label: string;
@@ -35,7 +36,7 @@ export const SelectField: FC<SelectFieldProps> = ({ label, options }) => {
           ))}
         </SelectContent>
       </Select>
-      {isInvalid && <FieldError errors={field.state.meta.errors} />}
+      {isInvalid && <FormFieldError errors={field.state.meta.errors} />}
     </Field>
   );
 };

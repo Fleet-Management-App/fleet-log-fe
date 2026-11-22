@@ -1,9 +1,10 @@
 import type { FC } from "react";
 
 import { Button } from "@/modules/common/components/ui/button";
-import { FieldError, FieldLegend, FieldSet } from "@/modules/common/components/ui/field";
+import { FieldLegend, FieldSet } from "@/modules/common/components/ui/field";
 
 import { useFieldContext } from "./formContext";
+import { FormFieldError } from "./FormFieldError";
 
 type MultiToggleFieldProps = {
   label: string;
@@ -45,7 +46,7 @@ export const MultiToggleField: FC<MultiToggleFieldProps> = ({ label, options }) 
           );
         })}
       </div>
-      {isInvalid && <FieldError errors={field.state.meta.errors} />}
+      {isInvalid && <FormFieldError errors={field.state.meta.errors} />}
     </FieldSet>
   );
 };

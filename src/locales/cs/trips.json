@@ -1,0 +1,132 @@
+{
+  "tripStatus": {
+    "PLANNED": "Naplánováno",
+    "PLAN_APPROVED": "Plán schválen",
+    "PLAN_REJECTED": "Plán zamítnut",
+    "COMPLETED": "Dokončeno",
+    "CANCELLED": "Zrušeno"
+  },
+  "fuelStatus": {
+    "PENDING": "Čeká",
+    "APPROVED": "Schváleno",
+    "REJECTED": "Zamítnuto"
+  },
+  "list": {
+    "title": "Moje jízdy",
+    "subtitle": "Přehled vašich naplánovaných a dokončených jízd",
+    "titleAll": "Jízdy",
+    "subtitleAll": "Všechny jízdy v organizaci",
+    "planTrip": "Naplánovat jízdu",
+    "filterLabel": "Filtr podle stavu",
+    "filters": {
+      "ALL": "Všechny",
+      "PLANNED": "Naplánované",
+      "PLAN_APPROVED": "Schválené",
+      "PLAN_REJECTED": "Zamítnuté",
+      "COMPLETED": "Dokončené"
+    },
+    "columns": {
+      "date": "Termín",
+      "driver": "Řidič",
+      "route": "Trasa",
+      "purpose": "Účel",
+      "vehicle": "Vozidlo",
+      "status": "Stav",
+      "fuel": "Tankování"
+    },
+    "empty": {
+      "title": "Zatím nemáte žádné jízdy",
+      "description": "Naplánujte první jízdu. Jakmile ji správce vozového parku schválí, můžete vyrazit.",
+      "descriptionAll": "V organizaci zatím nikdo nenaplánoval žádnou jízdu."
+    },
+    "emptyFilter": {
+      "title": "Žádné jízdy v tomto stavu",
+      "description": "Vyberte jiný stav nebo zobrazte všechny jízdy.",
+      "showAll": "Zobrazit všechny jízdy"
+    },
+    "error": {
+      "title": "Jízdy se nepodařilo načíst",
+      "description": "Při načítání se něco pokazilo. Zkuste to znovu."
+    }
+  },
+  "detail": {
+    "back": "Moje jízdy",
+    "backAll": "Jízdy",
+    "editPlan": "Upravit plán",
+    "cancelTrip": "Zrušit jízdu",
+    "cancelConfirm": "Opravdu jízdu zrušit?",
+    "cancelConfirmYes": "Ano, zrušit",
+    "cancelConfirmNo": "Ponechat",
+    "banner": {
+      "PLANNED": {
+        "title": "Čeká na schválení",
+        "description": "Správce vozového parku plán zatím neschválil. Do té doby můžete jízdu zrušit."
+      },
+      "PLAN_APPROVED": {
+        "title": "Plán schválen",
+        "description": "Můžete vyrazit. Po návratu zapište stav tachometru."
+      },
+      "PLAN_REJECTED": {
+        "title": "Plán zamítnut",
+        "description": "Upravte plán a odešlete jej znovu ke schválení."
+      },
+      "COMPLETED": {
+        "title": "Jízda dokončena",
+        "description": "Stav tachometru je zapsaný a jízda je v knize jízd."
+      },
+      "CANCELLED": {
+        "title": "Jízda zrušena",
+        "description": "Zrušenou jízdu už nelze měnit."
+      }
+    },
+    "reason": "Důvod: {{reason}}",
+    "data": {
+      "title": "Údaje o jízdě",
+      "dateTime": "Termín",
+      "driver": "Řidič",
+      "from": "Odkud",
+      "to": "Kam",
+      "purpose": "Účel",
+      "vehicle": "Vozidlo"
+    },
+    "odometer": {
+      "title": "Tachometr",
+      "afterApproval": "Stav zapíšete po schválení plánu.",
+      "prompt": "Po jízdě zapište počáteční a konečný stav. Jízda se tím dokončí.",
+      "log": "Zapsat stav tachometru",
+      "notLogged": "Nezapsáno.",
+      "start": "Počáteční stav",
+      "end": "Konečný stav",
+      "distance": "Ujeto",
+      "km": "{{value}} km"
+    },
+    "fuel": {
+      "title": "Tankování",
+      "afterApproval": "Tankování půjde zapsat po schválení plánu.",
+      "optional": "Tankování je volitelné. Zatím není zapsané.",
+      "none": "Tankování nebylo zapsáno.",
+      "add": "Přidat tankování",
+      "submitAgain": "Odeslat znovu",
+      "liters": "Litry",
+      "litersValue": "{{value}} l",
+      "price": "Cena",
+      "receipt": "Účtenka",
+      "showReceipt": "Zobrazit účtenku",
+      "noReceipt": "Bez účtenky",
+      "loadingReceipt": "Načítám účtenku…",
+      "receiptUnavailable": "Účtenku se nepodařilo načíst",
+      "pending": "Čeká na správce vozového parku. Dokončení jízdy to neblokuje.",
+      "approved": "Schváleno správcem vozového parku.",
+      "rejected": "Opravte záznam a odešlete jej znovu."
+    },
+    "error": {
+      "title": "Jízdu se nepodařilo načíst",
+      "description": "Při načítání se něco pokazilo. Zkuste to znovu.",
+      "notFoundTitle": "Jízda nenalezena",
+      "notFoundDescription": "Neexistuje, nebo k ní nemáte přístup."
+    },
+    "toast": {
+      "cancelled": "Jízda byla zrušena."
+    }
+  }
+}

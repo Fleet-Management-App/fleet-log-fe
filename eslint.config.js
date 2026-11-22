@@ -8,7 +8,7 @@ import globals from "globals";
 export default tseslint.config(
   // 1. Vyloučení složky node_modules z kontroly
   {
-    ignores: ["node_modules/**"],
+    ignores: ["node_modules/**", "dist/**"],
   },
   // 2. Základní doporučená pravidla ze zadání
   js.configs.recommended,

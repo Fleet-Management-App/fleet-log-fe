@@ -1,24 +1,45 @@
 import type { FC } from "react";
 
-import { Link, Outlet } from "@tanstack/react-router";
+import { Link, type LinkProps, Outlet } from "@tanstack/react-router";
 import { CarFront } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import { useGetMe } from "@/api/generated/hooks/account/account";
 import { Role } from "@/api/generated/models";
 import { OrganizationSwitcherContainer } from "@/modules/organizations/containers/OrganizationSwitcherContainer";
 import { UserMenuContainer } from "@/modules/organizations/containers/UserMenuContainer";
+import { hasAnyRole } from "@/security/requireRole";
 
 const navLinkClass =
   "rounded-md px-2.5 py-1.5 text-sm text-muted-foreground hover:bg-muted hover:text-foreground";
 const activeNavLinkClass = "bg-muted text-foreground";
 
+type NavItem = { to: LinkProps["to"]; label: string; exact?: boolean };
+
 // Layout of every signed-in page: header with navigation, organization switcher and user menu.
 export const AppLayout: FC = () => {
+  const { t } = useTranslation();
   const { data: me } = useGetMe();
   // Logging out clears the cache before the redirect to /login lands; render nothing meanwhile,
   // so nothing below calls useCurrentUser without data
   if (!me) return null;
   const { activeOrganization } = me;
+
+  const isFleetManager = hasAnyRole(me, Role.FLEET_MANAGER);
+  // The same menu for every role, minus what the role can't use (routes guard the same way)
+  const navItems: NavItem[] = [
+    { to: "/", label: t("nav.dashboard"), exact: true },
+    { to: "/vehicles", label: t("nav.vehicles") },
+    ...(hasAnyRole(me, Role.DRIVER, Role.FLEET_MANAGER)
+      ? [{ to: "/trips", label: isFleetManager ? t("nav.trips") : t("nav.myTrips") } as NavItem]
+      : []),
+    ...(isFleetManager
+      ? [
+          { to: "/approvals", label: t("nav.approvals") } as NavItem,
+          { to: "/organization/members", label: t("nav.members") } as NavItem,
+        ]
+      : []),
+  ];
 
   return (
     <>
@@ -29,24 +50,18 @@ export const AppLayout: FC = () => {
             FleetLog
           </Link>
           {activeOrganization && (
-            <nav className="flex items-center gap-1">
-              <Link
-                to="/"
-                className={navLinkClass}
-                activeProps={{ className: activeNavLinkClass }}
-                activeOptions={{ exact: true }}
-              >
-                Dashboard
-              </Link>
-              {activeOrganization.roles.includes(Role.FLEET_MANAGER) && (
+            <nav className="flex items-center gap-1 overflow-x-auto">
+              {navItems.map(({ to, label, exact }) => (
                 <Link
-                  to="/organization/members"
+                  key={to}
+                  to={to}
                   className={navLinkClass}
                   activeProps={{ className: activeNavLinkClass }}
+                  activeOptions={{ exact }}
                 >
-                  Members
+                  {label}
                 </Link>
-              )}
+              ))}
             </nav>
           )}
           <div className="ml-auto flex items-center gap-2">

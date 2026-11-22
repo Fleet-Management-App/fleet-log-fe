@@ -1,0 +1,64 @@
+{
+  "plan": {
+    "title": "Plan a trip",
+    "subtitle": "The plan goes to the fleet manager for approval",
+    "submit": "Send for approval",
+    "success": "Trip plan sent for approval."
+  },
+  "edit": {
+    "title": "Edit trip plan",
+    "subtitle": "Change the plan and send it to the fleet manager again",
+    "submit": "Resubmit for approval",
+    "success": "Trip plan resubmitted for approval.",
+    "rejectedTitle": "The fleet manager rejected the plan",
+    "noReason": "No reason was given.",
+    "notEditableTitle": "This plan can't be edited",
+    "notEditableText": "Only a trip whose plan was rejected can be changed and resubmitted. This trip's status:",
+    "toDetail": "Go to the trip"
+  },
+  "fields": {
+    "date": "Date",
+    "time": "Time",
+    "vehicle": "Vehicle from the pool",
+    "from": "From",
+    "to": "To",
+    "purpose": "Purpose of the trip",
+    "fromPlaceholder": "e.g. Prague, Karlín",
+    "toPlaceholder": "e.g. Brno, city centre",
+    "purposePlaceholder": "e.g. client meeting"
+  },
+  "vehiclePicker": {
+    "chooseDateFirst": "Choose a date first",
+    "placeholder": "Choose a vehicle",
+    "vignetteValid": "Vignette valid",
+    "vignetteExpiring": "Vignette ends {{date}}",
+    "vignetteExpired": "Vignette expired",
+    "blockReason": {
+      "SUSPENDED": "Suspended",
+      "STK_EXPIRED": "STK expired"
+    }
+  },
+  "vignette": {
+    "expiringTitle": "Motorway vignette ends soon",
+    "expiringText": "It is valid until {{date}}. Check it has been renewed before your next motorway trip.",
+    "expiredTitle": "Motorway vignette has expired",
+    "expiredText": "It expired on {{date}}. You can plan the trip, but don't use the motorway without a valid vignette."
+  },
+  "validation": {
+    "dateRequired": "Choose a date",
+    "timeRequired": "Choose a time",
+    "vehicleRequired": "Choose a vehicle",
+    "vehicleBlocked": "This vehicle can't be picked ({{reason}}). Choose another one.",
+    "fromRequired": "Enter where the trip starts",
+    "toRequired": "Enter where the trip goes",
+    "purposeRequired": "Enter the purpose of the trip",
+    "tooLong": "Use at most {{max}} characters"
+  },
+  "states": {
+    "noVehiclesTitle": "No vehicles in the pool",
+    "noVehiclesText": "There is no vehicle to plan a trip with yet. Ask your fleet manager to add one.",
+    "vehiclesLoadError": "The vehicles could not be loaded.",
+    "tripLoadError": "The trip could not be loaded.",
+    "submitErrorTitle": "The plan could not be sent"
+  }
+}

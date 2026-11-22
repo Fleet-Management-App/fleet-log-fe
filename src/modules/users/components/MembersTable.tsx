@@ -1,6 +1,7 @@
 import { type FC, useState } from "react";
 
 import { ChevronDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import type { MemberResponse, Role } from "@/api/generated/models";
 import { Badge } from "@/modules/common/components/ui/badge";
@@ -21,7 +22,7 @@ import {
   TableRow,
 } from "@/modules/common/components/ui/table";
 import { formatDate } from "@/modules/common/utils/formatDate";
-import { formatRoles, ROLE_OPTIONS } from "@/modules/common/utils/roles";
+import { useRoleLabels } from "@/modules/common/utils/roles";
 
 type MembersTableProps = {
   members: MemberResponse[];
@@ -42,19 +43,21 @@ export const MembersTable: FC<MembersTableProps> = ({
 }) => {
   // Removing asks once more inline instead of a browser confirm dialog
   const [confirmingUserId, setConfirmingUserId] = useState<string | null>(null);
+  const { t } = useTranslation(["users", "common"]);
+  const { formatRoles, roleOptions } = useRoleLabels();
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>People ({members.length})</CardTitle>
+        <CardTitle>{t("members.title", { count: members.length })}</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead className="w-52">Roles</TableHead>
-              <TableHead className="w-28">Joined</TableHead>
+              <TableHead>{t("members.name")}</TableHead>
+              <TableHead className="w-52">{t("members.roles")}</TableHead>
+              <TableHead className="w-28">{t("members.joined")}</TableHead>
               <TableHead className="w-28" />
             </TableRow>
           </TableHeader>
@@ -62,7 +65,7 @@ export const MembersTable: FC<MembersTableProps> = ({
             {isLoading && (
               <TableRow>
                 <TableCell colSpan={4} className="text-muted-foreground">
-                  Loading…
+                  {t("common:states.loading")}
                 </TableCell>
               </TableRow>
             )}
@@ -72,7 +75,9 @@ export const MembersTable: FC<MembersTableProps> = ({
                   <div className="flex flex-col">
                     <span className="flex items-center gap-2 font-medium">
                       {member.fullName}
-                      {member.userId === currentUserId && <Badge variant="secondary">You</Badge>}
+                      {member.userId === currentUserId && (
+                        <Badge variant="secondary">{t("members.you")}</Badge>
+                      )}
                     </span>
                     <span className="text-xs text-muted-foreground">{member.email}</span>
                   </div>
@@ -85,14 +90,14 @@ export const MembersTable: FC<MembersTableProps> = ({
                         size="sm"
                         variant="outline"
                         className="w-full justify-between font-normal"
-                        aria-label={`Roles of ${member.fullName}`}
+                        aria-label={t("members.rolesOf", { name: member.fullName })}
                       >
                         <span className="truncate">{formatRoles(member.roles)}</span>
                         <ChevronDown className="text-muted-foreground" />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="start" className="w-48">
-                      {ROLE_OPTIONS.map((option) => {
+                      {roleOptions.map((option) => {
                         const checked = member.roles.includes(option.value);
                         return (
                           <DropdownMenuCheckboxItem
@@ -130,7 +135,7 @@ export const MembersTable: FC<MembersTableProps> = ({
                       }}
                       onBlur={() => setConfirmingUserId(null)}
                     >
-                      Confirm
+                      {t("members.confirmRemove")}
                     </Button>
                   ) : (
                     <Button
@@ -139,7 +144,7 @@ export const MembersTable: FC<MembersTableProps> = ({
                       disabled={disabled}
                       onClick={() => setConfirmingUserId(member.userId)}
                     >
-                      Remove
+                      {t("members.remove")}
                     </Button>
                   )}
                 </TableCell>

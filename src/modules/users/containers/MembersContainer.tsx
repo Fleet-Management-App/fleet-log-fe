@@ -2,6 +2,7 @@ import type { FC } from "react";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 import { getGetMeQueryKey } from "@/api/generated/hooks/account/account";
@@ -13,7 +14,7 @@ import {
 } from "@/api/generated/hooks/organization-members/organization-members";
 import { type MemberResponse, Role } from "@/api/generated/models";
 import { getErrorMessage } from "@/modules/common/utils/getErrorMessage";
-import { formatRoles } from "@/modules/common/utils/roles";
+import { useRoleLabels } from "@/modules/common/utils/roles";
 import { useCurrentUser } from "@/security/useCurrentUser";
 
 import { MembersTable } from "../components/MembersTable";
@@ -25,6 +26,8 @@ export const MembersContainer: FC = () => {
   const { data: members = [], isLoading } = useListMembers();
   const { mutateAsync: changeRoles, isPending: isChangingRoles } = useChangeMemberRoles();
   const { mutateAsync: removeMember, isPending: isRemoving } = useRemoveMember();
+  const { t } = useTranslation("users");
+  const { formatRoles } = useRoleLabels();
 
   const refresh = () => queryClient.invalidateQueries({ queryKey: getListMembersQueryKey() });
 
@@ -38,7 +41,9 @@ export const MembersContainer: FC = () => {
   const handleRolesChange = async (member: MemberResponse, roles: Role[]) => {
     try {
       await changeRoles({ userId: member.userId, data: { roles } });
-      toast.success(`${member.fullName}: ${formatRoles(roles)}.`);
+      toast.success(
+        t("members.rolesChanged", { name: member.fullName, roles: formatRoles(roles) }),
+      );
       if (member.userId === currentUserId) await afterOwnChange(roles.includes(Role.FLEET_MANAGER));
       else await refresh();
     } catch (error) {
@@ -49,7 +54,7 @@ export const MembersContainer: FC = () => {
   const handleRemove = async (member: MemberResponse) => {
     try {
       await removeMember({ userId: member.userId });
-      toast.success(`${member.fullName} no longer has access.`);
+      toast.success(t("members.removed", { name: member.fullName }));
       if (member.userId === currentUserId) await afterOwnChange(false);
       else await refresh();
     } catch (error) {

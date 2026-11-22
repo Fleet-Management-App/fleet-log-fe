@@ -5,19 +5,37 @@
  * OpenAPI spec version: v1
  */
 
+export * from './apiFieldError';
+export * from './apiProblem';
+export * from './apiProblemCode';
 export * from './authTokenResponse';
 export * from './changeRolesRequest';
 export * from './createInvitationRequest';
 export * from './createOrganizationRequest';
+export * from './fuelEntryResponse';
+export * from './fuelStatus';
 export * from './helloResponse';
 export * from './incomingInvitationResponse';
 export * from './invitationResponse';
+export * from './listTripsParams';
 export * from './loginRequest';
 export * from './memberResponse';
 export * from './membershipResponse';
 export * from './meResponse';
 export * from './problemDetail';
 export * from './problemDetailProperties';
+export * from './receiptPhotoResponse';
 export * from './role';
 export * from './signUpRequest';
 export * from './switchOrganizationRequest';
+export * from './tripCreateRequest';
+export * from './tripFuelDecisionRequest';
+export * from './tripFuelRequest';
+export * from './tripOdometerRequest';
+export * from './tripPlanDecisionRequest';
+export * from './tripResponse';
+export * from './tripStatus';
+export * from './vehicleCreateRequest';
+export * from './vehicleFuelType';
+export * from './vehicleResponse';
+export * from './vehicleStatus';

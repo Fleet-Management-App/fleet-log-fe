@@ -1,0 +1,86 @@
+{
+  "backToDetail": "Detail jízdy",
+  "loadError": "Jízdu se nepodařilo načíst.",
+  "units": {
+    "km": "km",
+    "liters": "l",
+    "currency": "Kč"
+  },
+  "odometer": {
+    "title": "Zápis tachometru",
+    "description": "Zápisem stavu tachometru se jízda dokončí",
+    "startLabel": "Počáteční stav",
+    "endLabel": "Konečný stav",
+    "startPlaceholder": "Např. 42 530",
+    "endPlaceholder": "Např. 42 718",
+    "lastKnownHint": "Poslední známý stav vozidla: {{km}} km",
+    "submit": "Dokončit jízdu",
+    "submitting": "Ukládám…",
+    "success": "Jízda dokončena.",
+    "saveErrorTitle": "Stav tachometru se nepodařilo uložit",
+    "notApproved": {
+      "title": "Plán jízdy zatím nebyl schválen",
+      "text": "Stav tachometru lze zapsat až po schválení plánu jízdy správcem vozového parku."
+    },
+    "alreadyCompleted": {
+      "title": "Jízda je již dokončena",
+      "text": "Zapsaný stav tachometru: {{start}} → {{end}} km."
+    },
+    "validation": {
+      "required": "Zadejte stav tachometru",
+      "wholeNumber": "Zadejte celý počet kilometrů, 0 nebo více",
+      "endBelowStart": "Konečný stav nemůže být nižší než počáteční"
+    }
+  },
+  "fuel": {
+    "title": "Zápis tankování",
+    "description": "Tankování po odeslání schválí správce vozového parku",
+    "optionalNote": "Tankování je nepovinné: dokončení jízdy nijak neovlivní ani neblokuje.",
+    "litersLabel": "Množství",
+    "priceLabel": "Cena celkem",
+    "litersPlaceholder": "Např. 38,5",
+    "pricePlaceholder": "Např. 1 540",
+    "submit": "Odeslat ke schválení",
+    "resubmit": "Znovu odeslat ke schválení",
+    "submitting": "Odesílám…",
+    "success": "Tankování odesláno ke schválení.",
+    "saveErrorTitle": "Tankování se nepodařilo odeslat",
+    "rejected": {
+      "title": "Tankování bylo zamítnuto",
+      "noReason": "Důvod nebyl uveden.",
+      "hint": "Opravte záznam a odešlete ho znovu."
+    },
+    "pending": {
+      "title": "Tankování čeká na schválení",
+      "text": "Dokud o něm správce vozového parku nerozhodne, nelze ho změnit ani znovu odeslat."
+    },
+    "approved": {
+      "title": "Tankování bylo schváleno",
+      "text": "Schválené tankování už nelze změnit."
+    },
+    "notAvailable": {
+      "title": "K této jízdě zatím nelze zapsat tankování",
+      "text": "Tankování lze zapsat po schválení plánu jízdy."
+    },
+    "summary": "{{liters}} l · {{price}}",
+    "validation": {
+      "litersRequired": "Zadejte množství v litrech",
+      "litersPositive": "Zadejte množství větší než 0",
+      "priceRequired": "Zadejte cenu celkem",
+      "pricePositive": "Zadejte cenu větší než 0",
+      "receiptRequired": "Přiložte fotku účtenky"
+    }
+  },
+  "receipt": {
+    "label": "Fotka účtenky",
+    "choose": "Vybrat fotku",
+    "hint": "JPG, PNG nebo HEIC, nejvýše 5 MB",
+    "remove": "Odstranit",
+    "replace": "Vybrat jinou",
+    "uploadFailedTitle": "Nahrání se nezdařilo",
+    "tooLarge": "{{name}} má {{size}}, maximum je 5 MB.",
+    "notImage": "{{name}} není obrázek.",
+    "readError": "{{name}} se nepodařilo načíst. Zkuste to znovu nebo vyberte jinou fotku.",
+    "previewAlt": "Náhled fotky účtenky"
+  }
+}

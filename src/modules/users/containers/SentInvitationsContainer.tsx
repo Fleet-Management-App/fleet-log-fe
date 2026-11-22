@@ -1,6 +1,7 @@
 import type { FC } from "react";
 
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 import {
@@ -17,11 +18,12 @@ export const SentInvitationsContainer: FC = () => {
   const queryClient = useQueryClient();
   const { data: invitations = [] } = useListInvitations();
   const { mutateAsync: revoke, isPending } = useRevokeInvitation();
+  const { t } = useTranslation("users");
 
   const handleRevoke = async (invitation: InvitationResponse) => {
     try {
       await revoke({ invitationId: invitation.id });
-      toast.success(`Invitation for ${invitation.email} revoked.`);
+      toast.success(t("sentInvitations.revoked", { email: invitation.email }));
       await queryClient.invalidateQueries({ queryKey: getListInvitationsQueryKey() });
     } catch (error) {
       toast.error(getErrorMessage(error));

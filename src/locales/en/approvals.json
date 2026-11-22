@@ -1,0 +1,74 @@
+{
+  "title": "Approvals",
+  "subtitle": "Trip plans and fuel entries waiting for your decision",
+  "tabs": {
+    "plans": "Trip plans",
+    "plansWithCount": "Trip plans ({{count}})",
+    "fuel": "Fuel",
+    "fuelWithCount": "Fuel ({{count}})"
+  },
+  "columns": {
+    "term": "Date",
+    "tripDate": "Trip date",
+    "driver": "Driver",
+    "route": "Route",
+    "purpose": "Purpose",
+    "vehicle": "Vehicle",
+    "fuel": "Fuel",
+    "receipt": "Receipt",
+    "actions": "Actions"
+  },
+  "unknownVehicle": "Unknown vehicle",
+  "liters": "{{value}} l",
+  "pending": {
+    "approving": "Approving…",
+    "rejecting": "Rejecting…"
+  },
+  "empty": {
+    "plansTitle": "No trip plans to approve",
+    "plansText": "New trip plans from drivers will show up here.",
+    "fuelTitle": "No fuel entries to approve",
+    "fuelText": "Fuel entries logged by drivers will show up here."
+  },
+  "loadError": {
+    "title": "Approvals could not be loaded",
+    "text": "Check your connection and try again."
+  },
+  "receipt": {
+    "show": "View",
+    "none": "No receipt",
+    "title": "Receipt",
+    "alt": "Fuel receipt: {{trip}}",
+    "unavailable": "The receipt image could not be displayed.",
+    "loggedByDriver": "Logged by driver"
+  },
+  "rejectDialog": {
+    "planTitle": "Reject trip plan",
+    "fuelTitle": "Reject fuel entry",
+    "reasonLabel": "Reason for rejection",
+    "reasonPlaceholder": "e.g. The vehicle is needed for another trip at that time.",
+    "reasonHint": "The driver sees the reason on their trip.",
+    "reasonRequired": "Enter a reason for the rejection",
+    "reasonTooLong": "The reason can have at most {{max}} characters"
+  },
+  "toast": {
+    "planApproved": "Trip plan approved: {{trip}}",
+    "planRejected": "Trip plan rejected: {{trip}}",
+    "fuelApproved": "Fuel entry approved: {{trip}}",
+    "fuelRejected": "Fuel entry rejected: {{trip}}"
+  },
+  "errors": {
+    "title": "Error",
+    "planConflictApprove": "The trip plan {{trip}} can no longer be approved. The driver cancelled it meanwhile, or another manager has already decided it. We refreshed the list.",
+    "planConflictReject": "The trip plan {{trip}} can no longer be rejected. The driver cancelled it meanwhile, or another manager has already decided it. We refreshed the list.",
+    "fuelConflict": "The fuel entry {{trip}} can no longer be decided. Another manager has already decided it, or the trip is gone. We refreshed the list.",
+    "planApproveFailed": "The trip plan {{trip}} could not be approved. Try again.",
+    "planRejectFailed": "The trip plan {{trip}} could not be rejected. Try again.",
+    "fuelApproveFailed": "The fuel entry {{trip}} could not be approved. Try again.",
+    "fuelRejectFailed": "The fuel entry {{trip}} could not be rejected. Try again.",
+    "planApproveRefused": "The trip plan {{trip}} could not be approved. {{reason}}",
+    "planRejectRefused": "The trip plan {{trip}} could not be rejected. {{reason}}",
+    "fuelApproveRefused": "The fuel entry {{trip}} could not be approved. {{reason}}",
+    "fuelRejectRefused": "The fuel entry {{trip}} could not be rejected. {{reason}}"
+  }
+}

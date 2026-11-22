@@ -1,5 +1,6 @@
 import type { FC } from "react";
 
+import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 import { useCreateOrganization } from "@/api/generated/hooks/organizations/organizations";
@@ -19,12 +20,13 @@ import { CreateOrganizationForm } from "../forms/CreateOrganizationForm/CreateOr
 export const CreateOrganizationContainer: FC = () => {
   const { mutateAsync: createOrganization } = useCreateOrganization();
   const startSession = useStartSession();
+  const { t } = useTranslation("organizations");
 
   const handleCreate = async (data: CreateOrganizationRequest) => {
     try {
       // The BE answers with a token for the new organization, with the caller as its Fleet Manager
       await startSession(await createOrganization({ data }));
-      toast.success(`${data.name} is ready. Invite your drivers next.`);
+      toast.success(t("create.created", { name: data.name }));
     } catch (error) {
       toast.error(getErrorMessage(error));
     }
@@ -33,8 +35,8 @@ export const CreateOrganizationContainer: FC = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Create an organization</CardTitle>
-        <CardDescription>You become its first Fleet Manager.</CardDescription>
+        <CardTitle>{t("create.title")}</CardTitle>
+        <CardDescription>{t("create.description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <CreateOrganizationForm onSubmit={handleCreate} />

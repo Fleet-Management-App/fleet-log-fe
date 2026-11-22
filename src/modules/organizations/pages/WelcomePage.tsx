@@ -1,6 +1,7 @@
 import type { FC } from "react";
 
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 
 import { useCurrentUser } from "@/security/useCurrentUser";
 
@@ -10,6 +11,7 @@ import { PendingInvitationsContainer } from "../containers/PendingInvitationsCon
 // Where a user without an organization lands, and where anyone can create or join another one.
 export const WelcomePage: FC = () => {
   const { fullName, activeOrganization } = useCurrentUser();
+  const { t } = useTranslation("organizations");
 
   return (
     <motion.div
@@ -21,13 +23,10 @@ export const WelcomePage: FC = () => {
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-semibold">
           {activeOrganization
-            ? "Create or join an organization"
-            : `Welcome, ${fullName.split(" ")[0]}`}
+            ? t("createOrJoin")
+            : t("welcome.title", { firstName: fullName.split(" ")[0] })}
         </h1>
-        <p className="text-sm text-muted-foreground">
-          Your account isn&apos;t tied to one company. Create an organization for your fleet, or
-          accept an invitation from one that already uses FleetLog. You can belong to several.
-        </p>
+        <p className="text-sm text-muted-foreground">{t("welcome.description")}</p>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         <PendingInvitationsContainer />
