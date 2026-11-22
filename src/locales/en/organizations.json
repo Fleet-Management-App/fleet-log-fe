@@ -8,26 +8,44 @@
     "account": "Account",
     "logOut": "Log out"
   },
-  "welcome": {
-    "title": "Welcome, {{firstName}}",
-    "description": "Your account isn't tied to one company. Create an organization for your fleet, or accept an invitation from one that already uses FleetLog. You can belong to several."
+  "picker": {
+    "title": "Choose an organization",
+    "description": "Choose the organization you want to enter",
+    "invitationsHeading": "Pending invitations",
+    "organizationsHeading": "Your organizations",
+    "createNew": "Create a new organization",
+    "errorTitle": "Error",
+    "loadError": {
+      "title": "Your organizations couldn't be loaded",
+      "description": "Check your connection and try again."
+    },
+    "empty": {
+      "title": "Welcome to FleetLog",
+      "description": "Start by creating an organization",
+      "heading": "You don't have an organization yet",
+      "text": "Create a new one, or ask your company's administrator for an invitation.",
+      "create": "Create organization"
+    }
   },
   "invitations": {
-    "title": "Invitations",
-    "sentTo": "Sent to {{email}}",
-    "empty": "No invitations yet. Ask your Fleet Manager to invite this e-mail.",
-    "invitedBy": "{{name}} invited you as {{roles}}",
+    "invitedOn": "{{roles}} · invited on {{date}}",
     "accept": "Accept",
+    "accepting": "Accepting…",
     "decline": "Decline",
     "joined": "You joined {{organization}}."
   },
   "create": {
+    "back": "Choose an organization",
     "title": "Create an organization",
-    "description": "You become its first Fleet Manager.",
-    "nameLabel": "Organization name",
-    "namePlaceholder": "e.g. Demo Fleet s.r.o.",
+    "description": "You'll become its first fleet manager.",
+    "nameLabel": "Company name",
+    "namePlaceholder": "e.g. Novák Logistics s.r.o.",
+    "nameHint": "Everyone in the organization will see this name.",
     "submit": "Create organization",
+    "submitting": "Creating…",
     "created": "{{name}} is ready. Invite your drivers next.",
-    "nameRequired": "Enter the organization's name"
+    "nameRequired": "Enter the company name.",
+    "errorTitle": "Error",
+    "failed": "The organization couldn't be created. Please try again."
   }
 }

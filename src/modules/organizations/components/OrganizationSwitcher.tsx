@@ -70,7 +70,7 @@ export const OrganizationSwitcher: FC<OrganizationSwitcherProps> = ({
         })}
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link to="/welcome">
+          <Link to="/organizations">
             <Plus />
             {t("createOrJoin")}
             {pendingInvitationCount > 0 && (

@@ -14,4 +14,8 @@ declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router;
   }
+  interface StaticDataRouteOption {
+    // The page renders with a bare header (logo + user menu): no navigation, no organization switcher
+    minimalLayout?: boolean;
+  }
 }

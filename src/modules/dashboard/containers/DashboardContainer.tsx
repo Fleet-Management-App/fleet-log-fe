@@ -9,7 +9,7 @@ import { ROLE_ACTIONS } from "../models/roleActions";
 
 export const DashboardContainer: FC = () => {
   const { fullName, activeOrganization } = useCurrentUser();
-  // The app layout sends users without an organization to /welcome, so one is always active here
+  // The app layout sends users without an organization to /organizations, so one is always active here
   if (!activeOrganization) return null;
 
   return (

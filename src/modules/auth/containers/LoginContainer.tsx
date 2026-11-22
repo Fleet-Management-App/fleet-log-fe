@@ -9,13 +9,13 @@ import { getErrorMessage } from "@/modules/common/utils/getErrorMessage";
 
 import { DemoAccounts } from "../components/DemoAccounts";
 import { LoginForm } from "../forms/LoginForm/LoginForm";
-import { useStartSession } from "../hooks/custom/useStartSession";
+import { useStartLoginSession } from "../hooks/custom/useStartSession";
 
 const isDemoMode = getEnvVariable(EnvVariableName.DEMO_MODE, undefined, false) === "true";
 
 export const LoginContainer: FC = () => {
   const { mutateAsync: login, isPending } = useLogin();
-  const startSession = useStartSession();
+  const startSession = useStartLoginSession();
 
   const handleLogin = async (data: LoginRequest) => {
     try {
