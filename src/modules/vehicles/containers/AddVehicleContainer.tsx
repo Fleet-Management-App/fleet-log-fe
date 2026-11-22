@@ -1,13 +1,12 @@
 import { type FC, useState } from "react";
 
 import { useQueryClient } from "@tanstack/react-query";
-import type { AxiosError } from "axios";
 import { Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 import { getListVehiclesQueryKey, useCreateVehicle } from "@/api/generated/hooks/vehicles/vehicles";
-import type { ProblemDetail, VehicleCreateRequest } from "@/api/generated/models";
+import { ApiProblemCode, type VehicleCreateRequest } from "@/api/generated/models";
 import { Button } from "@/modules/common/components/ui/button";
 import {
   Dialog,
@@ -17,37 +16,45 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/modules/common/components/ui/dialog";
+import {
+  getErrorCode,
+  getErrorField,
+  getErrorMessage,
+} from "@/modules/common/utils/getErrorMessage";
 
 import {
   AddVehicleForm,
   type AddVehicleSubmitResult,
+  type UniqueVehicleField,
 } from "../forms/AddVehicleForm/AddVehicleForm";
+
+// A duplicate is answered with 409 and the clashing field (plate or vin); the message goes on that field
+const TAKEN_CODES: (ApiProblemCode | undefined)[] = [
+  ApiProblemCode.VEHICLE_PLATE_TAKEN,
+  ApiProblemCode.VEHICLE_VIN_TAKEN,
+];
+const isUniqueField = (field: string | undefined): field is UniqueVehicleField =>
+  field === "plate" || field === "vin";
 
 export const AddVehicleContainer: FC = () => {
   const { t } = useTranslation("vehicles");
-  const { t: tCommon } = useTranslation();
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const { mutateAsync: createVehicle } = useCreateVehicle();
 
   const handleAdd = async (data: VehicleCreateRequest): Promise<AddVehicleSubmitResult> => {
     try {
-      await createVehicle({ data });
-      toast.success(t("form.added", { plate: data.plate }));
+      // The BE normalises plate and VIN, so the toast names the plate as it was stored
+      const vehicle = await createVehicle({ data });
+      toast.success(t("form.added", { plate: vehicle.plate }));
       setOpen(false);
       await queryClient.invalidateQueries({ queryKey: getListVehiclesQueryKey() });
       return { success: true };
     } catch (error) {
-      const response = (error as AxiosError<ProblemDetail>)?.response;
-      // The 409 detail names the clashing field in English (VehicleService.create)
-      if (response?.status === 409) {
-        const detail = response.data?.detail ?? "";
-        if (detail.includes("VIN"))
-          return { success: false, fieldErrors: { vin: t("form.errors.vinTaken") } };
-        if (detail.includes("plate"))
-          return { success: false, fieldErrors: { plate: t("form.errors.plateTaken") } };
-      }
-      toast.error(tCommon("states.actionError"));
+      const field = getErrorField(error);
+      if (TAKEN_CODES.includes(getErrorCode(error)) && isUniqueField(field))
+        return { success: false, fieldErrors: { [field]: getErrorMessage(error) } };
+      toast.error(getErrorMessage(error));
       return { success: false };
     }
   };

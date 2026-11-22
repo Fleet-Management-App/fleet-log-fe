@@ -57,9 +57,7 @@
       "required": "Fill this in",
       "tooLong": "At most {{max}} characters",
       "odometer": "Enter a whole number of kilometres",
-      "date": "Enter a valid date",
-      "plateTaken": "A vehicle with this plate is already in the fleet",
-      "vinTaken": "A vehicle with this VIN is already in the fleet"
+      "date": "Enter a valid date"
     }
   }
 }

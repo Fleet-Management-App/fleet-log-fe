@@ -4,7 +4,7 @@ import { useListVehicles } from "@/api/generated/hooks/vehicles/vehicles";
 
 import { VehiclesTable } from "../components/VehiclesTable";
 
-export const VehiclesContainer: FC<{ canAdd: boolean }> = ({ canAdd }) => {
+export const VehiclesContainer: FC<{ isFleetManager: boolean }> = ({ isFleetManager }) => {
   const { data: vehicles = [], isLoading, isError, refetch } = useListVehicles();
 
   return (
@@ -13,7 +13,8 @@ export const VehiclesContainer: FC<{ canAdd: boolean }> = ({ canAdd }) => {
       isLoading={isLoading}
       isError={isError}
       onRetry={() => void refetch()}
-      canAdd={canAdd}
+      canAdd={isFleetManager}
+      showStkAndInsurance={isFleetManager}
     />
   );
 };

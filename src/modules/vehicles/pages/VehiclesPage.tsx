@@ -12,8 +12,9 @@ import { VehiclesContainer } from "../containers/VehiclesContainer";
 export const VehiclesPage: FC = () => {
   const { t } = useTranslation("vehicles");
   const me = useCurrentUser();
-  // Only a Fleet Manager adds vehicles (the BE answers 403 otherwise); everyone else reads the list
-  const canAdd = hasAnyRole(me, Role.FLEET_MANAGER);
+  // Only a Fleet Manager adds vehicles (the BE answers 403 otherwise) and sees the STK and insurance
+  // due dates (BR-02); everyone else reads the list with the vignette only
+  const isFleetManager = hasAnyRole(me, Role.FLEET_MANAGER);
 
   return (
     <div className="flex flex-col gap-6">
@@ -24,9 +25,9 @@ export const VehiclesPage: FC = () => {
             {t("page.subtitle", { organization: me.activeOrganization?.organizationName })}
           </p>
         </div>
-        {canAdd && <AddVehicleContainer />}
+        {isFleetManager && <AddVehicleContainer />}
       </div>
-      <VehiclesContainer canAdd={canAdd} />
+      <VehiclesContainer isFleetManager={isFleetManager} />
     </div>
   );
 };

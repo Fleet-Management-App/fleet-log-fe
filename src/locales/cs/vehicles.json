@@ -61,9 +61,7 @@
       "required": "Vyplňte prosím toto pole",
       "tooLong": "Nejvýše {{max}} znaků",
       "odometer": "Zadejte celý počet kilometrů",
-      "date": "Zadejte platné datum",
-      "plateTaken": "Vozidlo s touto SPZ již ve vozovém parku je",
-      "vinTaken": "Vozidlo s tímto VIN již ve vozovém parku je"
+      "date": "Zadejte platné datum"
     }
   }
 }

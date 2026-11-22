@@ -69,11 +69,10 @@ const createAddVehicleFormSchema = (t: TFunction<"vehicles">) => {
   });
 };
 
-// Plates and VINs are written in capitals; normalising here keeps "1ab 2345" from slipping past
-// the BE's exact-match duplicate check
+// The BE normalises plate and VIN (capitals, spacing) and checks duplicates on the normalised form
 const toCreateRequest = (values: AddVehicleFormValues): VehicleCreateRequest => ({
-  plate: values.plate.trim().toUpperCase(),
-  vin: values.vin.trim().toUpperCase(),
+  plate: values.plate.trim(),
+  vin: values.vin.trim(),
   make: values.make.trim(),
   model: values.model.trim(),
   fuelType: values.fuelType,

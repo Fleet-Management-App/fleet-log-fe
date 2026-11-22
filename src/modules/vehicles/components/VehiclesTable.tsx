@@ -24,9 +24,9 @@ type VehiclesTableProps = {
   onRetry: () => void;
   // The empty state points a Fleet Manager to the add button; others just see that there's nothing
   canAdd: boolean;
+  // BR-02: STK and insurance due dates are for the Fleet Manager only; the vignette is for everyone
+  showStkAndInsurance: boolean;
 };
-
-const COLUMN_COUNT = 8;
 
 export const VehiclesTable: FC<VehiclesTableProps> = ({
   vehicles,
@@ -34,9 +34,12 @@ export const VehiclesTable: FC<VehiclesTableProps> = ({
   isError,
   onRetry,
   canAdd,
+  showStkAndInsurance,
 }) => {
   const { t } = useTranslation("vehicles");
   const { t: tCommon } = useTranslation();
+
+  const columnCount = showStkAndInsurance ? 8 : 6;
 
   let placeholder: ReactNode = null;
   if (isLoading) placeholder = tCommon("states.loading");
@@ -67,8 +70,12 @@ export const VehiclesTable: FC<VehiclesTableProps> = ({
             <TableHead>{t("table.fuelType")}</TableHead>
             <TableHead className="text-right">{t("table.odometer")}</TableHead>
             <TableHead>{t("table.status")}</TableHead>
-            <TableHead>{t("table.stk")}</TableHead>
-            <TableHead>{t("table.insurance")}</TableHead>
+            {showStkAndInsurance && (
+              <>
+                <TableHead>{t("table.stk")}</TableHead>
+                <TableHead>{t("table.insurance")}</TableHead>
+              </>
+            )}
             <TableHead>{t("table.vignette")}</TableHead>
           </TableRow>
         </TableHeader>
@@ -76,7 +83,7 @@ export const VehiclesTable: FC<VehiclesTableProps> = ({
           {placeholder ? (
             <TableRow className="hover:bg-transparent">
               <TableCell
-                colSpan={COLUMN_COUNT}
+                colSpan={columnCount}
                 className="py-10 text-center whitespace-normal text-muted-foreground"
               >
                 {placeholder}
@@ -101,12 +108,16 @@ export const VehiclesTable: FC<VehiclesTableProps> = ({
                 <TableCell>
                   <VehicleStatusBadge status={vehicle.status} />
                 </TableCell>
-                <TableCell>
-                  <DueDateCell dueDate={vehicle.stkDueDate} />
-                </TableCell>
-                <TableCell>
-                  <DueDateCell dueDate={vehicle.insuranceDueDate} />
-                </TableCell>
+                {showStkAndInsurance && (
+                  <>
+                    <TableCell>
+                      <DueDateCell dueDate={vehicle.stkDueDate} />
+                    </TableCell>
+                    <TableCell>
+                      <DueDateCell dueDate={vehicle.insuranceDueDate} />
+                    </TableCell>
+                  </>
+                )}
                 <TableCell>
                   <DueDateCell dueDate={vehicle.vignetteDueDate} />
                 </TableCell>
