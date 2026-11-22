@@ -1,1 +1,86 @@
-{}
+{
+  "backToDetail": "Trip detail",
+  "loadError": "The trip couldn't be loaded.",
+  "units": {
+    "km": "km",
+    "liters": "l",
+    "currency": "CZK"
+  },
+  "odometer": {
+    "title": "Log odometer",
+    "description": "Logging the odometer completes the trip",
+    "startLabel": "Start reading",
+    "endLabel": "End reading",
+    "startPlaceholder": "e.g. 42 530",
+    "endPlaceholder": "e.g. 42 718",
+    "lastKnownHint": "Last known vehicle reading: {{km}} km",
+    "submit": "Complete trip",
+    "submitting": "Saving…",
+    "success": "Trip completed.",
+    "saveErrorTitle": "The odometer couldn't be saved",
+    "notApproved": {
+      "title": "The trip plan hasn't been approved yet",
+      "text": "The odometer can be logged only after the Fleet Manager approves the trip plan."
+    },
+    "alreadyCompleted": {
+      "title": "This trip is already completed",
+      "text": "Logged odometer: {{start}} → {{end}} km."
+    },
+    "validation": {
+      "required": "Enter the odometer reading",
+      "wholeNumber": "Enter a whole number of kilometres, 0 or more",
+      "endBelowStart": "The end reading can't be lower than the start reading"
+    }
+  },
+  "fuel": {
+    "title": "Log fuel",
+    "description": "After you send it, the Fleet Manager approves the fill-up",
+    "optionalNote": "Fuel is optional: it never changes or blocks the trip's completion.",
+    "litersLabel": "Amount",
+    "priceLabel": "Total price",
+    "litersPlaceholder": "e.g. 38.5",
+    "pricePlaceholder": "e.g. 1 540",
+    "submit": "Send for approval",
+    "resubmit": "Send for approval again",
+    "submitting": "Sending…",
+    "success": "Fuel sent for approval.",
+    "saveErrorTitle": "The fuel entry couldn't be sent",
+    "rejected": {
+      "title": "The fuel entry was rejected",
+      "noReason": "No reason was given.",
+      "hint": "Correct the entry and send it again."
+    },
+    "pending": {
+      "title": "The fuel entry is awaiting approval",
+      "text": "It can't be changed or sent again until the Fleet Manager decides on it."
+    },
+    "approved": {
+      "title": "The fuel entry has been approved",
+      "text": "An approved fuel entry can't be changed."
+    },
+    "notAvailable": {
+      "title": "Fuel can't be logged for this trip yet",
+      "text": "A fill-up can be logged once the trip plan is approved."
+    },
+    "summary": "{{liters}} l · {{price}}",
+    "validation": {
+      "litersRequired": "Enter the amount in litres",
+      "litersPositive": "Enter an amount greater than 0",
+      "priceRequired": "Enter the total price",
+      "pricePositive": "Enter a price greater than 0",
+      "receiptRequired": "Attach a photo of the receipt"
+    }
+  },
+  "receipt": {
+    "label": "Receipt photo",
+    "choose": "Choose a photo",
+    "hint": "JPG, PNG or HEIC, up to 5 MB",
+    "remove": "Remove",
+    "replace": "Choose another",
+    "uploadFailedTitle": "Upload failed",
+    "tooLarge": "{{name}} is {{size}}; the maximum is 5 MB.",
+    "notImage": "{{name}} is not an image.",
+    "readError": "{{name}} couldn't be read. Try again or pick another photo.",
+    "previewAlt": "Receipt photo preview"
+  }
+}

@@ -1,4 +1,18 @@
 import type { FC } from "react";
 
-// Placeholder created with the route scaffold; FLOG-59 replaces it.
-export const LogFuelPage: FC = () => <h1 className="text-2xl font-semibold">LogFuelPage</h1>;
+import { useParams } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
+
+import { LogTripShell } from "../components/LogTripShell";
+import { LogFuelContainer } from "../containers/LogFuelContainer";
+
+export const LogFuelPage: FC = () => {
+  const { t } = useTranslation("tripLog");
+  const { tripId } = useParams({ from: "/_app/trips/$tripId/fuel" });
+
+  return (
+    <LogTripShell tripId={tripId} title={t("fuel.title")} description={t("fuel.description")}>
+      <LogFuelContainer tripId={tripId} />
+    </LogTripShell>
+  );
+};
