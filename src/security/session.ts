@@ -6,11 +6,10 @@ export const getAccessToken = (): string | null => localStorage.getItem(TOKEN_KE
 
 export const hasSession = (): boolean => getAccessToken() !== null;
 
-// A token is bound to one active organization, so whenever it changes (login, switching
-// organization, joining one) every cached query belongs to the old one and has to go.
-export const startSession = (accessToken: string) => {
+// Only stores the token. Starting a session also has to replace the cached data, which
+// useStartSession does (see openSession there).
+export const storeAccessToken = (accessToken: string) => {
   localStorage.setItem(TOKEN_KEY, accessToken);
-  queryClient.clear();
 };
 
 export const endSession = () => {
