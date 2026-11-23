@@ -7,16 +7,21 @@ import { storeAccessToken } from "@/security/session";
 
 // A token is bound to one active organization, so whenever it changes (login, switching
 // organization, joining one) every cached query belongs to the old one and has to go.
-// /api/me is fetched with the new token *before* the cache is cleared and put straight back,
-// so the signed-in pages never see a moment without it (useCurrentUser throws when it's
-// missing, and on a slow connection that moment lasted long enough to show the error).
-// Returns undefined when /api/me fails; the cache is then just cleared and the app layout
-// loads it again.
+// - /api/me is fetched with the new token first and then written over the cached one, so the
+//   signed-in pages never see a moment without it (useCurrentUser throws when it's missing).
+// - Everything else is reset (data dropped, what's on screen refetched with the new token).
+// Not queryClient.clear(): it removes the cached queries, but the components on screen stay
+// subscribed to the removed ones and keep showing the old organization until they happen to
+// re-render, so a switch looked like it needed a second click.
+// Returns undefined when /api/me fails; it is then just refetched.
 const openSession = async (accessToken: string): Promise<MeResponse | undefined> => {
   storeAccessToken(accessToken);
+  const meKey = getGetMeQueryKey();
   const me = await getMe().catch(() => undefined);
-  queryClient.clear();
-  if (me) queryClient.setQueryData(getGetMeQueryKey(), me);
+  const isMe = ({ queryKey }: { queryKey: readonly unknown[] }) => queryKey[0] === meKey[0];
+  if (me) queryClient.setQueryData(meKey, me);
+  else void queryClient.invalidateQueries({ queryKey: meKey });
+  void queryClient.resetQueries({ predicate: (query) => !isMe(query) });
   return me;
 };
 
